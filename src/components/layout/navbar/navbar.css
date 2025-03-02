@@ -1,0 +1,118 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff;
+    padding: 10px 20px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .header .logo img {
+    margin: 40px 0px 0 50px;
+    max-width: 150px;
+  }
+  
+  .nav ul {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .nav li {
+    margin: 0 15px;
+  }
+  
+  .nav a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    transition: color 0.3s;
+    display: flex;
+    align-items: center;
+  }
+  
+  .nav-icon {
+    font-size: 20px;
+    margin-right: 8px;
+    display: block;
+  }
+  
+  .nav-text {
+    display: inline-block;
+  }
+  
+  .nav a:hover {
+    color: #ff6600;
+  }
+  
+  .button-container {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espacio entre los botones */
+  }
+  
+  .btn-reserva {
+    padding: 10px 20px;
+    background-color: #ff6600;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-reserva:hover {
+    background-color: #e65c00; /* Color al pasar el mouse */
+  }
+  
+  .btn-inicia-sesion {
+    background-color: #ff6600;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+    display: inline-block;
+    text-align: center;
+  }
+  
+  .btn-inicia-sesion:hover {
+    background-color: #cc5200;
+  }
+  
+  
+  @media (max-width: 960px) {
+    .header {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .header .logo img {
+      max-width: 250px;
+    }
+  
+    .nav ul {
+      flex-direction: row; 
+      gap: 10px;
+      justify-content: center;
+    }
+  
+    .nav .nav-text {
+      display: none; 
+    }
+  
+    .nav .nav-icon {
+      font-size: 30px;  
+    }
+  
+    .btn-reserva {
+      margin-top: 15px;
+    }
+  
+    .btn-inicia-sesion{
+      margin-top: 15px;
+    }
+  }

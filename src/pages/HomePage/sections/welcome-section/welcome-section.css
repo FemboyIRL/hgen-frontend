@@ -1,0 +1,99 @@
+.primera-seccion {
+    position: relative;
+    height: 100vh; /* Ocupa toda la pantalla */
+    background-size: cover;
+    background-position: center center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+    overflow: hidden;
+    transition: background-image 1s ease-in-out; /* Suavizar el cambio de fondo */
+  }
+  
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+  }
+  
+  .content {
+    position: relative;
+    z-index: 2;
+  }
+  
+  .titulo {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .subtitulo {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+  }
+  
+  .btn-reserva {
+    padding: 10px 20px;
+    background-color: #ff6600;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-reserva:hover {
+    background-color: #e05500;
+  }
+  
+  /* Media Queries */
+  @media screen and (max-width: 768px) {
+    .titulo {
+      font-size: 2rem; /* Reducir el tamaño del título en pantallas pequeñas */
+    }
+  
+    .subtitulo {
+      font-size: 1.2rem; /* Reducir el tamaño del subtítulo en pantallas pequeñas */
+      margin-bottom: 20px;
+    }
+  
+    .btn-reserva {
+      padding: 12px 25px; /* Botón más grande para dispositivos móviles */
+      font-size: 1.2rem; /* Aumentar el tamaño del texto del botón */
+    }
+  
+    /* Ajustes para la imagen de fondo */
+    .primera-seccion {
+      height: 80vh; /* Reducir la altura en pantallas pequeñas */
+      background-size: cover; /* Aseguramos que la imagen cubra el área */
+      background-position: center center;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .titulo {
+      font-size: 1.6rem; 
+    }
+  
+    .subtitulo {
+      font-size: 1rem;
+    }
+  
+    .btn-reserva {
+      padding: 12px 20px; 
+      font-size: 1.1rem; 
+    }
+  
+    .primera-seccion {
+      height: 70vh; 
+      background-size: cover;
+      background-position: center center;
+    }
+  }

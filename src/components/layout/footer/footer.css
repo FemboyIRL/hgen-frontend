@@ -1,0 +1,26 @@
+.footer {
+    background-color: #222;
+    color: white;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .footer-links ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .footer-links li {
+    display: inline;
+    margin: 0 10px;
+  }
+  
+  .footer-socials img {
+    width: 30px;
+    margin: 0 10px;
+  }
+  
+  .footer-payment p {
+    margin-top: 10px;
+  }
+  

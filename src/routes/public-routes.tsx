@@ -1,18 +1,16 @@
+import HomePage from "../pages/HomePage/homepage";
+
 export const outSidePages = [
-    {
-      path: "/",
-      element: <></>
-    },
-    {
-      path: "/home",
-      element: <></>,
-    },
-    {
-      path: "/login",
-      element: <></>,
-    },
-    {
-      path: "/set_password/:token",
-      element: <></>,
-    },
-  ];
+  {
+    path: "/",
+    element: <HomePage />,
+  },
+  {
+    path: "/home",
+    element: <HomePage />,
+  },
+  {
+    path: "/login",
+    element: <></>,
+  },
+];
