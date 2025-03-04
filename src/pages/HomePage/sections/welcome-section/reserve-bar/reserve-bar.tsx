@@ -1,27 +1,19 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Search } from "react-bootstrap-icons";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import "./reserve-bar.css";
 
 const ReservaBar = () => {
-    const [checkIn, setCheckIn] = useState<string>("");
-    const [checkOut, setCheckOut] = useState<string>("");
+    const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([null, null]);
+    const [startDate, endDate] = dateRange;
     const [huespedes, setHuespedes] = useState<string>("1 hab., 2 personas");
     const navigate = useNavigate();
 
-    // Manejar cambio de fecha de check-in
-    const handleCheckInChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setCheckIn(e.target.value);
-    };
-
-    // Manejar cambio de fecha de check-out
-    const handleCheckOutChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setCheckOut(e.target.value);
-    };
-
     // Manejar envío del formulario
     const handleSubmit = () => {
-        if (!checkIn || !checkOut) {
+        if (!startDate || !endDate) {
             alert("Por favor, selecciona las fechas de check-in y check-out.");
             return;
         }
@@ -31,30 +23,25 @@ const ReservaBar = () => {
     return (
         <div className="reserva-bar">
             <div className="reserva-bar-content">
-                <h1 className="reserva-bar-title">Reserva Aquí</h1>
+                <h1 className="reserva-bar-title">Reserva Aqui</h1>
                 <form className="reserva-bar-form" onSubmit={(e) => e.preventDefault()}>
                     <div className="reserva-bar-fields">
                         <div className="reserva-bar-field">
-                            <label htmlFor="check-in">Check-in</label>
-                            <input
-                                type="date"
-                                id="check-in"
-                                value={checkIn}
-                                onChange={handleCheckInChange}
-                                aria-label="Fecha de check-in"
+                            <label htmlFor="date-picker">Check-in / Check-out</label>
+                            <DatePicker
+                                selectsRange
+                                startDate={startDate}
+                                endDate={endDate}
+                                onChange={(update) => {
+                                    setDateRange(update);
+                                }}
+                                placeholderText="Selecciona fechas"
+                                id="date-picker"
+                                className="date-picker-input"
+                                withPortal
                             />
                         </div>
-                        <div className="reserva-bar-field">
-                            <label htmlFor="check-out">Check-out</label>
-                            <input
-                                type="date"
-                                id="check-out"
-                                value={checkOut}
-                                onChange={handleCheckOutChange}
-                                aria-label="Fecha de check-out"
-                            />
-                        </div>
-                        <div className="reserva-bar-field">
+                        <div className="reserva-bar-field huespedes">
                             <label htmlFor="huespedes">Huéspedes</label>
                             <input
                                 type="text"
@@ -66,15 +53,16 @@ const ReservaBar = () => {
                             />
                         </div>
                     </div>
+                    <div className="reserva-bar-button">
                     <button
                         type="submit"
-                        className="reserva-bar-button"
                         onClick={handleSubmit}
                         aria-label="Buscar hoteles"
                     >
                         <Search />
                         <span>Buscar</span>
                     </button>
+                    </div>
                 </form>
             </div>
         </div>

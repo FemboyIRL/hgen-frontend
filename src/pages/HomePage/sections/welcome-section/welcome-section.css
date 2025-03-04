@@ -1,6 +1,6 @@
 .primera-seccion {
     position: relative;
-    height: 100vh; /* Ocupa toda la pantalla */
+    height: 100vh;
     background-size: cover;
     background-position: center center;
     display: flex;
@@ -9,7 +9,7 @@
     color: white;
     text-align: center;
     overflow: hidden;
-    transition: background-image 1s ease-in-out; /* Suavizar el cambio de fondo */
+    transition: background-image 2s ease-in-out; /* Suavizar el cambio de fondo */
   }
   
   .overlay {

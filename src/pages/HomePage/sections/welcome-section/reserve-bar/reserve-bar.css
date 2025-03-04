@@ -35,9 +35,9 @@
 .reserva-bar-field {
     display: flex;
     flex-direction: column;
+    margin: 0px 10px;
     gap: 0.5rem;
     flex: 1;
-    min-width: 200px;
 }
 
 .reserva-bar-field label {
@@ -45,7 +45,8 @@
     color: #555;
 }
 
-.reserva-bar-field input {
+.reserva-bar-field input,
+.reserva-bar-field .date-picker-input {
     padding: 0.75rem;
     border: 1px solid #ced4da;
     border-radius: 4px;
@@ -53,6 +54,7 @@
     background-color: #fff;
     color: #495057;
     cursor: pointer;
+    width: 100%;
 }
 
 .reserva-bar-field input[type="text"] {
@@ -60,10 +62,12 @@
 }
 
 /* Botón de búsqueda */
-.reserva-bar-button {
+.reserva-bar-button button{
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: 0 10px;
+    width: 100%;
     gap: 0.5rem;
     padding: 0.75rem 1.5rem;
     background-color: #007bff;
@@ -75,7 +79,7 @@
     transition: background-color 0.3s ease;
 }
 
-.reserva-bar-button:hover {
+.reserva-bar-button button:hover {
     background-color: #0056b3;
 }
 
@@ -86,6 +90,6 @@
     }
 
     .reserva-bar-field {
-        width: 100%;
+        width: 95%;
     }
 }
