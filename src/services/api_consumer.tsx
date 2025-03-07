@@ -1,6 +1,5 @@
 import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from "axios";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.min.css";
 
 // Definir la URL base de la API
 const baseURL = "localhost:5000";

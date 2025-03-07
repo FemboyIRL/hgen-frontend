@@ -1,0 +1,134 @@
+.modal {
+    background-color: rgba(255, 255, 255, 0.95); /* Fondo semitransparente blanco */
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Sombra suave */
+}
+
+.modal-header {
+    background-color: #000000; /* Fondo blanco */
+    border-bottom: 1px solid #e0e0e0; /* Borde gris claro */
+    padding: 20px;
+    text-align: center;
+}
+
+.modal-header .modal-title {
+    width: 100%;
+    font-size: 22px;
+    color: #ffffff; /* Color de texto oscuro */
+    font-weight: 700;
+}
+
+.modal-body {
+    padding: 30px;
+    color: #333; /* Color de texto oscuro */
+    background-color: #ffffff; /* Fondo blanco */
+}
+
+.modal-body form .textInput {
+    font-size: 20px;
+    background-color: transparent;
+    border: 0;
+    border-radius: 0;
+    color: #333; /* Color de texto oscuro */
+    border-bottom: 2px solid #cccccc; /* Borde gris */
+    transition: border-bottom 0.3s;
+    padding: 10px 0;
+    width: 100%;
+}
+
+.modal-body form .textInput::placeholder {
+    color: #999; /* Color de texto gris para el placeholder */
+}
+
+.modal-body form .textInput:focus {
+    box-shadow: none;
+    border-bottom: 2px solid #007bff; /* Borde azul al enfocar */
+}
+
+.modal-body .textOnly {
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333; /* Color de texto oscuro */
+}
+
+.modal-body .textOnly.withBorder {
+    font-size: 16px;
+    border-top: 1px solid #e0e0e0; /* Borde gris claro */
+    border-bottom: 1px solid #e0e0e0; /* Borde gris claro */
+    padding: 10px 0;
+}
+
+.modal-body .textOnly.icon {
+    margin-top: 20px;
+}
+
+.modal-body .textOnly .textBig {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.modal-footer {
+    position: relative;
+    justify-content: center;
+    background-color: #000; /* Fondo blanco */
+    padding: 20px;
+    border-top: 1px solid #e0e0e0; /* Borde gris claro */
+}
+
+.modal-footer .step-indicator {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+}
+
+.modal-footer .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #cccccc; /* Fondo gris para puntos inactivos */
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.modal-footer .dot.active {
+    background-color: #007bff; /* Fondo azul para el punto activo */
+}
+
+.modal-footer .btn {
+    width: 150px;
+    height: 50px;
+    font-weight: 600;
+    border-radius: 8px;
+    background-color: #28a745;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.modal-footer .btn.secondBtn {
+    background-color: #007bff; /* Fondo azul */
+    color: #fff; /* Texto blanco */
+}
+
+.modal-footer .btn.secondBtn:hover {
+    background-color: #0056b3; /* Fondo azul más oscuro al hacer hover */
+    transform: translateY(-2px);
+}
+
+.modal-footer .btn.btn-back {
+    background-color: #f8f9fa; /* Fondo gris claro */
+    color: #333; /* Texto oscuro */
+    border: 1px solid #e0e0e0; /* Borde gris claro */
+}
+
+.modal-footer .btn.btn-back:hover {
+    background-color: #e0e0e0; /* Fondo gris al hacer hover */
+}

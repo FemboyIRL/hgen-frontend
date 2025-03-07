@@ -4,11 +4,14 @@ import ApiConsumer from '../services/api_consumer'
 
 // Definir el tipo de una habitación (ajusta según la estructura de tus datos)
 interface Room {
-    id: number;
-    name: string;
-    description: string;
-    // Agrega más propiedades según sea necesario
+    id: string
+    room_number: string
+    type: string
+    is_available: boolean
+    description: string
+    image: string
 }
+
 
 // Crear una instancia de ApiConsumer para las habitaciones
 const apiRooms = new ApiConsumer({ url: "/api/rooms/" });

@@ -1,12 +1,12 @@
 import { useRef } from "react";
-import "./rooms_section.css";
-import CardRoom from "./card.room";
+import "./rooms-sections.css";
 import useVisibility from "../../../../hooks/useVisibility";
-import useRooms from "../../../hooks/useRooms";
+import useRooms from "../../../../hooks/useRooms";
 
 const RoomsSection = () => {
-    const sectionRef = useRef(null);
-    const isVisible = useVisibility(sectionRef, "-50px");
+    const sectionRef = useRef<HTMLElement | null>(null)
+    const isVisible = useVisibility(sectionRef, "-50px")
+
 
     const { rooms } = useRooms();
 
@@ -25,14 +25,18 @@ const RoomsSection = () => {
                         <p>No hay habitaciones disponibles.</p>
                     ) : (
                         rooms.map((habitacion) => (
-                            <CardRoom
-                                key={habitacion._id}
-                                imagen={"localhost:5000" + habitacion.image}
-                                titulo={habitacion.room_number}
-                                descripcion={habitacion.description}
-                                precio={"$700"}
-                                isVisible={isVisible}
-                            />
+                            <>
+                                <div className={`habitacion ${isVisible ? "visible" : ""}`}>
+                                    <img
+                                        src={habitacion.image}
+                                        alt={habitacion.room_number}
+                                        className="imagen-habitacion"
+                                    />
+                                    <h3 className="titulo-habitacion">Habitación {habitacion.room_number}</h3>
+                                    <p className="descripcion-habitacion">{habitacion.description}</p>
+                                    <p className="precio-habitacion">{"$800 p/n"}</p>
+                                </div>
+                            </>
                         ))
                     )}
                 </div>

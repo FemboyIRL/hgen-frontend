@@ -1,6 +1,6 @@
 import { useEffect, useState, RefObject } from "react";
 
-const useVisibility = (ref: RefObject<HTMLElement>, rootMargin: string = "0px"): boolean => {
+const useVisibility = (ref: RefObject<HTMLElement | null>, rootMargin: string = "0px"): boolean => {
     const [isVisible, setIsVisible] = useState<boolean>(false);
 
     useEffect(() => {
