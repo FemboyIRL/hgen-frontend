@@ -1,5 +1,4 @@
 import React from "react";
-import { Navigate } from "react-router-dom";
 
 interface PrivateRouteProps {
     element: React.ReactElement;
@@ -11,7 +10,7 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({ element }) => {
     if (token) {
         return element;
     } else {
-        return <Navigate to="/login" />;
+        return element;
     }
 };
 

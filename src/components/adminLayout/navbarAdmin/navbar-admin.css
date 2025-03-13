@@ -1,0 +1,54 @@
+.navBarAdmin {
+  padding: 0;
+  position: fixed;
+  width: 100%;
+  height: 87px;
+  background-color: var(--primary-color);
+  top: 0;
+  z-index: 100;
+}
+
+.navBarAdmin .nav-container {
+  background-color: var(--primary-color);
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  padding-right: 10%;
+}
+
+.navBarAdmin .nav-container .custom-button {
+  border-color: gray;
+  margin-left: 10px;
+}
+
+.navBarAdmin .nav-container .custom-button:hover {
+  border-color: darkgray;
+}
+
+.navBarAdmin .nav-container .custom-button svg {
+  font-size: 30px;
+  color: var(--secondary-text-color);
+}
+
+.navBarAdmin .nav-container .logo {
+  display: flex;
+  width: 330px;
+  justify-content: center;
+  margin: 0;
+}
+
+.navBarAdmin .nav-container .logo img {
+  width: 103.25px;
+  height: 78.17px;
+}
+
+.navBarAdmin .nav-container .texto {
+  color: var(--primary-text-color);
+}
+
+@media (max-width: 992px) {
+  .navBarAdmin .nav-container {
+      padding-right: 10px;
+  }
+}

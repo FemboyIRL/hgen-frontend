@@ -1,0 +1,30 @@
+/* Estilos para el encabezado del Offcanvas */
+.offcanvas-header {
+    background-color: color-mix(in srgb, var(--primary-color), #000 20%);
+    display: flex;
+    justify-content: space-between;
+    color: var(--primary-text-color);
+    border-bottom: 1px solid #333;
+  }
+  
+  /* Estilos para el botón de cerrar */
+  .offcanvas-header .closeBtn {
+    background-color: red;
+    border: 1px solid white;
+  }
+  
+  .offcanvas-header .closeBtn .icons {
+    scale: 2;
+  }
+  
+  .offcanvas-header .closeBtn:hover {
+    background-color: red;
+  }
+  
+  /* Estilos para el cuerpo del Offcanvas */
+  .offcanvas-body {
+    background-color: color-mix(in srgb, var(--primary-color), #fff 20%);
+    color: white;
+    display: flex;
+    justify-content: center;
+  }

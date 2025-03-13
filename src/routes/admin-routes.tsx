@@ -1,81 +1,48 @@
+import { House, People, DoorOpen, CalendarCheck, List, ClipboardCheck, Briefcase } from "react-bootstrap-icons"
+
 export const AdminRoutes = () => {
     return [
         {
             path: "home",
-            element: <></>,
+            element: <>nigger</>,
             title: "Inicio",
-            icon: (
-                <img
-                    src="/assets/svg/iconInicioBlack.svg"
-                    alt="..."
-                />
-            ),
+            icon: <House size={30} />,
         },
         {
             path: "clients",
             element: <></>,
             title: "Clientes",
-            icon: (
-                <img
-                    src="/assets/svg/clientes.svg"
-                    alt="Clientes"
-                />
-            ),
+            icon: <People size={30} />,
         },
         {
             path: "rooms",
             element: <></>,
             title: "Habitaciones",
-            icon: (
-                <img
-                    src="/assets/svg/door.svg"
-                    alt="Habitaciones"
-                />
-            ),
+            icon: <DoorOpen size={30} />,
         },
         {
             path: "reservations",
             element: <></>,
             title: "Reservaciones",
-            icon: (
-                <img
-                    src="/assets/svg/hotel.svg"
-                    alt="Reservaciones"
-                />
-            ),
+            icon: <CalendarCheck size={30} />,
         },
         {
             path: "menu",
             element: <></>,
             title: "Menú",
-            icon: (
-                <img
-                    src="/assets/svg/menu.svg"
-                    alt="Menú"
-                />
-            ),
+            icon: <List size={30} />,
         },
         {
             path: "orders",
             element: <></>,
             title: "Órdenes",
-            icon: (
-                <img
-                    src="/assets/svg/orders.svg"
-                    alt="Órdenes"
-                />
-            ),
+            icon: <ClipboardCheck size={30} />,
         },
         {
             path: "employees",
             element: <></>,
             title: "Empleados",
-            icon: (
-                <img
-                    src="/assets/svg/empleados.svg"
-                    alt="Empleados"
-                />
-            ),
+            icon: <Briefcase size={30} />,
         },
         {
             path: "*",
@@ -83,5 +50,5 @@ export const AdminRoutes = () => {
             title: "",
             icon: "",
         },
-    ];
-};
+    ]
+}
