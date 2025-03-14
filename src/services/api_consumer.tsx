@@ -1,8 +1,9 @@
+/* eslint-disable react-refresh/only-export-components */
 import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from "axios";
 import { toast } from "react-toastify";
 
 // Definir la URL base de la API
-const baseURL = "localhost:5000";
+const baseURL = "localhost:5000/api/v1";
 
 // Definir la estructura de una respuesta exitosa
 interface ApiResponse<T = any> {

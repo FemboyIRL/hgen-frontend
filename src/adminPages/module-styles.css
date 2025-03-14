@@ -1,0 +1,309 @@
+.moduleContain {
+    display: flex;
+}
+
+.moduleContain .moduleInner {
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.moduleContain .moduleInner .innerContent {
+    width: 100%;
+}
+
+.moduleContain .moduleInner .innerContent .innerContain {
+    width: 80%;
+    margin: 2rem auto auto auto;
+}
+
+.moduleContain .moduleInner .innerContent .innerContain .titleContain {
+    display: flex;
+    flex-direction: row;
+    gap: 3%;
+}
+
+.moduleContain .moduleInner .innerContent .innerContain .titleContain .title h3 {
+    font-size: 32px;
+    font-weight: 900;
+    margin: 0;
+    font-weight: bold;
+}
+
+.moduleContain .moduleInner .innerContent .innerContain .titleContain .title p {
+    font-size: 15px;
+    font-weight: 400;
+    margin: 0;
+}
+
+.moduleContain .moduleInner .innerContent .innerContain .searchBarContain {
+    position: relative;
+    margin: 2% 13px 2% 0;
+}
+
+.moduleContain .moduleInner .innerContent .innerContain .searchBarContain img {
+    position: absolute;
+    margin-top: 5px;
+    width: 30px;
+    left: 1.5%;
+}
+
+.moduleContain .moduleInner .innerContent .innerContain .searchBarContain form {
+    height: 41px;
+}
+
+.moduleContain .moduleInner .innerContent .innerContain .searchBarContain form input {
+    width: 100%;
+    height: 100%;
+    border-radius: 26.5px;
+    border: none;
+    padding: 0 10px 0 20px;
+    background: #D9D9D9;
+}
+
+.moduleContain .moduleInner .innerContent .innerContain .searchBarContain button {
+    width: 151px;
+    height: 57px;
+    padding: 2%;
+    border: none;
+    border-radius: 8px;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.moduleContain .moduleInner .innerContent .innerContain .topRowOptions {
+    display: flex;
+    align-items: center;
+    padding: 5px 0 5px 0;
+}
+
+.moduleContain .moduleInner .innerContent .innerContain .topRowOptions .dropDownGroup {
+    width: 490px;
+    display: flex;
+    padding: 0;
+}
+
+.moduleContain .moduleInner .innerContent .innerContain .topRowOptions .dropDownGroup .customDropDown {
+    width: 231px;
+    height: 41px;
+    margin-right: 10px;
+}
+
+.moduleContain .moduleInner .innerContent .innerContain .topRowOptions .dropDownGroup .customDropDown .input {
+    border-top-left-radius: 20.5px;
+    border-bottom-left-radius: 20.5px;
+    background-color: #D9D9D9;
+}
+
+.moduleContain .moduleInner .innerContent .innerContain .topRowOptions .dropDownGroup .customDropDown .btn {
+    border-top-right-radius: 20.5px;
+    border-bottom-right-radius: 20.5px;
+    background-color: #D9D9D9;
+    border: 0;
+    color: #000;
+    font-size: 20px;
+}
+
+.moduleContain .moduleInner .innerContent .innerContain .topRowOptions .buttonGroup {
+    width: 330px;
+    padding: 0;
+}
+
+.moduleContain .moduleInner .innerContent .innerContain .topRowOptions .buttonGroup .btn {
+    height: 40px;
+    margin-right: 3px;
+}
+
+.moduleContain .moduleInner .innerContent .innerContain .newsettlerRow {
+    width: 100%;
+    padding: 10px 0 10px 0;
+    font-weight: 900;
+    font-size: 20px;
+    margin: 0;
+}
+
+.moduleContain .moduleInner .innerContent .innerContain .newsettlerRow .newsettlerTitle {
+    margin-bottom: 20px;
+}
+
+.moduleContain .moduleInner .innerContent .innerContain .newsettlerRow .newsettlerContain {
+    height: 132px;
+    display: flex;
+    align-items: center;
+}
+
+.moduleContain .moduleInner .innerContent .innerContain .newsettlerRow .newsettlerContain .arrowIconLeft {
+    cursor: pointer;
+    margin-right: 15px;
+}
+
+.moduleContain .moduleInner .innerContent .innerContain .newsettlerRow .newsettlerContain .newsettlers {
+    display: flex;
+    width: 95%;
+    overflow: hidden;
+}
+
+.moduleContain .moduleInner .innerContent .innerContain .newsettlerRow .newsettlerContain .newsettlers .newsettler {
+    cursor: pointer;
+    margin: 0 15px 0 15px;
+}
+
+.moduleContain .moduleInner .innerContent .innerContain .newsettlerRow .newsettlerContain .newsettlers .newsettler img {
+    width: 203.51px;
+    height: 132px;
+    border-radius: 15px;
+}
+
+.moduleContain .moduleInner .innerContent .innerContain .newsettlerRow .newsettlerContain .arrowIconRight {
+    cursor: pointer;
+    margin-left: 15px;
+}
+
+.moduleContain .moduleInner .innerContent .innerContain .tableModule {
+    display: block;
+    border: 1px solid #D9D9D9;
+    border-radius: 13px 13px 13px 13px;
+    max-height: 300px;
+    overflow-y: auto;
+    overflow-x: auto;
+}
+
+.moduleContain .moduleInner .innerContent .innerContain .tableModule .tableContain {
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+    border-collapse: collapse;
+    border-spacing: 0;
+    border-radius: 13px 13px 0 0;
+    overflow: hidden;
+}
+
+.moduleContain .moduleInner .innerContent .innerContain .tableModule .tableContain thead {
+    background: var(--secondary-color);
+    height: 44px;
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.moduleContain .moduleInner .innerContent .innerContain .tableModule .tableContain thead tr th {
+    font-weight: normal;
+    color: var(--secondary-text-color);
+    text-align: center;
+}
+
+.moduleContain .moduleInner .innerContent .innerContain .tableModule .tableContain tbody {
+    font-size: 12px;
+    font-weight: 700;
+    padding: 1rem;
+}
+
+.moduleContain .moduleInner .innerContent .innerContain .tableModule .tableContain tbody tr td {
+    border: 1px solid black;
+    padding: 0.3rem;
+    text-align: center;
+}
+
+.moduleContain .moduleInner .innerContent .innerContain .tableModule .tableContain tbody tr td .controllerOptions {
+    display: flex;
+    flex-direction: column;
+    gap: 5%;
+    font-size: 16px;
+    align-items: center;
+}
+
+.moduleContain .moduleInner .innerContent .innerContain .tableModule .tableContain tbody tr td .controllerOptions .optionsInner {
+    display: flex;
+    flex-direction: row;
+}
+
+.moduleContain .moduleInner .innerContent .innerContain .tableModule .tableContain tbody tr td .controllerOptions .optionsInner svg {
+    width: 1rem;
+    margin: 0 7% 0 10px;
+}
+
+.moduleContain .moduleInner .innerContent .innerContain .tableModule .tableContain tbody tr td .controllerOptions .optionsInner svg:hover {
+    cursor: pointer;
+}
+
+.moduleContain .moduleInner .innerContent .innerContain .tableModule .tableContain tbody tr td .controllerOptions .optionsInner .option {
+    color: var(--secondary-color);
+}
+
+.moduleContain .moduleInner .innerContent .innerContain .tableModule .tableContain tbody tr td .controllerOptions .optionsInner .option.delete {
+    color: red;
+}
+
+@media screen and (max-width: 1350px) {
+    .moduleContain .moduleInner .innerContent .innerContain .topRowOptions {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .moduleContain .moduleInner .innerContent .innerContain .topRowOptions .dropDownGroup {
+        margin-bottom: 10px;
+    }
+    
+    .moduleContain .moduleInner .innerContent .innerContain .topRowOptions .buttonGroup {
+        width: auto;
+        padding: 0;
+    }
+    
+    .moduleContain .moduleInner .innerContent .innerContain .topRowOptions .buttonGroup .btn {
+        height: 40px;
+        margin-right: 10px;
+    }
+}
+
+@media screen and (min-height: 958px) {
+    .moduleContain .moduleInner .innerContent .innerContain .tableModule {
+        max-height: 550px;
+    }
+    
+    .moduleContain .moduleInner .innerContent .innerContain .tableModule .tableContain thead {
+        font-size: 18px;
+    }
+    
+    .moduleContain .moduleInner .innerContent .innerContain .tableModule .tableContain tbody {
+        font-size: 15px;
+    }
+    
+    .moduleContain .moduleInner .innerContent .innerContain .tableModule .tableContain tbody tr {
+        border: 1px solid black;
+    }
+    
+    .moduleContain .moduleInner .innerContent .innerContain .tableModule .tableContain tbody tr td .controllerOptions {
+        font-size: 16px;
+    }
+    
+    .moduleContain .moduleInner .innerContent .innerContain .tableModule .tableContain tbody tr td .controllerOptions .optionsInner svg {
+        width: 1rem;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .moduleContain .moduleInner .innerContent .innerContain .searchBarContain button {
+        margin-top: 10px;
+        height: 47px;
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .moduleContain .moduleInner .innerContent .innerContain .titleContain .title h3 {
+        font-size: 28px;
+    }
+    
+    .moduleContain .moduleInner .innerContent .innerContain .titleContain .title p {
+        font-size: 13px;
+    }
+}
+
+@media screen and (max-width: 406px) {
+    .moduleContain .moduleInner .innerContent .innerContain .titleContain .title h3 {
+        font-size: 23px;
+    }
+    
+    .moduleContain .moduleInner .innerContent .innerContain .titleContain .title p {
+        font-size: 11px;
+    }
+}

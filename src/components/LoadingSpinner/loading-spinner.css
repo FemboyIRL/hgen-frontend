@@ -1,0 +1,10 @@
+.loadingContainer{
+    display: flex;
+    height: 50vh;
+    justify-content: center;
+    align-items: center;
+}
+ 
+.customSpinner{
+    color: var(--secondary-color);
+}

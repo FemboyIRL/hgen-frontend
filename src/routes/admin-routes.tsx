@@ -1,4 +1,5 @@
 import { House, People, DoorOpen, CalendarCheck, List, ClipboardCheck, Briefcase } from "react-bootstrap-icons"
+import CustomersPage from "../adminPages/Customers/customers"
 
 export const AdminRoutes = () => {
     return [
@@ -10,7 +11,7 @@ export const AdminRoutes = () => {
         },
         {
             path: "clients",
-            element: <></>,
+            element: <CustomersPage />,
             title: "Clientes",
             icon: <People size={30} />,
         },
