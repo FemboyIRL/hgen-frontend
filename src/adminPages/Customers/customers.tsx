@@ -6,19 +6,21 @@ import '../module-styles.css'
 import { useEffect, useReducer } from "react";
 import { reducer, initialState, CustomerActions } from "./reducer/reducer"
 import ApiConsumer from "../../services/api_consumer";
+import DeleteModal from "./modals/deleteCustomerModal/deleteModal";
+import { Customer } from "../../interfaces/CustomerInterface";
+import CreateClientModal from "./modals/createCustomerModal/userModal";
 
-const Customers = new ApiConsumer({ url: "/customer" })
+const Customers = new ApiConsumer({ url: "clients" })
 
 const CustomersPage = () => {
 
     const [state, dispatch] = useReducer(reducer, initialState);
 
     const filterCustomerList = () => {
-        const customerList = state.customers || [];
+        const customerList = state.customers;
 
-        const filteredList = customerList.filter((customer: { firstName: string; lastName: string; email: string; phone: string | any[]; }) =>
-            customer.firstName.toLowerCase().includes(state.searchTerm.toLowerCase()) ||
-            customer.lastName.toLowerCase().includes(state.searchTerm.toLowerCase()) ||
+        const filteredList = customerList.filter((customer: { fullName: string; email: string; phone: string | any[]; }) =>
+            customer.fullName.toLowerCase().includes(state.searchTerm.toLowerCase()) ||
             customer.email.toLowerCase().includes(state.searchTerm.toLowerCase()) ||
             customer.phone.includes(state.searchTerm)
         );
@@ -28,7 +30,7 @@ const CustomersPage = () => {
 
     useEffect(() => {
         getCustomers();
-    }, [!state.loading]);
+    }, [state.loading]);
 
     const getCustomers = async () => {
         try {
@@ -37,14 +39,8 @@ const CustomersPage = () => {
             );
             if (status) {
                 dispatch({
-                    type: CustomerActions.GET_CUSTOMERS_LIST,
-                    payload: {
-                        data: data,
-                    }
-                });
-                dispatch({
                     type: CustomerActions.LOADED_CUSTOMERS_LIST,
-                    payload: true
+                    payload: data.data
                 });
             }
         } catch (error) {
@@ -52,34 +48,18 @@ const CustomersPage = () => {
         }
     }
 
-    const changeValue = (prop: any, data: any) => {
-        if (prop === "searchTerm") {
-            dispatch({
-                type: CustomerActions.SET_SEARCH_TERM,
-                payload: data,
-            });
-        } else {
-            if (prop === "addCustomerModal") {
-                dispatch({
-                    type: CustomerActions.CHANGE_VALUE_FORM,
-                    payload: {
-                        data: initialState.formData
-                    }
-                });
+    const changeValue = (prop: string, data: any) => {
+        dispatch({
+            type: CustomerActions.CHANGE_VALUE,
+            payload: {
+                prop,
+                data
             }
-            dispatch({
-                type: CustomerActions.CHANGE_VALUE,
-                payload: {
-                    prop,
-                    data
-                }
-            });
-        }
+        })
     }
-
-    const selectCustomerId = (prop: any, data: any, id: any) => {
+    const selectCustomerId = (prop: any, data: any, customer: Customer) => {
         changeValue(prop, data);
-        changeValue("customerId", id)
+        changeValue("currentCustomer", customer)
     }
 
     const temporal_list = filterCustomerList();
@@ -114,7 +94,7 @@ const CustomersPage = () => {
                                     </Col>
                                     <Col xs="12" sm="5" md="5" lg="5" xl="4">
                                         <Row style={{ justifyContent: "end" }}>
-                                            <Button onClick={() => changeValue("formCustomerModal", !state.customerModal)}>
+                                            <Button onClick={() => changeValue("customerModal", !state.customerModal)}>
                                                 Nuevo Cliente
                                             </Button>
                                         </Row>
@@ -141,7 +121,7 @@ const CustomersPage = () => {
                                                 <tbody>
                                                     {temporal_list.map((customer: any) => (
                                                         <tr key={`customer-${customer.id}`}>
-                                                            <td>{`${customer.firstName} ${customer.lastName}`}</td>
+                                                            <td>{`${customer.fullName}`}</td>
                                                             <td>{customer.email}</td>
                                                             <td>{customer.phone}</td>
                                                             <td>
@@ -149,12 +129,12 @@ const CustomersPage = () => {
                                                                     <div className="optionsInner">
                                                                         <div className="option delete">
                                                                             <Trash3Fill
-                                                                                onClick={() => selectCustomerId("deleteCustomerModal", !state.deleteCustomerModal, customer.id)}
+                                                                                onClick={() => selectCustomerId("deleteCustomerModal", !state.deleteCustomerModal, customer)}
                                                                             />
                                                                         </div>
                                                                         <div className="option edit">
                                                                             <PencilFill
-                                                                                onClick={() => selectCustomerId("formCustomerModal", !state.customerModal, customer.id)}
+                                                                                onClick={() => selectCustomerId("customerModal", !state.customerModal, customer)}
                                                                             />
                                                                         </div>
                                                                     </div>
@@ -172,6 +152,8 @@ const CustomersPage = () => {
                     </div>
                 </div>
             </div>
+            <DeleteModal stateReducer={state} dispatch={dispatch} changeModal={() => changeValue("deleteCustomerModal", !state.deleteCustomerModal)} />
+            <CreateClientModal stateReducer={state} dispatch={dispatch} changeModal={() => changeValue("customerModal", !state.customerModal)} />
         </>
     );
 }

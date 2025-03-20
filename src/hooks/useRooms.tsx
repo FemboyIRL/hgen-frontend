@@ -14,7 +14,7 @@ interface Room {
 
 
 // Crear una instancia de ApiConsumer para las habitaciones
-const apiRooms = new ApiConsumer({ url: "/api/rooms/" });
+const apiRooms = new ApiConsumer({ url: "rooms" });
 
 const useRooms = () => {
     const [rooms, setRooms] = useState<Room[]>([]);
@@ -30,7 +30,7 @@ const useRooms = () => {
                 const response = await apiRooms.getAll();
 
                 if (response.status) {
-                    setRooms(response.data);
+                    setRooms(Array.isArray(response.data) ? response.data : []);
                 } else {
                     setError("Error al obtener las habitaciones");
                     toast.error("Error al obtener las habitaciones");

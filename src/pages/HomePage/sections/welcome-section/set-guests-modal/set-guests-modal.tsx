@@ -1,11 +1,11 @@
 import { Form, FormControl, FormGroup } from "react-bootstrap"
 import FormModal from "../../../../../components/FormModal/form-modal"
 import roomSelectionActions from "../reducer/actions"
-import { StateReducer } from "../reducer/constants"
+import { RoomReducer } from "../reducer/constants"
 import { toast } from "react-toastify"
 
 interface SetGuestsModalProps {
-    stateReducer: StateReducer
+    stateReducer: RoomReducer
     dispatch: React.Dispatch<{
         type: string;
         payload: any;

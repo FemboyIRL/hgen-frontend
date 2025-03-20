@@ -89,6 +89,12 @@
     font-weight: 700;
 }
 
+.textOnly.icon img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain; 
+}
+
 .ModalDelete .ModalContainerDelete .ModalContentDelete svg {
     margin-top: 10px;
     color: white;

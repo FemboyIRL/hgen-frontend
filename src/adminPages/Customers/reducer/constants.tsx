@@ -1,17 +1,20 @@
+import { Customer } from '../../../interfaces/CustomerInterface'
+
 const initialState = {
-    loading: false,
+    loading: true,
     customerModal: false,
     deleteCustomerModal: false,
-    customers: [],
+    customers: [] as Customer[],
     searchTerm: '',
     formData: {
-        firstName: '',
-        lastName: '',
+        fullName: '',
         email: '',
         phone: '',
         address: ''
     },
-    currentCustomer: null
+    currentCustomer: null as Customer | null,
 };
 
 export default initialState
+
+export type CustomerReducer = typeof initialState;

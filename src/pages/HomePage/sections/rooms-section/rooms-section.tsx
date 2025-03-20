@@ -2,15 +2,18 @@ import { useRef } from "react";
 import "./rooms-sections.css";
 import useVisibility from "../../../../hooks/useVisibility";
 import useRooms from "../../../../hooks/useRooms";
+import LoadingSpinnerContainer from "../../../../components/LoadingSpinner/loading-spinner";
 
 const RoomsSection = () => {
     const sectionRef = useRef<HTMLElement | null>(null)
     const isVisible = useVisibility(sectionRef, "-50px")
 
 
-    const { rooms } = useRooms();
+    const { rooms, loading, error } = useRooms();
 
-    console.log(rooms);
+    if (loading) return <LoadingSpinnerContainer />
+
+    if (error) return <></>
 
     return (
         <section

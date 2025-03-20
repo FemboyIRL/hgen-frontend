@@ -10,4 +10,4 @@ const roomSelectionInitial = {
 
 export default roomSelectionInitial
 
-export type StateReducer = typeof roomSelectionInitial;
+export type RoomReducer = typeof roomSelectionInitial;

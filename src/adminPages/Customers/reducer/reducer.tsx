@@ -1,32 +1,26 @@
-/* eslint-disable react-refresh/only-export-components */
 import CustomerActions from "./actions";
 import initialState from "./constants";
 
 const reducer = (state = initialState, action: { payload: any; type: any }) => {
-    switch (action.type) {
-        case CustomerActions.LOADING_CUSTOMERS_LIST:
-            return {
-                ...state,
-                loading: true
-            };
-
+    const { type, payload } = action;
+    switch (type) {
         case CustomerActions.LOADED_CUSTOMERS_LIST:
             return {
                 ...state,
                 loading: false,
-                customers: action.payload
+                customers: payload
             };
 
         case CustomerActions.ADD_CUSTOMER:
             return {
                 ...state,
-                customers: [...state.customers, action.payload]
+                customers: [...state.customers, payload]
             };
 
         case CustomerActions.CHANGE_VALUE:
             return {
                 ...state,
-                [action.payload.name]: action.payload.value
+                [payload.prop]: payload.data
             };
 
         case CustomerActions.CHANGE_VALUE_FORM:
@@ -34,32 +28,45 @@ const reducer = (state = initialState, action: { payload: any; type: any }) => {
                 ...state,
                 formData: {
                     ...state.formData,
-                    [action.payload.name]: action.payload.value
+                    [payload.prop]: payload.data
                 }
             };
 
         case CustomerActions.SET_SEARCH_TERM:
             return {
                 ...state,
-                searchTerm: action.payload
+                searchTerm: payload
             };
 
         case CustomerActions.SET_CURRENT_CUSTOMER:
             return {
                 ...state,
-                currentCustomer: action.payload
+                currentCustomer: payload
             };
 
-        case CustomerActions.RESET_FORM:
+        case CustomerActions.CLEAN_FORM_DATA:
             return {
                 ...state,
                 formData: initialState.formData,
                 currentCustomer: null
             };
 
+        case CustomerActions.RELOAD_LIST:
+            return {
+                ...state,
+                loading: !state.loading
+            }
+
+        case CustomerActions.CHANGE_ALL_VALUE_FORM:
+            return {
+                ...state,
+                formData: payload
+            }
+
         default:
             return state;
     }
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export { reducer, initialState, CustomerActions }
