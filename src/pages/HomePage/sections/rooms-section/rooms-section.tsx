@@ -1,18 +1,50 @@
-import { useRef } from "react";
+import { useEffect, useReducer, useRef } from "react";
 import "./rooms-sections.css";
 import useVisibility from "../../../../hooks/useVisibility";
-import useRooms from "../../../../hooks/useRooms";
 import LoadingSpinnerContainer from "../../../../components/LoadingSpinner/loading-spinner";
+import initialState from "../../../../adminPages/Rooms/reducer/constants";
+import ApiConsumer from "../../../../services/api_consumer";
+import { reducer, roomsActions } from "../../../../adminPages/Rooms/reducer/reducer";
+import { Room } from "../../../../interfaces/RoomInterface";
+
+const Rooms = new ApiConsumer({ url: 'rooms/' })
 
 const RoomsSection = () => {
+    const [state, dispatch] = useReducer(reducer, initialState)
     const sectionRef = useRef<HTMLElement | null>(null)
     const isVisible = useVisibility(sectionRef, "-50px")
 
-    const { rooms, loading, error } = useRooms();
+    useEffect(() => {
+        getAllRooms()
+    }, [state.loading])
 
-    if (loading) return <LoadingSpinnerContainer />
-
-    if (error) return <></>
+    const getAllRooms = async () => {
+        try {
+            const { status, data } = await Rooms.getAll()
+            if (status) {
+                const parsedData = data.data.map((room: any) => {
+                    try {
+                        return {
+                            ...room,
+                            images: JSON.parse(room.images),
+                        };
+                    } catch (error) {
+                        console.error("Error al parsear las imágenes:", error);
+                        return {
+                            ...room,
+                            images: [],
+                        };
+                    }
+                });
+                dispatch({
+                    type: roomsActions.LOADED_ROOMS_LIST,
+                    payload: parsedData
+                })
+            }
+        } catch (e) {
+            console.log(e)
+        }
+    }
 
     return (
         <section
@@ -23,10 +55,10 @@ const RoomsSection = () => {
             <div className="contenedor">
                 <h2 className="section-title">Nuestras Habitaciones</h2>
                 <div className="habitaciones-lista">
-                    {rooms.length === 0 ? (
+                    {state.rooms.length === 0 ? (
                         <p>No hay habitaciones disponibles.</p>
-                    ) : (
-                        rooms.map((habitacion) => (
+                    ) : state.loading ? <LoadingSpinnerContainer /> : (
+                        state.rooms.map((habitacion: Room) => (
                             <>
                                 <div className={`habitacion ${isVisible ? "visible" : ""}`}>
                                     <img
