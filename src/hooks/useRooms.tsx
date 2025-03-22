@@ -1,17 +1,7 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import ApiConsumer from '../services/api_consumer'
-
-// Definir el tipo de una habitación (ajusta según la estructura de tus datos)
-interface Room {
-    id: string
-    room_number: string
-    type: string
-    is_available: boolean
-    description: string
-    image: string
-}
-
+import { Room } from "../interfaces/RoomInterface";
 
 // Crear una instancia de ApiConsumer para las habitaciones
 const apiRooms = new ApiConsumer({ url: "rooms" });

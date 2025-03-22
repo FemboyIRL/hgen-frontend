@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import './form-modal.css'
+import { TrashFill } from "react-bootstrap-icons";
 
 type FormModalProps = {
     modalTitle: string
@@ -16,11 +17,12 @@ type FormModalProps = {
     secondBtnSubmit?: () => void
     totalSteps?: number
     currentStep?: number
+    onDelete?: () => void
     onGoBack?: () => void
 }
 
 const FormModal: React.FC<FormModalProps> = ({ modalTitle, children, status, changeModal, onSubmit, size, btnDisable, btnText,
-    secondBtn, secondBtnText, secondBtnSubmit, totalSteps, currentStep, onGoBack }) => {
+    secondBtn, secondBtnText, secondBtnSubmit, totalSteps, currentStep, onGoBack, onDelete }) => {
     const [primaryColor, setPrimaryColor] = useState("");
 
     const COLORS = {
@@ -40,11 +42,18 @@ const FormModal: React.FC<FormModalProps> = ({ modalTitle, children, status, cha
         <Modal
             centered
             show={status}
+            scrollable
             onHide={changeModal}
             size={size ? size : "sm"}
         >
             <Modal.Header closeButton closeVariant="black" style={primaryColor == COLORS.dark_grey ? { backgroundColor: COLORS.black } : undefined}>
                 <Modal.Title>{modalTitle}</Modal.Title>
+                {onDelete ? (
+                    <>
+                        <div className='delete-icon d-flex justify-content-center align-items-center' onClick={onDelete} style={{ color: "#ffffff", borderRadius: '50%', width: '30px', height: '30px', border: '3px solid black', backgroundColor: 'red' }}><TrashFill /></div>
+                    </>)
+                    :
+                    (<></>)}
             </Modal.Header>
             <Modal.Body>
                 {children}
@@ -72,7 +81,7 @@ const FormModal: React.FC<FormModalProps> = ({ modalTitle, children, status, cha
                     </Button>
                     : ''}
             </Modal.Footer>
-        </Modal>
+        </Modal >
     )
 }
 

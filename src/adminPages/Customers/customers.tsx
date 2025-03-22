@@ -57,6 +57,7 @@ const CustomersPage = () => {
             }
         })
     }
+
     const selectCustomerId = (prop: any, data: any, customer: Customer) => {
         changeValue(prop, data);
         changeValue("currentCustomer", customer)
@@ -71,7 +72,7 @@ const CustomersPage = () => {
                     <div className="innerContent">
                         <div className="innerContain">
                             <div className="titleContain">
-                                <img src="/icons/iconClientesBlack.svg" alt="" />
+                                <img src="/assets/icons/icon-customer.svg" alt="" width={50} />
                                 <div className="title">
                                     <h3>Clientes</h3>
                                     <p>Lista de Clientes registrados</p>

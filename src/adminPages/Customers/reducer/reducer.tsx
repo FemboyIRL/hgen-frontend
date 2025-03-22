@@ -11,12 +11,6 @@ const reducer = (state = initialState, action: { payload: any; type: any }) => {
                 customers: payload
             };
 
-        case CustomerActions.ADD_CUSTOMER:
-            return {
-                ...state,
-                customers: [...state.customers, payload]
-            };
-
         case CustomerActions.CHANGE_VALUE:
             return {
                 ...state,
@@ -36,12 +30,6 @@ const reducer = (state = initialState, action: { payload: any; type: any }) => {
             return {
                 ...state,
                 searchTerm: payload
-            };
-
-        case CustomerActions.SET_CURRENT_CUSTOMER:
-            return {
-                ...state,
-                currentCustomer: payload
             };
 
         case CustomerActions.CLEAN_FORM_DATA:

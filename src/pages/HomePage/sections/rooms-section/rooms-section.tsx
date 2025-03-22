@@ -8,7 +8,6 @@ const RoomsSection = () => {
     const sectionRef = useRef<HTMLElement | null>(null)
     const isVisible = useVisibility(sectionRef, "-50px")
 
-
     const { rooms, loading, error } = useRooms();
 
     if (loading) return <LoadingSpinnerContainer />
@@ -31,13 +30,13 @@ const RoomsSection = () => {
                             <>
                                 <div className={`habitacion ${isVisible ? "visible" : ""}`}>
                                     <img
-                                        src={habitacion.image}
+                                        src={habitacion.images[0]}
                                         alt={habitacion.room_number}
                                         className="imagen-habitacion"
                                     />
                                     <h3 className="titulo-habitacion">Habitación {habitacion.room_number}</h3>
                                     <p className="descripcion-habitacion">{habitacion.description}</p>
-                                    <p className="precio-habitacion">{"$800 p/n"}</p>
+                                    <p className="precio-habitacion">{"$700 p/n"}</p>
                                 </div>
                             </>
                         ))

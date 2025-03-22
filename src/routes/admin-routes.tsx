@@ -1,5 +1,6 @@
 import { House, People, DoorOpen, CalendarCheck, List, ClipboardCheck, Briefcase } from "react-bootstrap-icons"
 import CustomersPage from "../adminPages/Customers/customers"
+import RoomsPage from "../adminPages/Rooms/rooms"
 
 export const AdminRoutes = () => {
     return [
@@ -17,7 +18,7 @@ export const AdminRoutes = () => {
         },
         {
             path: "rooms",
-            element: <></>,
+            element: <RoomsPage />,
             title: "Habitaciones",
             icon: <DoorOpen size={30} />,
         },
