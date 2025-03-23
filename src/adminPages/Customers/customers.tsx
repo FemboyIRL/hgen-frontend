@@ -19,7 +19,7 @@ const CustomersPage = () => {
     const filterCustomerList = () => {
         const customerList = state.customers;
 
-        const filteredList = customerList.filter((customer: { fullName: string; email: string; phone: string | any[]; }) =>
+        const filteredList = customerList.filter((customer: Customer) =>
             customer.fullName.toLowerCase().includes(state.searchTerm.toLowerCase()) ||
             customer.email.toLowerCase().includes(state.searchTerm.toLowerCase()) ||
             customer.phone.includes(state.searchTerm)
