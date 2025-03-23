@@ -1,4 +1,4 @@
-import { House, People, DoorOpen, CalendarCheck, List, ClipboardCheck, Briefcase } from "react-bootstrap-icons"
+import { House, People, DoorOpen, CalendarCheck, List, ClipboardCheck, Briefcase, TagFill } from "react-bootstrap-icons"
 import CustomersPage from "../adminPages/Customers/customers"
 import RoomsPage from "../adminPages/Rooms/rooms"
 import MenuItemsPage from "../adminPages/Menu/menu"
@@ -40,6 +40,12 @@ export const AdminRoutes = () => {
             element: <></>,
             title: "Órdenes",
             icon: <ClipboardCheck size={30} />,
+        },
+        {
+            path: "offers",
+            element: <></>,
+            title: "Ofertas",
+            icon: <TagFill />
         },
         {
             path: "employees",
