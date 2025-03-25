@@ -4,7 +4,6 @@ import ApiConsumer from "../../../../services/api_consumer";
 import { useEffect } from "react";
 import { MenuReducer } from "../../reducer/constants";
 import FormModal from "../../../../components/FormModal/form-modal";
-import { toast } from "react-toastify";
 import menuActions from "../../reducer/actions";
 
 interface CreateMenuItemModalProps {
@@ -126,18 +125,14 @@ const CreateMenuItemModal: React.FC<CreateMenuItemModalProps> = ({ stateReducer,
         }
     };
 
-    const onDelete = async () => {
-        try {
-            const { status } = await Menu.delete(Number(stateReducer.currentMenuItem?.id))
-
-            if (status) {
-                toast.success('Platillo eliminado de forma exitosa')
-                closeModal()
-                reloadList()
+    const onDelete = () => {
+        dispatch({
+            type: menuActions.CHANGE_VALUE,
+            payload: {
+                prop: 'deleteMenuItemModal',
+                data: !stateReducer.deleteMenuItemModal
             }
-        } catch (e) {
-            console.log(e)
-        }
+        })
     }
 
     return (
@@ -208,20 +203,20 @@ const CreateMenuItemModal: React.FC<CreateMenuItemModalProps> = ({ stateReducer,
                                 onChange={handleOnChangeInput}
                             />
                         </div>
-                        <FormGroup className="mb-3">
-                            <label>Descripción</label>
-                            <div className="inputWithIcon">
-                                <FormControl
-                                    type="textarea"
-                                    size="lg"
-                                    className="textInput"
-                                    placeholder="Ingresa la descripción"
-                                    value={stateReducer.formData.description}
-                                    name="description"
-                                    onChange={handleOnChangeInput}
-                                />
-                            </div>
-                        </FormGroup>
+                    </FormGroup>
+                    <FormGroup className="mb-3">
+                        <label>Descripción</label>
+                        <div className="inputWithIcon">
+                            <FormControl
+                                type="textarea"
+                                size="lg"
+                                className="textInput"
+                                placeholder="Ingresa la descripción"
+                                value={stateReducer.formData.description}
+                                name="description"
+                                onChange={handleOnChangeInput}
+                            />
+                        </div>
                     </FormGroup>
                 </Form>
             </FormModal>

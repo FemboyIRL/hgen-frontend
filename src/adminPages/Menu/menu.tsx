@@ -6,7 +6,8 @@ import LoadingSpinnerContainer from "../../components/LoadingSpinner/loading-spi
 import ApiConsumer from "../../services/api_consumer"
 import './menu.css'
 import { MenuItem } from "../../interfaces/MenuItemInterface"
-import CreateMenuItemModal from "./modals/menuModal.tsx/menuModal"
+import CreateMenuItemModal from "./modals/menuModal/menuModal"
+import DeleteMenuItemModal from "./modals/deleteModal/deleteModal"
 
 const MenuItems = new ApiConsumer({ url: 'menu/' })
 
@@ -150,6 +151,7 @@ const MenuItemsPage = () => {
                 </div>
             </div>
             <CreateMenuItemModal stateReducer={state} dispatch={dispatch} changeModal={() => changeValue("menuItemModal", !state.menuItemModal)} />
+            <DeleteMenuItemModal stateReducer={state} dispatch={dispatch} changeModal={() => changeValue("deleteMenuItemModal", !state.deleteMenuItemModal)} />
         </>
     )
 }

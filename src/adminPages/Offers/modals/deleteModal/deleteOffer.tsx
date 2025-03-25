@@ -1,12 +1,12 @@
 import { toast } from "react-toastify";
 import ApiConsumer from "../../../../services/api_consumer";
-import roomsActions from "../../reducer/actions";
+import offerActions from "../../reducer/actions";
 import '../../../delete-modal.css'
 import CustomDeleteModal from "../../../../components/DeleteModal/delete_modal";
-import { MenuReducer } from "../../reducer/constants";
+import { OfferReducer } from "../../reducer/constants";
 
-interface deleteMenuItemModalProps {
-    stateReducer: MenuReducer
+interface DeleteOfferModalProps {
+    stateReducer: OfferReducer
     dispatch: React.Dispatch<{
         type: string;
         payload: any;
@@ -14,25 +14,26 @@ interface deleteMenuItemModalProps {
     changeModal: () => void;
 }
 
-const Room = new ApiConsumer({ url: 'rooms/' })
+const Offer = new ApiConsumer({ url: 'menu/' })
 
-const DeleteModal: React.FC<deleteMenuItemModalProps> = ({ stateReducer, dispatch, changeModal }) => {
+const DeleteOfferModal: React.FC<DeleteOfferModalProps> = ({ stateReducer, dispatch, changeModal }) => {
 
     const reloadList = () => {
         dispatch({
-            type: roomsActions.RELOAD_LIST,
+            type: offerActions.RELOAD_LIST,
             payload: null,
         })
     }
 
     const closeModal = () => {
-        changeValue("currentMenuItem", null)
+        changeValue("currentOffer", null)
+        changeValue("offerModal", !stateReducer.offerModal)
         changeModal();
     }
 
     const changeValue = (prop: string, data: any) => {
         dispatch({
-            type: roomsActions.CHANGE_VALUE,
+            type: offerActions.CHANGE_VALUE,
             payload: {
                 prop,
                 data
@@ -42,10 +43,10 @@ const DeleteModal: React.FC<deleteMenuItemModalProps> = ({ stateReducer, dispatc
 
     const handleDeleteButton = async () => {
         console.log(stateReducer)
-        if (stateReducer.currentMenuItem) {
-            const { status } = await Room.delete(stateReducer.currentMenuItem.id)
+        if (stateReducer.currentOffer) {
+            const { status } = await Offer.delete(stateReducer.currentOffer.id)
             if (status) {
-                toast.success(`Item del menu eliminado con éxito`)
+                toast.success(`Oferta eliminada con éxito`)
                 reloadList()
                 closeModal();
             }
@@ -53,12 +54,12 @@ const DeleteModal: React.FC<deleteMenuItemModalProps> = ({ stateReducer, dispatc
     }
     return (
         <>
-            {stateReducer.deleteMenuItemModal &&
+            {stateReducer.deleteOfferModal &&
                 <CustomDeleteModal
-                    show={stateReducer.deleteMenuItemModal}
+                    show={stateReducer.deleteOfferModal}
                     onHide={closeModal}
-                    title={"Eliminar dependencia"}
-                    typeDelete={'cliente'}
+                    title={"Eliminar oferta"}
+                    typeDelete={'Oferta'}
                     secondBtnClick={() => handleDeleteButton()}
                     firstBtnClick={closeModal}
                 >
@@ -67,4 +68,4 @@ const DeleteModal: React.FC<deleteMenuItemModalProps> = ({ stateReducer, dispatc
         </>
     )
 }
-export default DeleteModal;
+export default DeleteOfferModal;

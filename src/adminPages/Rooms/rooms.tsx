@@ -7,6 +7,7 @@ import ApiConsumer from "../../services/api_consumer"
 import './rooms.css'
 import CreateRoomModal from "./modals/roomModal/roomModal"
 import { Room } from "../../interfaces/RoomInterface"
+import DeleteRoomModal from "./modals/deleteModal/deleteModal"
 
 const Rooms = new ApiConsumer({ url: 'rooms/' })
 
@@ -125,6 +126,7 @@ const RoomsPage = () => {
                 </div>
             </div>
             <CreateRoomModal stateReducer={state} dispatch={dispatch} changeModal={() => changeValue('roomModal', !state.roomModal)} />
+            <DeleteRoomModal stateReducer={state} dispatch={dispatch} changeModal={() => changeValue('deleteRoomModal', !state.deleteRoomModal)} />
         </>
     )
 }

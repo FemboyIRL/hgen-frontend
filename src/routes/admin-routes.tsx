@@ -2,6 +2,7 @@ import { House, People, DoorOpen, CalendarCheck, List, ClipboardCheck, Briefcase
 import CustomersPage from "../adminPages/Customers/customers"
 import RoomsPage from "../adminPages/Rooms/rooms"
 import MenuItemsPage from "../adminPages/Menu/menu"
+import OffersPage from "../adminPages/Offers/offers"
 
 export const AdminRoutes = () => {
     return [
@@ -43,7 +44,7 @@ export const AdminRoutes = () => {
         },
         {
             path: "offers",
-            element: <></>,
+            element: <OffersPage />,
             title: "Ofertas",
             icon: <TagFill />
         },

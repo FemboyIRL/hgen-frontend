@@ -1,14 +1,14 @@
 import { Button, Form, FormControl, FormGroup, Row, } from "react-bootstrap";
 import { TrashFill } from "react-bootstrap-icons";
 import ApiConsumer from "../../../../services/api_consumer";
-import roomsActions from "../../reducer/actions";
 import { useEffect } from "react";
-import { RoomReducer } from "../../reducer/constants";
+import { OfferReducer } from "../../reducer/constants";
 import FormModal from "../../../../components/FormModal/form-modal";
 import { toast } from "react-toastify";
+import offerActions from "../../reducer/actions";
 
-interface CreateRoomModalProps {
-    stateReducer: RoomReducer
+interface CreateOfferModalProps {
+    stateReducer: OfferReducer
     dispatch: React.Dispatch<{
         type: string;
         payload: any;
@@ -16,29 +16,31 @@ interface CreateRoomModalProps {
     changeModal: () => void
 }
 
-const Rooms = new ApiConsumer({ url: 'rooms/' })
+const Menu = new ApiConsumer({ url: 'offers/' })
 
-const CreateRoomModal: React.FC<CreateRoomModalProps> = ({ stateReducer, dispatch, changeModal }) => {
+const CreateOfferModal: React.FC<CreateOfferModalProps> = ({ stateReducer, dispatch, changeModal }) => {
 
     useEffect(() => {
-        if (stateReducer.roomModal) {
-            if (stateReducer.currentRoom) {
-                getRoomsData()
+        if (stateReducer.offerModal) {
+            console.log(stateReducer)
+            if (stateReducer.currentOffer) {
+                getMenuData()
             }
         }
-    }, [stateReducer.roomModal])
+    }, [stateReducer.offerModal])
 
-    const getRoomsData = () => {
-        const selectedRooms = stateReducer.rooms.find(room => room.room_number === stateReducer.currentRoom?.room_number);
+    const getMenuData = () => {
+        const selectedOffer = stateReducer.offers.find(offer => offer.id === stateReducer.currentOffer?.id);
+        console.log(selectedOffer)
         dispatch({
-            type: roomsActions.CHANGE_ALL_VALUE_FORM,
-            payload: selectedRooms
+            type: offerActions.CHANGE_ALL_VALUE_FORM,
+            payload: selectedOffer
         })
     }
 
     const changeValueForm = (prop: string, data: any) => {
         dispatch({
-            type: roomsActions.CHANGE_VALUE_FORM,
+            type: offerActions.CHANGE_VALUE_FORM,
             payload: {
                 prop,
                 data
@@ -49,16 +51,12 @@ const CreateRoomModal: React.FC<CreateRoomModalProps> = ({ stateReducer, dispatc
     const handleOnChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, files, value } = e.target
 
-        if (name === 'room_number') {
-            if (!/^\d*$/.test(value)) {
-                toast.error('El número de habitación solo puede contener números');
-                return;
-            }
-        }
+        console.log({ name, files, value })
 
         if (name === 'images' && files && files.length > 0) {
+            console.log('papu')
             dispatch({
-                type: roomsActions.ADD_IMAGES,
+                type: offerActions.ADD_IMAGES,
                 payload: {
                     data: Array.from(files)
                 }
@@ -72,7 +70,7 @@ const CreateRoomModal: React.FC<CreateRoomModalProps> = ({ stateReducer, dispatc
 
     const closeModal = () => {
         dispatch({
-            type: roomsActions.RESET_FORM,
+            type: offerActions.RESET_FORM,
             payload: null
         })
         changeModal()
@@ -80,12 +78,12 @@ const CreateRoomModal: React.FC<CreateRoomModalProps> = ({ stateReducer, dispatc
 
     const reloadList = () => {
         dispatch({
-            type: roomsActions.RELOAD_LIST,
+            type: offerActions.RELOAD_LIST,
             payload: null,
         })
     }
 
-    const onDeleteImage = (index: number) => (e: React.MouseEvent<HTMLDivElement>) => {
+    const onDeleteImage = (index: number) => (e: React.MouseEvent) => {
         e.stopPropagation();
 
         const imgSrc: any = stateReducer.formData.images[index];
@@ -94,22 +92,26 @@ const CreateRoomModal: React.FC<CreateRoomModalProps> = ({ stateReducer, dispatc
         }
 
         dispatch({
-            type: roomsActions.DELETE_IMAGE,
+            type: offerActions.DELETE_IMAGE,
             payload: {
                 data: index
             },
         });
     };
-
     const handleSave = async () => {
-        const { room_number, type, description, is_available, images } = stateReducer.formData
+        const { title, original_price, discount_price, description, images } = stateReducer.formData
 
         const formData = new FormData();
 
-        formData.append('room_number', room_number);
-        formData.append('type', type);
+        if (stateReducer.currentOffer) {
+            formData.append('id', String(stateReducer.currentOffer.id))
+        }
+
+        formData.append('title', title);
+        formData.append('originalPrice', String(original_price));
+        formData.append('discountPrice', String(discount_price));
         formData.append('description', description);
-        formData.append("is_available", is_available ? "1" : "0")
+
 
         if (images && images.length > 0) {
             images.forEach((file: any) => {
@@ -121,7 +123,7 @@ const CreateRoomModal: React.FC<CreateRoomModalProps> = ({ stateReducer, dispatc
             });
         }
 
-        const { status } = stateReducer.currentRoom ? await Rooms.update(formData, stateReducer.currentRoom.room_number) : await Rooms.create(formData)
+        const { status } = stateReducer.currentOffer ? await Menu.update(formData, stateReducer.currentOffer.id) : await Menu.create(formData)
 
         if (status) {
             closeModal()
@@ -130,35 +132,42 @@ const CreateRoomModal: React.FC<CreateRoomModalProps> = ({ stateReducer, dispatc
     };
 
     const onDelete = async () => {
-        dispatch({
-            type: roomsActions.CHANGE_VALUE,
-            payload: {
-                prop: 'deleteRoomModal',
-                data: !stateReducer.deleteRoomModal
+        try {
+            const { status } = await Menu.delete(Number(stateReducer.currentOffer?.id))
+
+            if (status) {
+                toast.success('Oferta eliminada de forma exitosa')
+                closeModal()
+                reloadList()
             }
-        })
+        } catch (e) {
+            console.log(e)
+        }
     }
 
     return (
         <>
             <FormModal
-                modalTitle={stateReducer.currentRoom ? "Editar una habitacion" : 'Agregar una habitacion'}
-                status={stateReducer.roomModal}
-                btnText={stateReducer.currentRoom ? "Editar" : 'Agregar'}
+                modalTitle={stateReducer.currentOffer ? "Editar una oferta" : 'Agregar una oferta'}
+                status={stateReducer.offerModal}
+                btnText={stateReducer.currentOffer ? "Editar" : 'Agregar'}
                 onSubmit={handleSave}
                 size={'md'}
-                onDelete={stateReducer.currentRoom ? onDelete : undefined}
+                onDelete={stateReducer.currentOffer ? onDelete : undefined}
                 changeModal={() => closeModal()}
             >
                 <Form>
                     <div className="innerContainer">
                         <Row className="topRow">
                             <Button className="imgButton" style={{ backgroundColor: '#f2f2f2' }}>
-                                <label htmlFor="images" className="d-flex flex-row justify-content-center flex-wrap" style={{ order: '5px solid green' }}>
+                                <label htmlFor="image" className="d-flex flex-row justify-content-center flex-wrap" style={{ order: '5px solid green' }}>
                                     {stateReducer.formData.images.length > 0 ? (
                                         stateReducer.formData.images.map((imgSrc: any, index) => (
                                             <div className="img-container m-3">
-                                                <div className='delete-icon d-flex justify-content-center align-items-center' onClick={onDeleteImage(index)} style={{ position: "absolute", color: "#ffffff", borderRadius: '50%', width: '30px', height: '30px', border: '3px solid black', backgroundColor: 'red' }}><TrashFill /></div>
+                                                <div className='delete-icon d-flex justify-content-center align-items-center' onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    onDeleteImage(index)(e);
+                                                }} style={{ position: "absolute", color: "#ffffff", borderRadius: '50%', width: '30px', height: '30px', border: '3px solid black', backgroundColor: 'red' }}><TrashFill /></div>
                                                 <img
                                                     key={index}
                                                     src={imgSrc instanceof File ? URL.createObjectURL(imgSrc) : imgSrc}
@@ -171,7 +180,7 @@ const CreateRoomModal: React.FC<CreateRoomModalProps> = ({ stateReducer, dispatc
                                     )}
                                 </label>
                                 <input
-                                    id="images"
+                                    id="image"
                                     name="images"
                                     type="file"
                                     multiple
@@ -179,31 +188,44 @@ const CreateRoomModal: React.FC<CreateRoomModalProps> = ({ stateReducer, dispatc
                                     onChange={handleOnChangeInput}
                                 />
                             </Button>
-                            <label>Selecciona las imágenes de la habitación</label>
+                            <label>Selecciona las imagenes de la oferta</label>
                         </Row>
                     </div>
                     <FormGroup className="mb-3">
-                        <label>Numero de habitación</label>
+                        <label>Nombre</label>
                         <div className="inputWithIcon">
                             <FormControl
                                 type="text"
                                 className="textInput"
-                                placeholder="Ingresa el numero de habitacion"
-                                value={stateReducer.formData.room_number}
-                                name="room_number"
+                                placeholder="Ingresa el nombre del platillo"
+                                value={stateReducer.formData.title}
+                                name="title"
                                 onChange={handleOnChangeInput}
                             />
                         </div>
                     </FormGroup>
                     <FormGroup className="mb-3">
-                        <label>Tipo</label>
+                        <label>Precio original</label>
                         <div className="inputWithIcon">
                             <FormControl
-                                type="text"
+                                type="number"
                                 className="textInput"
-                                placeholder="Ingresa el tipo de habitación"
-                                value={stateReducer.formData.type}
-                                name="type"
+                                placeholder="Ingresa el precio original"
+                                value={stateReducer.formData.original_price}
+                                name="originalPrice"
+                                onChange={handleOnChangeInput}
+                            />
+                        </div>
+                    </FormGroup>
+                    <FormGroup className="mb-3">
+                        <label>Precio con descuento</label>
+                        <div className="inputWithIcon">
+                            <FormControl
+                                type="number"
+                                className="textInput"
+                                placeholder="Ingresa el precio con descuento"
+                                value={stateReducer.formData.discount_price}
+                                name="discountPrice"
                                 onChange={handleOnChangeInput}
                             />
                         </div>
@@ -228,4 +250,4 @@ const CreateRoomModal: React.FC<CreateRoomModalProps> = ({ stateReducer, dispatc
     )
 }
 
-export default CreateRoomModal
+export default CreateOfferModal

@@ -16,7 +16,7 @@ interface deleteRoomModalProps {
 
 const Room = new ApiConsumer({ url: 'rooms/' })
 
-const DeleteModal: React.FC<deleteRoomModalProps> = ({ stateReducer, dispatch, changeModal }) => {
+const DeleteRoomModal: React.FC<deleteRoomModalProps> = ({ stateReducer, dispatch, changeModal }) => {
 
     const reloadList = () => {
         dispatch({
@@ -26,6 +26,7 @@ const DeleteModal: React.FC<deleteRoomModalProps> = ({ stateReducer, dispatch, c
     }
 
     const closeModal = () => {
+        changeValue("roomModal", !stateReducer.roomModal)
         changeValue("currentRoom", null)
         changeModal();
     }
@@ -57,8 +58,8 @@ const DeleteModal: React.FC<deleteRoomModalProps> = ({ stateReducer, dispatch, c
                 <CustomDeleteModal
                     show={stateReducer.deleteRoomModal}
                     onHide={closeModal}
-                    title={"Eliminar dependencia"}
-                    typeDelete={'cliente'}
+                    title={"Eliminar habitación"}
+                    typeDelete={'habitación'}
                     secondBtnClick={() => handleDeleteButton()}
                     firstBtnClick={closeModal}
                 >
@@ -67,4 +68,4 @@ const DeleteModal: React.FC<deleteRoomModalProps> = ({ stateReducer, dispatch, c
         </>
     )
 }
-export default DeleteModal;
+export default DeleteRoomModal;
