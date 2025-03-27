@@ -3,6 +3,7 @@ import CustomersPage from "../adminPages/Customers/customers"
 import RoomsPage from "../adminPages/Rooms/rooms"
 import MenuItemsPage from "../adminPages/Menu/menu"
 import OffersPage from "../adminPages/Offers/offers"
+import OrderPage from "../adminPages/Orders/orders"
 
 export const AdminRoutes = () => {
     return [
@@ -38,7 +39,7 @@ export const AdminRoutes = () => {
         },
         {
             path: "orders",
-            element: <></>,
+            element: <OrderPage />,
             title: "Órdenes",
             icon: <ClipboardCheck size={30} />,
         },
