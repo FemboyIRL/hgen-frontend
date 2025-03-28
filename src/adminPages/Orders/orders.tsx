@@ -9,6 +9,7 @@ import CreateOrderModal from "./orderModal/orderModal"
 
 const Orders = new ApiConsumer({ url: "orders/" })
 const Customers = new ApiConsumer({ url: "clients/" })
+const MenuItems = new ApiConsumer({ url: "menu/" })
 
 const OrderPage = () => {
     const [state, dispatch] = useReducer(reducer, initialState)
@@ -22,8 +23,39 @@ const OrderPage = () => {
     useEffect(() => {
         getOrders()
         getCustomers()
+        getMenuItems()
     }, [state.loading])
 
+    const getMenuItems = async () => {
+        try {
+            const { status, data } = await MenuItems.getAll()
+            if (status) {
+                const parsedData = data.data.map((menuItem: any) => {
+                    try {
+                        return {
+                            ...menuItem,
+                            images: JSON.parse(menuItem.images),
+                        };
+                    } catch (error) {
+                        console.error("Error al parsear las imágenes:", error);
+                        return {
+                            ...menuItem,
+                            images: [],
+                        };
+                    }
+                });
+                dispatch({
+                    type: ordersActions.CHANGE_VALUE,
+                    payload: {
+                        prop: "menuItems",
+                        data: parsedData
+                    }
+                })
+            }
+        } catch (e) {
+            console.log(e)
+        }
+    }
 
     const getCustomers = async () => {
         try {

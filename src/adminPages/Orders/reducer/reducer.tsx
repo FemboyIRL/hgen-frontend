@@ -50,10 +50,10 @@ const reducer = (state = initialState, action: { payload: any; type: any }) => {
                 ...state,
                 formData: {
                     ...state.formData,
-                    menuItems: {
+                    menuItems: [
                         ...state.formData.menuItems,
-                        payload
-                    }
+                        payload.data
+                    ]
                 }
             }
 

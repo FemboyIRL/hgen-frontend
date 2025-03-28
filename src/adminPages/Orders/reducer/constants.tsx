@@ -15,7 +15,7 @@ const initialState = {
     },
     formData: {
         customer: null as Customer | null,
-        menuItems: []
+        menuItems: [] as MenuItem[]
     },
     searchCustomer: '',
     searchMenuItem: '',
