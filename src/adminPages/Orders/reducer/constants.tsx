@@ -2,6 +2,13 @@ import { Customer } from "../../../interfaces/CustomerInterface";
 import { MenuItem } from "../../../interfaces/MenuItemInterface";
 import { Order } from "../../../interfaces/OrdersInterface";
 
+export interface MenuItemsList {
+    item: MenuItem;
+    quantity: number;
+    category: number;
+}
+
+
 const initialState = {
     loading: true,
     orderModal: false,
@@ -15,7 +22,7 @@ const initialState = {
     },
     formData: {
         customer: null as Customer | null,
-        menuItems: [] as MenuItem[]
+        menuItems: {} as Record<string, MenuItemsList[]>
     },
     searchCustomer: '',
     searchMenuItem: '',

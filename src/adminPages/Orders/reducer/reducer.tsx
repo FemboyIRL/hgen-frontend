@@ -50,13 +50,73 @@ const reducer = (state = initialState, action: { payload: any; type: any }) => {
                 ...state,
                 formData: {
                     ...state.formData,
-                    menuItems: [
+                    menuItems: {
                         ...state.formData.menuItems,
-                        payload.data
-                    ]
+                        [payload.item.id]: [
+                            ...(state.formData.menuItems[payload.item.id] || []),
+                            ...(!state.formData.menuItems[payload.item.id]?.some(item =>
+                                item.item.id === payload.item.id
+                            ) ? [{
+                                item: payload.item,
+                                quantity: payload.quantity || 1,
+                                category: payload.item.id
+                            }] : [])
+                        ]
+                    }
                 }
-            }
+            };
 
+        case ordersActions.UPDATE_MENU_ITEM_QUANTITY: {
+            const { category, itemId, action, value } = payload;
+
+            return {
+                ...state,
+                formData: {
+                    ...state.formData,
+                    menuItems: {
+                        ...state.formData.menuItems,
+                        [category]: state.formData.menuItems[category]?.map(item => {
+                            if (item.item.id === itemId) {
+                                let newQuantity = item.quantity;
+
+                                switch (action) {
+                                    case "increase":
+                                        newQuantity += 1;
+                                        break;
+
+                                    case "decrease":
+                                        newQuantity = Math.max(1, item.quantity - 1);
+                                        break;
+
+                                    case "input":
+                                        if (value !== null) {
+                                            newQuantity = Math.max(1, value);
+                                        }
+                                        break;
+                                }
+
+                                return { ...item, quantity: newQuantity };
+                            }
+                            return item;
+                        })
+                    }
+                }
+            };
+        }
+
+        case ordersActions.DELETE_MENU_ITEM:
+            return {
+                ...state,
+                formData: {
+                    ...state.formData,
+                    menuItems: {
+                        ...state.formData.menuItems,
+                        [payload.category]: state.formData.menuItems[payload.category]?.filter(
+                            (menuItem) => menuItem.item.id !== payload.itemId
+                        ) || []
+                    }
+                }
+            };
         default:
             return state;
     }

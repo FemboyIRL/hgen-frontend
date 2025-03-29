@@ -1,4 +1,4 @@
-import { Col, Dropdown, DropdownButton, Form, Row, InputGroup, } from "react-bootstrap";
+import { Col, Dropdown, DropdownButton, Form, Row, InputGroup, Button, Badge, } from "react-bootstrap";
 import { OrderReducer } from "../reducer/constants";
 import ApiConsumer from "../../../services/api_consumer";
 import { useEffect } from "react";
@@ -6,7 +6,7 @@ import ordersActions from "../reducer/actions";
 import FormModal from "../../../components/FormModal/form-modal";
 import { Customer } from "../../../interfaces/CustomerInterface";
 import { MenuItem } from "../../../interfaces/MenuItemInterface";
-import { FileMinus, Plus } from "react-bootstrap-icons";
+import { Plus } from "react-bootstrap-icons";
 
 
 interface CreateOrderModalProps {
@@ -75,6 +75,8 @@ const CreateOrderModal: React.FC<CreateOrderModalProps> = ({ stateReducer, dispa
             type: ordersActions.RESET_FORM,
             payload: null
         })
+        changeValue("searchCustomer", '')
+        changeValue("searchMenuItem", '')
         changeModal()
     }
 
@@ -86,6 +88,9 @@ const CreateOrderModal: React.FC<CreateOrderModalProps> = ({ stateReducer, dispa
     }
 
     const handleSave = async () => {
+
+        console.log('platillos', stateReducer.formData.menuItems)
+
         const { customer } = stateReducer.formData
 
         const formData = new FormData();
@@ -126,6 +131,32 @@ const CreateOrderModal: React.FC<CreateOrderModalProps> = ({ stateReducer, dispa
         })
     }
 
+    const handleOnChangeInput = (e: React.MouseEvent | React.ChangeEvent) => {
+        const target = e.currentTarget as HTMLElement;
+        const actionType = target.dataset.action;
+        const itemId = target.dataset.itemId;
+        const category = target.dataset.category;
+
+        if (!itemId || !category || !actionType) return;
+
+        // Para el input numérico
+        const inputValue = actionType === "input"
+            ? Math.max(1, parseInt((target as HTMLInputElement).value)) || 1
+            : null;
+
+        console.log(inputValue, actionType, category)
+
+        dispatch({
+            type: ordersActions.UPDATE_MENU_ITEM_QUANTITY,
+            payload: {
+                category,
+                itemId: parseInt(itemId),
+                action: actionType,
+                value: inputValue
+            }
+        });
+    };
+
     const temporal_customer_list = filterCustomerList()
 
     const temporal_menu_list = filterMenuList()
@@ -142,153 +173,189 @@ const CreateOrderModal: React.FC<CreateOrderModalProps> = ({ stateReducer, dispa
                 changeModal={() => closeModal()}
             >
                 <Form>
-                    <Row style={{ height: '100px' }}>
-                        <Col>
-                            <InputGroup>
-                                <Form.Control
-                                    className="input"
-                                    placeholder="Buscar cliente..."
-                                    aria-label="Buscar cliente"
-                                    value={stateReducer.searchCustomer}
-                                    onChange={(e) => changeValue("searchCustomer", e.target.value)}
-                                />
-                                <DropdownButton
-                                    className="btn"
-                                    title="▼"
-                                    id="input-group-dropdown-1"
-                                    align="end"
-                                    show={stateReducer.searchCustomer !== ''}
-                                >
-                                    {temporal_customer_list.length > 0 ? (
-                                        temporal_customer_list.map((customer: Customer) => (
-                                            <Dropdown.Item
-                                                onClick={() => {
-                                                    changeValueForm('customer', customer);
-                                                    changeValue("searchCustomer", '');
-                                                }}
-                                                key={`customer-${customer.user_id}`}
-                                            >
-                                                <div>
-                                                    <div>{customer.fullName}</div>
-                                                    <small className="text-muted">{customer.email} | {customer.phone}</small>
-                                                </div>
-                                            </Dropdown.Item>
-                                        ))
-                                    ) : (
-                                        <Dropdown.Item disabled>No se encontraron clientes</Dropdown.Item>
-                                    )}
-                                </DropdownButton>
-                            </InputGroup>
-
-                            {stateReducer.formData.customer && (
-                                <div className="mt-2 p-2 border rounded">
-                                    <strong>Cliente seleccionado:</strong>
-                                    <div>{stateReducer.formData.customer.fullName}</div>
-                                    <small className="text-muted">
-                                        {stateReducer.formData.customer.email} | {stateReducer.formData.customer.phone}
-                                    </small>
-                                </div>
-                            )}
-                        </Col>
-                    </Row>
-                    <Row className="mt-5" style={{ height: "500px" }}>
-                        <Col>
-                            <InputGroup>
-                                <Form.Control
-                                    className="input"
-                                    placeholder="Buscar platillo..."
-                                    aria-label="Buscar platillo"
-                                    value={stateReducer.searchMenuItem}
-                                    onChange={(e) => changeValue("searchMenuItem", e.target.value)}
-                                />
-                                <DropdownButton
-                                    className="btn"
-                                    title="▼"
-                                    id="input-group-dropdown-1"
-                                    align="end"
-                                    show={stateReducer.searchMenuItem !== ''}
-                                >
-                                    {temporal_menu_list.length > 0 ? (
-                                        temporal_menu_list.map((item: MenuItem) => (
-                                            <Dropdown.Item
-                                                onClick={() => {
-                                                    dispatch({
-                                                        type: ordersActions.ADD_MENU_ITEM,
-                                                        payload: {
-                                                            prop: null,
-                                                            data: item
-                                                        }
-                                                    })
-                                                    changeValue("searchMenuItem", '');
-                                                    console.log(stateReducer.formData.menuItems)
-                                                }}
-                                                key={`item-${item.id}`}
-                                            >
-                                                <div>
-                                                    <div>{item.name}</div>
-                                                </div>
-                                            </Dropdown.Item>
-                                        ))
-                                    ) : (
-                                        <Dropdown.Item disabled>No se encontraron platillos en el menu</Dropdown.Item>
-                                    )}
-                                </DropdownButton>
-                            </InputGroup>
-
-                            {stateReducer.formData.menuItems?.length > 0 && (
-                                <div className="mt-2 p-2 border rounded bg-light">
-                                    <strong className="d-block mb-2">Platillos seleccionados:</strong>
-                                    <div className="selected-items-container">
-                                        {stateReducer.formData.menuItems.map((item, index) => (
-                                            <div
-                                                key={`selected-item-${item.id || index}`}
-                                                className="mb-2 pb-2 border-bottom d-flex align-items-center justify-content-between"
-                                            >
-                                                {/* Image on the left */}
-                                                <div className="d-flex align-items-center" style={{ width: '40%' }}>
-                                                    {item.images?.[0] && (
-                                                        <img
-                                                            src={item.images[0]}
-                                                            alt={item.name || 'Menu item'}
-                                                            className="rounded"
-                                                            style={{ width: '50px', height: '50px', objectFit: 'cover' }}
-                                                        />
-                                                    )}
-                                                    <div className="ml-3">
-                                                        <div className="fw-medium">{item.name || 'Nombre no disponible'}</div>
-                                                        {item.price && (
-                                                            <small className="text-muted">${item.price}</small>
-                                                        )}
+                    <div className="container">
+                        <Row>
+                            <Col>
+                                <InputGroup>
+                                    <Form.Control
+                                        className="input"
+                                        placeholder="Buscar cliente..."
+                                        aria-label="Buscar cliente"
+                                        value={stateReducer.searchCustomer}
+                                        onChange={(e) => changeValue("searchCustomer", e.target.value)}
+                                    />
+                                    <DropdownButton
+                                        className="btn"
+                                        title="▼"
+                                        id="input-group-dropdown-1"
+                                        align="end"
+                                        show={stateReducer.searchCustomer !== ''}
+                                    >
+                                        {temporal_customer_list.length > 0 ? (
+                                            temporal_customer_list.map((customer: Customer) => (
+                                                <Dropdown.Item
+                                                    onClick={() => {
+                                                        changeValueForm('customer', customer);
+                                                        changeValue("searchCustomer", '');
+                                                    }}
+                                                    key={`customer-${customer.user_id}`}
+                                                >
+                                                    <div>
+                                                        <div>{customer.fullName}</div>
+                                                        <small className="text-muted">{customer.email} | {customer.phone}</small>
                                                     </div>
-                                                </div>
+                                                </Dropdown.Item>
+                                            ))
+                                        ) : (
+                                            <Dropdown.Item disabled>No se encontraron clientes</Dropdown.Item>
+                                        )}
+                                    </DropdownButton>
+                                </InputGroup>
 
-                                                <div className="d-flex align-items-center">
-                                                    <button
-                                                        className="btn btn-sm btn-outline-secondary p-0 d-flex align-items-center justify-content-center"
-                                                        style={{ width: '28px', height: '28px', borderRadius: '50%' }}
-
-                                                    >
-                                                        <FileMinus size={16} />
-                                                    </button>
-
-                                                    <span className="mx-2" style={{ minWidth: '20px', textAlign: 'center' }}>
-                                                        {1}
-                                                    </span>
-
-                                                    <button
-                                                        className="btn btn-sm btn-outline-secondary p-0 d-flex align-items-center justify-content-center"
-                                                        style={{ width: '28px', height: '28px', borderRadius: '50%' }}
-                                                    >
-                                                        <Plus size={16} />
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        ))}
+                                {stateReducer.formData.customer && (
+                                    <div className="mt-2 p-2 border rounded">
+                                        <strong>Cliente seleccionado:</strong>
+                                        <div>{stateReducer.formData.customer.fullName}</div>
+                                        <small className="text-muted">
+                                            {stateReducer.formData.customer.email} | {stateReducer.formData.customer.phone}
+                                        </small>
                                     </div>
-                                </div>
-                            )}
-                        </Col>
-                    </Row>
+                                )}
+                            </Col>
+                        </Row>
+                        <Row className="mt-2" >
+                            <Col>
+                                <InputGroup>
+                                    <Form.Control
+                                        className="input"
+                                        placeholder="Buscar platillo..."
+                                        aria-label="Buscar platillo"
+                                        value={stateReducer.searchMenuItem}
+                                        onChange={(e) => changeValue("searchMenuItem", e.target.value)}
+                                    />
+                                    <DropdownButton
+                                        className="btn"
+                                        title="▼"
+                                        id="input-group-dropdown-1"
+                                        align="end"
+                                        show={stateReducer.searchMenuItem !== ''}
+                                    >
+                                        {temporal_menu_list.length > 0 ? (
+                                            temporal_menu_list.map((item: MenuItem) => (
+                                                <Dropdown.Item
+                                                    onClick={() => {
+                                                        dispatch({
+                                                            type: ordersActions.ADD_MENU_ITEM,
+                                                            payload: {
+                                                                item: item,
+                                                                quantity: 1,
+                                                            }
+                                                        })
+                                                        changeValue("searchMenuItem", '');
+                                                    }}
+                                                    key={`item-${item.id}`}
+                                                >
+                                                    <div>
+                                                        <div>{item.name}</div>
+                                                    </div>
+                                                </Dropdown.Item>
+                                            ))
+                                        ) : (
+                                            <Dropdown.Item disabled>No se encontraron platillos en el menu</Dropdown.Item>
+                                        )}
+                                    </DropdownButton>
+                                </InputGroup>
+
+                                {Object.keys(stateReducer.formData.menuItems).length > 0 && (
+                                    <Form.Group className="mt-3">
+                                        <Form.Label className="fw-bold">Platillos seleccionados</Form.Label>
+
+                                        {Object.entries(stateReducer.formData.menuItems).map(([category, items]) => {
+                                            console.log(category)
+                                            console.log(items)
+                                            return (
+                                                <>
+                                                    <div key={`category-${category}`} className="border rounded bg-light p-2 mb-3">
+                                                        {items.map((group) => (
+                                                            <Form.Control
+                                                                as="div"
+                                                                key={`selected-item-${group.item.id}`}
+                                                                className="mb-2 p-2 border-bottom d-flex align-items-center"
+                                                            >
+                                                                <div className="d-flex align-items-center flex-grow-1">
+                                                                    {/* Image */}
+                                                                    <div className="mr-3" style={{ width: '50px', height: '50px' }}>
+                                                                        <img
+                                                                            src={group.item.images?.[0] || '/placeholder-food.jpg'}
+                                                                            alt={group.item.name}
+                                                                            className="img-fluid rounded"
+                                                                            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                                                                        />
+                                                                    </div>
+
+                                                                    {/* Name and Price */}
+                                                                    <div className="flex-grow-1">
+                                                                        <div className="fw-medium">{group.item.name || 'Nombre no disponible'}</div>
+                                                                        {group.item.price && (
+                                                                            <small className="text-muted">
+                                                                                ${group.item.price} c/u
+                                                                            </small>
+                                                                        )}
+                                                                    </div>
+                                                                </div>
+
+                                                                {/* Quantity Controls */}
+                                                                <div className="d-flex align-items-center ml-3">
+                                                                    <Button
+                                                                        variant="outline-secondary"
+                                                                        size="sm"
+                                                                        className="p-0 rounded-circle"
+                                                                        style={{ width: '28px', height: '28px' }}
+                                                                        data-action="decrease"
+                                                                        data-item-id={group.item.id}
+                                                                        data-category={group.category}
+                                                                        onClick={handleOnChangeInput}
+                                                                        disabled={group.quantity <= 1}
+                                                                    >
+                                                                        -
+                                                                    </Button>
+
+                                                                    <Form.Control
+                                                                        type=""
+                                                                        name="quantity"
+                                                                        min="1"
+                                                                        value={group.quantity}
+                                                                        data-item-id={group.item.id}
+                                                                        data-category={group.category}
+                                                                        onChange={handleOnChangeInput}
+                                                                        className="mx-2 text-center"
+                                                                        style={{ width: '45px' }}
+                                                                    />
+
+                                                                    <Button
+                                                                        variant="outline-secondary"
+                                                                        size="sm"
+                                                                        className="p-0 rounded-circle"
+                                                                        style={{ width: '28px', height: '28px' }}
+                                                                        data-action="increase"
+                                                                        data-item-id={group.item.id}
+                                                                        data-category={group.category}
+                                                                        onClick={handleOnChangeInput}
+                                                                    >
+                                                                        <Plus size={16} />
+                                                                    </Button>
+                                                                </div>
+                                                            </Form.Control>
+                                                        ))}
+                                                    </div>
+                                                </>
+                                            )
+                                        })}
+                                    </Form.Group>
+                                )}
+                            </Col>
+                        </Row>
+                    </div>
                 </Form>
             </FormModal >
         </>
