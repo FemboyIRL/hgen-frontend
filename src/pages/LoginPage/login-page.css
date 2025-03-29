@@ -1,0 +1,49 @@
+.login-container{
+    font-family: 'Poppins', sans-serif;
+    height: 100vh;
+    width: 100%;
+    background: url('../public/assets/images/hgen-front-view.jpeg') no-repeat center center/cover; 
+}
+
+.featured-image {
+    text-align: center;
+  }
+  
+  .featured-image .img-fluid {
+    max-width: 100%;
+    height: auto;
+    border-radius: 20px;
+  }  
+.box-area{
+   width: 930px;
+}
+
+.right-box{
+    padding: 40px 30px 40px 40px;
+
+}
+
+::placeholder{
+    font-size: 16px;
+}
+
+@media only screen and (max-width: 768px){
+    .box-area{
+        margin: 0 10px;
+    }
+    .left-box{
+        height: 200px;
+        overflow: hidden;
+    }
+    .right-box{
+        padding: 20px;
+    }
+    .featured-image .img-fluid {
+        margin-top: 15px;
+        max-width: 80%;
+    }
+    .box-area-content{
+        display: none;
+        visibility: hidden;
+    }
+}

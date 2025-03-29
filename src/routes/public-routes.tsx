@@ -1,4 +1,5 @@
 import HomePage from "../pages/HomePage/homepage";
+import LoginPage from "../pages/LoginPage/login-page";
 
 export const outSidePages = [
   {
@@ -11,6 +12,6 @@ export const outSidePages = [
   },
   {
     path: "/login",
-    element: <></>,
+    element: <LoginPage />,
   },
 ];
