@@ -1,10 +1,18 @@
 import { useReducer } from "react";
 import { FormCheck, FormControl, FormGroup } from "react-bootstrap";
+import './login-page.css'
 import { initialState, loginActions, reducer } from "./reducer/reducer";
+import ApiConsumer from "../../services/api_consumer";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+
+const Auth = new ApiConsumer({ url: "auth/login/" })
 
 const LoginPage = () => {
 
     const [state, dispatch] = useReducer(reducer, initialState)
+
+    const navigate = useNavigate();
 
     const changeValueForm = (prop: string, data: any) => {
         dispatch({
@@ -16,7 +24,30 @@ const LoginPage = () => {
         })
     }
 
-    const handleLogin = () => {
+    const handleLogin = async (e: any) => {
+        e.preventDefault();
+        try {
+
+            const { email, password, rememberMe } = state!.formData
+
+            const body = {
+                email,
+                password
+            }
+
+            const { status, data } = await Auth.petition(body, "POST")
+
+            if (status) {
+                toast.success("Sesion iniciada de forma exitosa")
+                if (rememberMe) localStorage.setItem("user", JSON.stringify(body))
+                localStorage.setItem("token", data.token);
+                navigate("/admin/home");
+            }
+        } catch (e) {
+            console.log(e)
+        }
+
+
 
     }
 
@@ -71,8 +102,8 @@ const LoginPage = () => {
                             </small>
                         </div>
                     </div>
-                    <div className="col-md-6 right-box">
-                        <div className="row align-items-center">
+                    <div className="d-flex col-md-6 right-box align-items-center justify-content-center">
+                        <div className="row">
                             <div className="header-text mb-4">
                                 <h1>Hola de nuevo</h1>
                                 <p>Nos hace felices volverlo a ver</p>
