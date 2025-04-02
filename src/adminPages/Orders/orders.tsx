@@ -17,6 +17,7 @@ const OrderPage = () => {
     const filterOrderList = () => {
         const ordersList = state.orders
 
+        console.log('ordenes', ordersList)
         return ordersList
     }
 
@@ -78,9 +79,10 @@ const OrderPage = () => {
         try {
             const { status, data } = await Orders.getAll()
             if (status) {
+                console.log(data)
                 dispatch({
                     type: ordersActions.LOADED_ORDERS_LIST,
-                    payload: data
+                    payload: data.data
                 })
             }
         } catch (e) {
@@ -138,7 +140,7 @@ const OrderPage = () => {
                                 <LoadingSpinnerContainer />
                             ) : (
                                 <>
-                                    {temporal_list ? (
+                                    {temporal_list.length === 0 ? (
                                         <p>No se encontraron ordenes.</p>
                                     ) : (
                                         <div className="tableModule">
@@ -147,13 +149,13 @@ const OrderPage = () => {
                                                     <tr>
                                                         <th>Precio</th>
                                                         <th>Cliente</th>
-                                                        <th>Teléfono</th>
                                                         <th>Fecha</th>
+                                                        <th>Opciones</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     {temporal_list.map((order: Order) => (
-                                                        <tr key={`order-${order.order_id}`}>
+                                                        <tr key={`order-${order.order_id}`} >
                                                             <td>{`${order.total_price}`}</td>
                                                             <td>{order.user_name}</td>
                                                             <td>{String(order.order_date)}</td>

@@ -1,4 +1,4 @@
-import { Col, Dropdown, DropdownButton, Form, Row, InputGroup, Button, Badge, } from "react-bootstrap";
+import { Col, Dropdown, DropdownButton, Form, Row, InputGroup, Button } from "react-bootstrap";
 import { OrderReducer } from "../reducer/constants";
 import ApiConsumer from "../../../services/api_consumer";
 import { useEffect } from "react";
@@ -18,7 +18,7 @@ interface CreateOrderModalProps {
     changeModal: () => void
 }
 
-const Order = new ApiConsumer({ url: 'order/' })
+const Order = new ApiConsumer({ url: 'orders/' })
 
 const CreateOrderModal: React.FC<CreateOrderModalProps> = ({ stateReducer, dispatch, changeModal }) => {
 
@@ -91,19 +91,21 @@ const CreateOrderModal: React.FC<CreateOrderModalProps> = ({ stateReducer, dispa
 
         console.log('platillos', stateReducer.formData.menuItems)
 
-        const { customer } = stateReducer.formData
+        const { customer, menuItems } = stateReducer.formData
 
-        const formData = new FormData();
+        const totalPrice = Object.values(menuItems)
+            .flat()
+            .reduce((total, menuItem) => {
+                return total = total + (menuItem.quantity * Number(menuItem.item.price));
+            }, 0);
 
-        if (stateReducer.currentOrder) {
-            formData.append('id', String(stateReducer.currentOrder.order_id))
+        const body = {
+            customer_id: customer?.user_id,
+            total_price: totalPrice,
+            menuItems
         }
 
-        formData.append("user_id", String(customer?.user_id))
-
-
-
-        const { status } = stateReducer.currentOrder ? await Order.update(formData, stateReducer.currentOrder.order_id) : await Order.create(formData)
+        const { status } = stateReducer.currentOrder ? await Order.update(body, stateReducer.currentOrder.order_id) : await Order.create(body)
 
         if (status) {
             closeModal()
