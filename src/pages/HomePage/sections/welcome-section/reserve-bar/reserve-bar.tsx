@@ -1,6 +1,6 @@
 import { useReducer } from "react";
 import { useNavigate } from "react-router-dom";
-import { Search, CalendarCheckFill } from "react-bootstrap-icons";
+import { CalendarCheckFill, Calendar2CheckFill } from "react-bootstrap-icons";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./reserve-bar.css";
@@ -35,16 +35,16 @@ const ReservaBar = () => {
 
     const CustomInput: React.FC<CustomInputProps> = ({ value, onClick }) => {
         return (
-            <div className="input-group" onClick={onClick} style={{ cursor: 'pointer' }}>
+            <div className="input-group flex-nowrap" onClick={onClick} style={{ cursor: 'pointer' }}>
                 <input
                     type="text"
-                    className="form-control"
+                    className=""
                     value={value}
                     readOnly
                     placeholder="Selecciona fechas"
                 />
-                <div className="input-group-append">
-                    <CalendarCheckFill />
+                <div className="input-group-append d-flex align-items-center p-1">
+                    <CalendarCheckFill size={20} />
                 </div>
             </div>
         )
@@ -64,43 +64,47 @@ const ReservaBar = () => {
             <div className="reserva-bar">
                 <div className="reserva-bar-content">
                     <h1 className="reserva-bar-title">Reserva Aqui</h1>
-                    <form className="reserva-bar-form" onSubmit={(e) => e.preventDefault()}>
-                        <div className="reserva-bar-fields">
+                    <form className="reserva-bar-form d-flex flex-column gap-3" onSubmit={(e) => e.preventDefault()}>
+                        <div className="reserva-bar-fields d-flex justify-content-center align-items-center flex-wrap gap-5">
                             <div className="reserva-bar-field">
-                                <label htmlFor="date-picker">Check-in / Check-out</label>
-                                <DatePicker
-                                    selectsRange
-                                    startDate={startDate}
-                                    endDate={endDate}
-                                    onChange={(update) => {
-                                        handleDateChange(update);
-                                    }}
-                                    placeholderText="Selecciona fechas "
-                                    id="date-picker"
-                                    className="date-picker-input"
-                                    customInput={<CustomInput />}
-                                    withPortal
-                                />
+                                <label htmlFor="date-picker" className="">Check-in / Check-out</label>
+                                <div className="datePicker d-flex align-items-center no-wrap">
+                                    <DatePicker
+                                        selectsRange
+                                        startDate={startDate}
+                                        endDate={endDate}
+                                        onChange={(update) => {
+                                            handleDateChange(update);
+                                        }}
+                                        placeholderText="Selecciona fechas "
+                                        id="date-picker"
+                                        className="date-picker-input"
+                                        customInput={<CustomInput />}
+                                        withPortal
+                                    />
+                                </div>
                             </div>
-                            <div className="reserva-bar-field huespedes">
+                            <div className="huespedesInput">
                                 <label htmlFor="huespedes">Huéspedes</label>
-                                <input
-                                    type="text"
-                                    id="huespedes"
-                                    value={huespedes}
-                                    readOnly
-                                    aria-label="Número de huéspedes"
-                                    onClick={() => changeValue('roomModal', !state.roomModal)} />
+                                <div className="input-group">
+                                    <input
+                                        type="text"
+                                        id="huespedes"
+                                        value={huespedes}
+                                        readOnly
+                                        aria-label="Número de huéspedes"
+                                        onClick={() => changeValue('roomModal', !state.roomModal)} />
+                                </div>
                             </div>
                         </div>
                         <div className="reserva-bar-button">
                             <button
                                 type="submit"
                                 onClick={handleSubmit}
-                                aria-label="Buscar hoteles"
+                                aria-label="Reservar"
                             >
-                                <Search />
-                                <span>Buscar</span>
+                                <Calendar2CheckFill />
+                                <span>Reservar</span>
                             </button>
                         </div>
                     </form>

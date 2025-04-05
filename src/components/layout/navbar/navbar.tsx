@@ -18,30 +18,30 @@ const Navbar = () => {
             <div className="logo">
                 <img src="/assets/images/logo.jpeg" alt="Hgen Suites Logo" />
             </div>
-            <nav className="nav">
-                <ul>
+            <nav className="nav d-flex justify-content-center align-items-center">
+                <ul className="d-flex align-items-center mt-3">
                     <li>
                         <a href="#home">
-                            <House className="nav-icon" />{" "}
+                            <House className="nav-icon" size={25} />{" "}
                             <span className="nav-text">Inicio</span>
                         </a>
                     </li>
                     <li>
                         <a href="#habitaciones">
-                            <DoorClosed className="nav-icon" />{" "}
+                            <DoorClosed className="nav-icon" size={25} />{" "}
                             <span className="nav-text">Habitaciones</span>
                         </a>
                     </li>
                     <li>
                         <a href="#servicios">
-                            <People className="nav-icon" />{" "}
+                            <People className="nav-icon" size={25} />{" "}
                             <span className="nav-text">Servicios</span>
                         </a>
                     </li>
                     {user ? (
                         <li>
                             <Link to="/Reservation">
-                                <Calendar className="nav-icon" />{" "}
+                                <Calendar className="nav-icon" size={25} />{" "}
                                 <span className="nav-text">Mis Reservas</span>
                             </Link>
                         </li>
@@ -50,7 +50,7 @@ const Navbar = () => {
                     )}
                     <li>
                         <a href="#contacto">
-                            <Phone className="nav-icon" />{" "}
+                            <Phone className="nav-icon" size={25} />{" "}
                             <span className="nav-text">Contacto</span>
                         </a>
                     </li>
@@ -71,7 +71,6 @@ const Navbar = () => {
                 <a
                     href="/Login"
                     className="btn-inicia-sesion"
-                    style={{ marginRight: "20px" }}
                 >
                     Inicia Sesión
                 </a>

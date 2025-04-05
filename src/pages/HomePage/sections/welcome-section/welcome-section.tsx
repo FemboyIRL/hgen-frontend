@@ -15,10 +15,10 @@ const WelcomeSection = () => {
     useEffect(() => {
         const intervalId = setInterval(() => {
             setBackgroundIndex((prevIndex) => (prevIndex + 1) % images.length);
-        }, 5000);
+        }, 1000000);
 
         return () => clearInterval(intervalId);
-    }, []);
+    });
 
     return (
         <section
@@ -28,12 +28,14 @@ const WelcomeSection = () => {
         >
             {" "}
             <div className="overlay" />
-            <div className="content">
+            <div className="content mt-5">
                 <h1 className="titulo">Bienvenido a Hgen Suites</h1>
                 <p className="subtitulo">
                     Confort, estilo y atención personalizada para tu estancia.
                 </p>
-                <ReservaBar />
+                <div className="reserveBarContainer p-5">
+                    <ReservaBar />
+                </div>
             </div>
         </section>
     );

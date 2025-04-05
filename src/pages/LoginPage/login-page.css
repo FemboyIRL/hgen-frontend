@@ -21,6 +21,10 @@
    height: 60%;
 }
 
+.left-box{
+    height: 100%;
+}
+
 .right-box{
     padding: 40px 30px 40px 40px;
 
@@ -30,10 +34,6 @@
     .box-area{
         margin: 0 10px;
         height: auto;
-    }
-    .left-box{
-        height: 200px;
-        overflow: hidden;
     }
     .right-box{
         padding: 20px;
