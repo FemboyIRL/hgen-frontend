@@ -5,7 +5,6 @@
   }
   
   .contenedor {
-    max-width: 1200px;
     margin: 0 auto;
   }
   
@@ -15,138 +14,117 @@
     color: #333;
     text-transform: uppercase;
   }
-  
-  .habitaciones-lista {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
+
+  .card-container {
+    display: grid;
+    row-gap: 3.5rem;
   }
-  
-  .habitacion {
-    background-color: #fff;
-    border-radius: 15px;
-    box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.1);
-    max-width: 350px;
-    width: 100%;
-    overflow: hidden;
-    opacity: 0;
-    transform: translateX(180px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+
+  .card {
+    width: 250px;
+    height: 250px;
     position: relative;
-    transition: all 0.3s ease-in-out;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(240, 240, 240, 0.6));
+    overflow: hidden;
   }
   
-  .habitacion.visible {
-    opacity: 1;
-    transform: translateX(0);
-  }
-  
-  .habitacion.visible:nth-child(1) {
-    transition-delay: 0s;
-  }
-  .habitacion.visible:nth-child(2) {
-    transition-delay: 0.2s;
-  }
-  .habitacion.visible:nth-child(3) {
-    transition-delay: 0.4s;
-  }
-  .habitacion.visible:nth-child(4) {
-    transition-delay: 0.6s;
-  }
-  .habitacion.visible:nth-child(5) {
-    transition-delay: 1s;
-  }
-  
-  .habitacion:hover {
-    transform: translateY(-10px);
-    box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.2);
-    cursor: pointer;
-  }
-  
-  .imagen-habitacion {
-    width: 100%;
-    height: 200px;
+  .card-img {
+    height: 100%;
     object-fit: cover;
-    border-radius: 10px;
-    transition: transform 0.3s ease-in-out;
+    object-position: center;
+    border-radius: 1.5rem;
   }
   
-  .imagen-habitacion:hover {
-    transform: scale(1.05);
+  .card-data {
+    width: 70%;
+    background-color: white;
+    box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
+    border-radius: 1rem;
+    position: absolute;
+    bottom: -9rem;
+    left: 0;
+    right: 0;
+    margin-inline: auto;
+    opacity: 0;
+    transition: opacity 1s 1s;
   }
   
-  .titulo-habitacion {
-    font-size: 1.6rem;
-    color: #333;
-    margin: 15px 0;
-    font-weight: bold;
-    text-transform: uppercase;
+  .card-description {
+    display: block;
+    font-size: var(--small-font-size);
+    margin-bottom: .25rem;
   }
   
-  .descripcion-habitacion {
-    font-size: 1rem;
-    color: #666;
-    margin: 10px 0;
-    text-align: center;
-    flex-grow: 1;
+  .card-title {
+    font-size: var(--h2-font-size);
+    font-weight: 500;
+    color: var(--title-color);
+    margin-bottom: .75rem;
   }
   
-  .precio-habitacion {
-    font-size: 1.3rem;
-    color: #ff6600;
-    font-weight: bold;
-    margin-top: 15px;
-    text-align: center;
+  .card-button {
+    text-decoration: none;
+    font-size: var(--small-font-size);
+    font-weight: 500;
+    color: var(--first-color);
   }
   
-  @media (max-width: 768px) {
-    .habitacion {
-        max-width: 70%;
-        padding: 15px;
-    }
+  .card-button:hover {
+    text-decoration: underline;
+  }
   
-    .imagen-habitacion {
-        height: 180px;
-    }
+  /* Naming animations in hover */
+  .card:hover .card-data {
+    animation: show-data 1s forwards;
+    opacity: 1;
+    transition: opacity .3s;
+  }
   
-    .titulo-habitacion {
-        font-size: 1.3rem;
-    }
+  .card:hover {
+    animation: remove-overflow 2s forwards;
+  }
   
-    .descripcion-habitacion {
-        font-size: 0.9rem;
-    }
+  .card:not(:hover) {
+    animation: show-overflow 2s forwards;
+  }
   
-    .precio-habitacion {
-        font-size: 1.1rem;
+  .card:not(:hover) .card-data {
+    animation: remove-data 1s forwards;
+  }
+  
+  /* Card animation */
+  @keyframes show-data {
+    50% {
+      transform: translateY(-10rem);
+    }
+    100% {
+      transform: translateY(-7rem);
     }
   }
   
-  @media (max-width: 480px) {
-    .habitacion {
-        max-width: 100%;
-        padding: 10px;
+  @keyframes remove-overflow {
+    to {
+      overflow: initial;
     }
+  }
   
-    .imagen-habitacion {
-        height: 150px;
+  @keyframes remove-data {
+    0% {
+      transform: translateY(-7rem);
     }
-  
-    .titulo-habitacion {
-        font-size: 1.2rem;
+    50% {
+      transform: translateY(-10rem);
     }
-  
-    .descripcion-habitacion {
-        font-size: 0.85rem;
+    100% {
+      transform: translateY(.5rem);
     }
+  }
   
-    .precio-habitacion {
-        font-size: 1rem;
+  @keyframes show-overflow {
+    0% {
+      overflow: initial;
+      pointer-events: none;
+    }
+    50% {
+      overflow: hidden;
     }
   }

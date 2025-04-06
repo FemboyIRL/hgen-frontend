@@ -7,9 +7,13 @@
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
   }
   
-  .header .logo img {
-    max-width: 150px;
+ .logo{
+  width: calc(1em + 50%);
+  img{
+    width: inherit;
+    object-fit: cover;
   }
+ }
 
   .nav{
     width: 100%;
@@ -23,8 +27,12 @@
     margin: 0 15px;
   }
   
-  .nav a {
-    text-decoration: none;
+  .nav-links{
+  text-decoration: none;
+
+  } 
+
+  .nav li a {
     color: #333;
     font-weight: bold;
     transition: color 0.3s;
@@ -33,8 +41,8 @@
   }
   
   .nav-icon {
-    font-size: 1rem;
     margin-right: 2px;
+    width: calc(2em + 0%);
     display: block;
   }
   

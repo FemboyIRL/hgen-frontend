@@ -1,6 +1,5 @@
 import { useEffect, useReducer, useRef } from "react";
 import "./rooms-sections.css";
-import useVisibility from "../../../../hooks/useVisibility";
 import LoadingSpinnerContainer from "../../../../components/LoadingSpinner/loading-spinner";
 import initialState from "../../../../adminPages/Rooms/reducer/constants";
 import ApiConsumer from "../../../../services/api_consumer";
@@ -12,7 +11,6 @@ const Rooms = new ApiConsumer({ url: 'rooms/' })
 const RoomsSection = () => {
     const [state, dispatch] = useReducer(reducer, initialState)
     const sectionRef = useRef<HTMLElement | null>(null)
-    const isVisible = useVisibility(sectionRef, "-50px")
 
     useEffect(() => {
         getAllRooms()
@@ -54,28 +52,26 @@ const RoomsSection = () => {
         >
             <div className="contenedor">
                 <h2 className="section-title">Nuestras Habitaciones</h2>
-                <div className="habitaciones-lista">
+                <div className="cards-container d-flex justify-content-center align-items-center gap-4 flex-wrap">
                     {state.rooms.length === 0 ? (
                         <p>No hay habitaciones disponibles.</p>
                     ) : state.loading ? <LoadingSpinnerContainer /> : (
                         state.rooms.map((habitacion: Room) => (
                             <>
-                                <div className={`habitacion ${isVisible ? "visible" : ""}`}>
-                                    <img
-                                        src={habitacion.images[0]}
-                                        alt={habitacion.room_number}
-                                        className="imagen-habitacion"
-                                    />
-                                    <h3 className="titulo-habitacion">Habitación {habitacion.room_number}</h3>
-                                    <p className="descripcion-habitacion">{habitacion.description}</p>
-                                    <p className="precio-habitacion">{"$700 p/n"}</p>
-                                </div>
+                                <div className="card mt-3">
+                                    <img src={habitacion.images[0]} alt="" className="card-img" />
+                                    <div className="card-data d-flex justify-content-center flex-column p-3">
+                                        <span className="card-description">{habitacion.description}</span>
+                                        <h2 className="card-title">{habitacion.room_number}</h2>
+                                        <div className="card-button"></div>
+                                    </div>
+                                </div >
                             </>
                         ))
                     )}
                 </div>
             </div>
-        </section>
+        </section >
     );
 };
 
