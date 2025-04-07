@@ -1,0 +1,11 @@
+.servicesContainer{
+    background: url('/assets/images/restaurant.jpeg') no-repeat center center/cover; 
+}
+
+.card-description{
+    font-size: 12px;
+}
+
+.card-icon{
+    color: blue;
+}

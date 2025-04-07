@@ -56,9 +56,9 @@ const RoomsSection = () => {
                     {state.rooms.length === 0 ? (
                         <p>No hay habitaciones disponibles.</p>
                     ) : state.loading ? <LoadingSpinnerContainer /> : (
-                        state.rooms.map((habitacion: Room) => (
+                        state.rooms.map((habitacion: Room, index: number) => (
                             <>
-                                <div className="card mt-3">
+                                <div className="card mt-3" key={index}>
                                     <img src={habitacion.images[0]} alt="" className="card-img" />
                                     <div className="card-data d-flex justify-content-center flex-column p-3">
                                         <span className="card-description">{habitacion.description}</span>

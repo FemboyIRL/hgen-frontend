@@ -197,7 +197,7 @@ const CreateOfferModal: React.FC<CreateOfferModalProps> = ({ stateReducer, dispa
                             <FormControl
                                 type="text"
                                 className="textInput"
-                                placeholder="Ingresa el nombre del platillo"
+                                placeholder="Ingresa el titulo de la oferta"
                                 value={stateReducer.formData.title}
                                 name="title"
                                 onChange={handleOnChangeInput}
@@ -212,7 +212,7 @@ const CreateOfferModal: React.FC<CreateOfferModalProps> = ({ stateReducer, dispa
                                 className="textInput"
                                 placeholder="Ingresa el precio original"
                                 value={stateReducer.formData.original_price}
-                                name="originalPrice"
+                                name="original_price"
                                 onChange={handleOnChangeInput}
                             />
                         </div>
@@ -225,7 +225,7 @@ const CreateOfferModal: React.FC<CreateOfferModalProps> = ({ stateReducer, dispa
                                 className="textInput"
                                 placeholder="Ingresa el precio con descuento"
                                 value={stateReducer.formData.discount_price}
-                                name="discountPrice"
+                                name="discount_price"
                                 onChange={handleOnChangeInput}
                             />
                         </div>

@@ -22,26 +22,26 @@ const Navbar = () => {
                 <ul className="d-flex align-items-center mt-3">
                     <li>
                         <a className="nav-links" href="#home">
-                            <House className="nav-icon d-flex justify-content-center align-items-center" size={'auto'} />
+                            <House className="nav-icon d-flex justify-content-center align-items-center" />
                             <span className="nav-text">Inicio</span>
                         </a>
                     </li>
                     <li>
                         <a className="nav-links" href="#habitaciones">
-                            <DoorClosed className="nav-icon d-flex justify-content-center align-items-center" size={'auto'} />
+                            <DoorClosed className="nav-icon d-flex justify-content-center align-items-center" />
                             <span className="nav-text">Habitaciones</span>
                         </a>
                     </li>
                     <li>
                         <a className="nav-links" href="#servicios">
-                            <People className="nav-icon d-flex justify-content-center align-items-center" size={'auto'} />
+                            <People className="nav-icon d-flex justify-content-center align-items-center" />
                             <span className="nav-text">Servicios</span>
                         </a>
                     </li>
                     {user ? (
                         <li>
                             <Link to="/Reservation">
-                                <Calendar className="nav-icon d-flex justify-content-center align-items-center" size={'auto'} />
+                                <Calendar className="nav-icon d-flex justify-content-center align-items-center" />
                                 <span className="nav-text">Mis Reservas</span>
                             </Link>
                         </li>
@@ -50,7 +50,7 @@ const Navbar = () => {
                     )}
                     <li>
                         <a className="nav-links" href="#contacto">
-                            <Phone className="nav-icon d-flex justify-content-center align-items-center" size={'auto'} />
+                            <Phone className="nav-icon d-flex justify-content-center align-items-center" />
                             <span className="nav-text">Contacto</span>
                         </a>
                     </li>
