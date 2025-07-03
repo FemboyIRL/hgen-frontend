@@ -18,11 +18,11 @@ const SetGuestsModal: React.FC<SetGuestsModalProps> = ({ stateReducer, dispatch,
     const handleOnChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
 
-        if (name === "rooms" || name === "guests") {
+        if (name === "rooms") {
             const numericValue = parseInt(value, 10);
 
-            if (isNaN(numericValue) || numericValue < 1 || numericValue > 20) {
-                toast.error("Por favor, ingresa un número válido entre 1 y 20.");
+            if (isNaN(numericValue) || numericValue < 1 || numericValue > 6) {
+                toast.error("Por favor, ingresa un número válido entre 1 y 6.");
                 return;
             }
         }
@@ -66,6 +66,7 @@ const SetGuestsModal: React.FC<SetGuestsModalProps> = ({ stateReducer, dispatch,
             <FormModal
                 modalTitle="Seleccionar Habitaciones y Personas"
                 status={stateReducer.roomModal}
+                changeModal={changeModal}
                 onSubmit={handleSave}
                 btnText="Confirmar"
                 size="lg"

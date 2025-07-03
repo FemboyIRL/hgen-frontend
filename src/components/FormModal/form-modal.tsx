@@ -46,7 +46,7 @@ const FormModal: React.FC<FormModalProps> = ({ modalTitle, children, status, cha
             onHide={changeModal}
             size={size ? size : "sm"}
         >
-            <Modal.Header closeButton closeVariant="black" style={primaryColor == COLORS.dark_grey ? { backgroundColor: COLORS.black } : undefined}>
+            <Modal.Header closeButton closeVariant="white" style={primaryColor == COLORS.dark_grey ? { backgroundColor: COLORS.black } : undefined}>
                 <Modal.Title>{modalTitle}</Modal.Title>
                 {onDelete ? (
                     <>

@@ -14,12 +14,12 @@ const Navbar = () => {
     const navigate = useNavigate();
 
     return (
-        <header className="header">
+        <header className="header px-3 py-1 d-flex justify-content-between align-items-center">
             <div className="logo">
                 <img src="/assets/images/logo.jpeg" alt="Hgen Suites Logo" />
             </div>
             <nav className="nav d-flex justify-content-center align-items-center">
-                <ul className="d-flex align-items-center mt-3">
+                <ul className="d-flex align-items-center mt-3 gap-5">
                     <li>
                         <a className="nav-links" href="#home">
                             <House className="nav-icon d-flex justify-content-center align-items-center" />
