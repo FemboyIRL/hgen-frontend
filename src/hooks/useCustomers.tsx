@@ -1,14 +1,7 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import ApiConsumer from '../services/api_consumer';
-
-// Definir el tipo de un cliente
-interface Customer {
-    id: string;
-    email: string;
-    phone: string;
-    address?: string;
-}
+import { Customer } from "../interfaces/CustomerInterface";
 
 // Crear una instancia de ApiConsumer para los clientes
 const apiCustomers = new ApiConsumer({ url: "customers/" });
@@ -73,7 +66,7 @@ const useCustomers = () => {
             if (response.status) {
                 setCustomers(prev =>
                     prev.map(customer =>
-                        customer.id === id ? { ...customer, ...response.data } : customer
+                        customer.user_id === id ? { ...customer, ...response.data } : customer
                     )
                 );
                 toast.success("Cliente actualizado exitosamente");
@@ -95,7 +88,7 @@ const useCustomers = () => {
             const response = await apiCustomers.delete(id);
 
             if (response.status) {
-                setCustomers(prev => prev.filter(customer => customer.id !== id));
+                setCustomers(prev => prev.filter(customer => customer.user_id !== id));
                 toast.success("Cliente eliminado exitosamente");
                 return true;
             } else {

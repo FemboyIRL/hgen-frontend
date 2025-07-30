@@ -1,14 +1,13 @@
 import { useReducer } from "react";
-import { FormCheck, FormControl, FormGroup } from "react-bootstrap";
-import './login-page.css'
-import { initialState, loginActions, reducer } from "./reducer/reducer";
+import { FormControl, FormGroup } from "react-bootstrap";
+import { initialState, registerActions, reducer } from "./reducer/reducer";
 import ApiConsumer from "../../services/api_consumer";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 
-const Auth = new ApiConsumer({ url: "auth/login/" })
+const Auth = new ApiConsumer({ url: "auth/register/" })
 
-const LoginPage = () => {
+const RegisterPage = () => {
 
     const [state, dispatch] = useReducer(reducer, initialState)
 
@@ -16,7 +15,7 @@ const LoginPage = () => {
 
     const changeValueForm = (prop: string, data: any) => {
         dispatch({
-            type: loginActions.CHANGE_VALUE_FORM,
+            type: registerActions.CHANGE_VALUE_FORM,
             payload: {
                 prop,
                 data
@@ -28,20 +27,22 @@ const LoginPage = () => {
         e.preventDefault();
         try {
 
-            const { email, password, rememberMe } = state!.formData
+            const { email, password, fullName, phone } = state!.formData
 
             const body = {
                 email,
-                password
+                password,
+                fullName,
+                phone
             }
 
             const { status, data } = await Auth.petition(body, "POST")
 
             if (status) {
-                toast.success("Sesion iniciada de forma exitosa")
-                if (rememberMe) localStorage.setItem("user", JSON.stringify(body))
+                toast.success("Cuenta creada de forma exitosa")
+                localStorage.setItem("user", data.data)
                 localStorage.setItem("token", data.token);
-                navigate("/admin");
+                navigate("/");
             }
         } catch (e) {
             console.log(e)
@@ -120,7 +121,29 @@ const LoginPage = () => {
                                             />
                                         </FormGroup>
 
-                                        <FormGroup className="mb-1">
+                                        <FormGroup className="mb-3">
+                                            <FormControl
+                                                type="text"
+                                                name="fullName"
+                                                value={state.formData.fullName}
+                                                onChange={handleOnChangeInput}
+                                                className="form-control-lg bg-light fs-6"
+                                                placeholder="Nombre"
+                                                required
+                                            />
+                                        </FormGroup>
+                                        <FormGroup className="mb-3">
+                                            <FormControl
+                                                type="text"
+                                                name="phone"
+                                                value={state.formData.phone}
+                                                onChange={handleOnChangeInput}
+                                                className="form-control-lg bg-light fs-6"
+                                                placeholder="Teléfono"
+                                                required
+                                            />
+                                        </FormGroup>
+                                        <FormGroup className="mb-3">
                                             <FormControl
                                                 type="password"
                                                 name="password"
@@ -132,24 +155,13 @@ const LoginPage = () => {
                                             />
                                         </FormGroup>
 
-                                        <FormGroup className="mb-5 d-flex justify-content-between w-100">
-                                            <FormCheck
-                                                type="checkbox"
-                                                name="rememberMe"
-                                                id="formCheck"
-                                                label="Recordarme"
-                                                checked={state.formData.rememberMe}
-                                                onChange={handleOnChangeInput}
-                                                className="form-check-label text-secondary"
-                                            />
-                                        </FormGroup>
 
                                         <FormGroup className="mb-3">
                                             <button
                                                 type="submit"
                                                 className="btn btn-lg btn-primary w-100 fs-6"
                                             >
-                                                Iniciar sesión
+                                                Registrate
                                             </button>
                                         </FormGroup>
                                     </>
@@ -158,7 +170,7 @@ const LoginPage = () => {
                             </form>
                             <div className="row">
                                 <small>
-                                    No tienes una cuenta? <Link to={'/Register'}>Registrate</Link>
+                                    Ya tienes una cuenta? <Link to={'/Login'}>Inicia Sesión</Link>
                                 </small>
                             </div>
                         </div>
@@ -170,4 +182,4 @@ const LoginPage = () => {
 };
 
 
-export default LoginPage
+export default RegisterPage

@@ -5,8 +5,7 @@
     --secondary-text-color: #fff;
 }
 
-input,
-textarea {
+.text-input {
   text-align: center;
   border: 0;
   height: 100%;
@@ -16,14 +15,269 @@ textarea {
   outline: none;
 }
 
-input:focus,
-textarea:focus {
+.text-input:focus {
   box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.2);
 }
 
-label {
-  font-weight: 600;
-  font-size: 1.2rem;
-  display: block;
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  width: 100%;
+  max-width: 350px;
+  min-height: 400px;
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  
+  /* Efectos visuales */
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1), 
+              0 6px 6px rgba(0,0,0,0.05);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  background: white;
+  
+  /* Tipografía base */
+  font-family: 'Segoe UI', system-ui, sans-serif;
   color: #333;
+
+  /* Layout interno */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Efecto hover */
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.15), 
+              0 10px 10px rgba(0,0,0,0.08);
+}
+
+/* Parte superior (imagen) */
+.card-img-container {
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+}
+
+.card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.card:hover .card-img {
+  transform: scale(1.05);
+}
+
+/* Cuerpo de la card */
+.card-body {
+  padding: 20px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #222;
+}
+
+.card-text {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #555;
+  margin-bottom: 15px;
+  flex-grow: 1;
+}
+
+/* Footer de la card */
+.card-footer {
+  padding: 15px 20px;
+  background: #f9f9f9;
+  border-top: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Badges/etiquetas */
+.card-badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: #ff4757;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  z-index: 1;
+}
+
+/* Botones */
+.card-btn {
+  background: #4a6bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.card-btn:hover {
+  background: #3a56d4;
+  transform: translateY(-2px);
+}
+
+.text-input{
+  
+}
+
+/* Small devices (landscape phones, 576px and up)*/
+@media (min-width: 576px) {
+    .w-sm-100 {
+        width: 100% !important;
+    }
+
+    .w-sm-75 {
+        width: 75% !important;
+    }
+
+    .w-sm-50 {
+        width: 50% !important;
+    }
+
+    .w-sm-25 {
+        width: 25% !important;
+    }
+
+    .h-sm-100 {
+        height: 100% !important;
+    }
+
+    .h-sm-75 {
+        height: 75% !important;
+    }
+
+    .h-sm-50 {
+        height: 50% !important;
+    }
+
+    .h-sm-25 {
+        height: 25% !important;
+    }
+}
+
+
+/* Medium devices (tablets, 768px and up)*/
+@media (min-width: 768px) {
+    .w-md-100 {
+        width: 100% !important;
+    }
+
+    .w-md-75 {
+        width: 75% !important;
+    }
+
+    .w-md-50 {
+        width: 50% !important;
+    }
+
+    .w-md-25 {
+        width: 25% !important;
+    }
+
+    .h-md-100 {
+        height: 100% !important;
+    }
+
+    .h-md-75 {
+        height: 75% !important;
+    }
+
+    .h-md-50 {
+        height: 50% !important;
+    }
+
+    .h-md-25 {
+        height: 25% !important;
+    }
+}
+
+/* Large devices (desktops, 992px and up)*/
+@media (min-width: 992px) {
+    .w-lg-100 {
+        width: 100% !important;
+    }
+
+    .w-lg-75 {
+        width: 75% !important;
+    }
+
+    .w-lg-50 {
+        width: 50% !important;
+    }
+
+    .w-lg-25 {
+        width: 25% !important;
+    }
+
+    .h-lg-100 {
+        height: 100% !important;
+    }
+
+    .h-lg-75 {
+        height: 75% !important;
+    }
+
+    .h-lg-50 {
+        height: 50% !important;
+    }
+
+    .h-lg-25 {
+        height: 25% !important;
+    }
+}
+
+/* Extra large devices (large desktops, 1200px and up)*/
+@media (min-width: 1200px) {
+    .w-xl-100 {
+        width: 100% !important;
+    }
+
+    .w-xl-75 {
+        width: 75% !important;
+    }
+
+    .w-xl-50 {
+        width: 50% !important;
+    }
+
+    .w-xl-25 {
+        width: 25% !important;
+    }
+
+    .h-xl-100 {
+        height: 100% !important;
+    }
+
+    .h-xl-75 {
+        height: 75% !important;
+    }
+
+    .h-xl-50 {
+        height: 50% !important;
+    }
+
+    .h-xl-25 {
+        height: 25% !important;
+    }
 }
