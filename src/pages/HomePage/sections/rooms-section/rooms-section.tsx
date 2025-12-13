@@ -4,7 +4,7 @@ import LoadingSpinnerContainer from "../../../../components/LoadingSpinner/loadi
 import initialState from "../../../../adminPages/Rooms/reducer/constants";
 import ApiConsumer from "../../../../services/api_consumer";
 import { reducer, roomsActions } from "../../../../adminPages/Rooms/reducer/reducer";
-import { Room } from "../../../../interfaces/RoomInterface";
+import { Room } from "../../../../types/room";
 import RoomCard from "./components/room-card";
 
 const Rooms = new ApiConsumer({ url: 'rooms/' })

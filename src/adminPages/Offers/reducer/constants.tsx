@@ -1,4 +1,4 @@
-import { Offer } from "../../../interfaces/OfferInterface";
+import { Offer } from "../../../types/offer";
 
 const initialState = {
     loading: true,

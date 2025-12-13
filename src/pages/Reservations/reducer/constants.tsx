@@ -1,4 +1,4 @@
-import { Room } from '../../../interfaces/RoomInterface.tsx'
+import { Room } from '../../../types/room.tsx'
 
 const reservationsInitial = {
     selectedRoom: null as Room | null,

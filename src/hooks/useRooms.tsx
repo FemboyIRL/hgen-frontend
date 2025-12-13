@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import ApiConsumer from '../services/api_consumer'
-import { Room } from "../interfaces/RoomInterface";
+import { Room } from "../types/room";
 
 // Crear una instancia de ApiConsumer para las habitaciones
 const apiRooms = new ApiConsumer({ url: "rooms" });

@@ -1,4 +1,4 @@
-import { MenuItem } from "./MenuItemInterface"
+import { MenuItem } from "./menu_item"
 
 export type Order = {
     order_id: string,

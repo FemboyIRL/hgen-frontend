@@ -1,4 +1,4 @@
-import { MenuItem } from "../../../interfaces/MenuItemInterface";
+import { MenuItem } from "../../../types/menu_item";
 
 const initialState = {
     loading: true,

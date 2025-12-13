@@ -1,4 +1,4 @@
-import { Room } from "../../../interfaces/RoomInterface";
+import { Room } from "../../../types/room";
 
 const initialState = {
     loading: true,

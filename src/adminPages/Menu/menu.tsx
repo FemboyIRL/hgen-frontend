@@ -5,7 +5,7 @@ import { initialState, reducer } from "./reducer/reducer"
 import LoadingSpinnerContainer from "../../components/LoadingSpinner/loading-spinner"
 import ApiConsumer from "../../services/api_consumer"
 import './menu.css'
-import { MenuItem } from "../../interfaces/MenuItemInterface"
+import { MenuItem } from "../../types/menu_item"
 import CreateMenuItemModal from "./modals/menuModal/menuModal"
 import DeleteMenuItemModal from "./modals/deleteModal/deleteModal"
 

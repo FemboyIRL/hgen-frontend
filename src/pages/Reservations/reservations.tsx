@@ -6,7 +6,7 @@ import { CustomInput } from "../HomePage/sections/welcome-section/reserve-bar/re
 import { toast } from "react-toastify";
 import ApiConsumer from "../../services/api_consumer";
 import LoadingSpinnerContainer from "../../components/LoadingSpinner/loading-spinner";
-import { Room } from "../../interfaces/RoomInterface";
+import { Room } from "../../types/room";
 import './reservations.css'
 
 const Rooms = new ApiConsumer({ url: 'rooms' })

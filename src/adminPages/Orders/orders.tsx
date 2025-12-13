@@ -4,7 +4,7 @@ import { PencilFill, Trash3Fill } from "react-bootstrap-icons"
 import { initialState, ordersActions, reducer } from "./reducer/reducer"
 import LoadingSpinnerContainer from "../../components/LoadingSpinner/loading-spinner"
 import ApiConsumer from "../../services/api_consumer"
-import { Order } from "../../interfaces/OrdersInterface"
+import { Order } from "../../types/order"
 import CreateOrderModal from "./orderModal/orderModal"
 
 const Orders = new ApiConsumer({ url: "orders/" })

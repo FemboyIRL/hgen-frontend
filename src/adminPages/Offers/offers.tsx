@@ -2,7 +2,7 @@ import { useEffect, useReducer } from "react"
 import ApiConsumer from "../../services/api_consumer"
 import initialState from "./reducer/constants"
 import { reducer, offerActions } from "./reducer/reducer"
-import { Offer } from "../../interfaces/OfferInterface"
+import { Offer } from "../../types/offer"
 import './offers.css'
 import { Button, Col, Row } from "react-bootstrap"
 import LoadingSpinnerContainer from "../../components/LoadingSpinner/loading-spinner"

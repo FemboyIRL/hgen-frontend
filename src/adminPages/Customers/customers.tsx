@@ -7,7 +7,7 @@ import { useEffect, useReducer } from "react";
 import { reducer, initialState, CustomerActions } from "./reducer/reducer"
 import ApiConsumer from "../../services/api_consumer";
 import DeleteModal from "./modals/deleteCustomerModal/deleteModal";
-import { Customer } from "../../interfaces/CustomerInterface";
+import { Customer } from "../../types/customer";
 import CreateClientModal from "./modals/createCustomerModal/userModal";
 
 const Customers = new ApiConsumer({ url: "clients" })

@@ -1,18 +1,26 @@
-import { useReducer } from "react";
+import { useEffect, useReducer } from "react";
 import { FormCheck, FormControl, FormGroup } from "react-bootstrap";
 import './login-page.css'
 import { initialState, loginActions, reducer } from "./reducer/reducer";
 import ApiConsumer from "../../services/api_consumer";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
+import { useUser } from "../../context/UserContext/user-context";
 
 const Auth = new ApiConsumer({ url: "auth/login/" })
 
 const LoginPage = () => {
 
     const [state, dispatch] = useReducer(reducer, initialState)
+    const {user, setUser} = useUser();
 
     const navigate = useNavigate();
+
+    useEffect(() => {
+        if(user){
+            navigate("/");
+        }
+    },[])
 
     const changeValueForm = (prop: string, data: any) => {
         dispatch({
@@ -25,28 +33,40 @@ const LoginPage = () => {
     }
 
     const handleLogin = async (e: any) => {
-        e.preventDefault();
-        try {
+    e.preventDefault();
+    try {
+        const { email, password, rememberMe } = state!.formData;
 
-            const { email, password, rememberMe } = state!.formData
+        const body = {
+            email,
+            password
+        };
 
-            const body = {
-                email,
-                password
+        const { status, data } = await Auth.petition(body, "POST");
+
+        console.log("Respuesta del login:", data);
+        
+        if (status) {
+            toast.success("Sesión iniciada de forma exitosa");
+            
+            // Guardar token primero
+            localStorage.setItem("token", data.token);
+            
+            if (rememberMe) {
+                console.log("Guardando usuario:", data.data);
+                setUser(data.data); // Esto disparará el useEffect que guarda en localStorage
+            } else {
+                // Si no es "rememberMe", solo mantenemos en estado, no en localStorage
+                setUser(data.data);
             }
-
-            const { status, data } = await Auth.petition(body, "POST")
-
-            if (status) {
-                toast.success("Sesion iniciada de forma exitosa")
-                if (rememberMe) localStorage.setItem("user", JSON.stringify(body))
-                localStorage.setItem("token", data.token);
-                navigate("/admin");
-            }
-        } catch (e) {
-            console.log(e)
+            
+            navigate("/");
         }
+    } catch (e) {
+        console.log("Error en login:", e);
+        toast.error("Error al iniciar sesión");
     }
+};
 
     const handleOnChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value, checked } = e.target

@@ -1,6 +1,6 @@
-import { Customer } from "../../../interfaces/CustomerInterface";
-import { MenuItem } from "../../../interfaces/MenuItemInterface";
-import { Order } from "../../../interfaces/OrdersInterface";
+import { Customer } from "../../../types/customer";
+import { MenuItem } from "../../../types/menu_item";
+import { Order } from "../../../types/order";
 
 export interface MenuItemsList {
     item: MenuItem;

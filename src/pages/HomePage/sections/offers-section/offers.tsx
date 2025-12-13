@@ -1,6 +1,6 @@
 import './offers.css'
 import ApiConsumer from '../../../../services/api_consumer'
-import { Offer } from '../../../../interfaces/OfferInterface'
+import { Offer } from '../../../../types/offer'
 import { useEffect, useState } from 'react'
 import LoadingSpinnerContainer from '../../../../components/LoadingSpinner/loading-spinner'
 

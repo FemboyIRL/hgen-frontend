@@ -4,8 +4,8 @@ import ApiConsumer from "../../../services/api_consumer";
 import { useEffect } from "react";
 import ordersActions from "../reducer/actions";
 import FormModal from "../../../components/FormModal/form-modal";
-import { Customer } from "../../../interfaces/CustomerInterface";
-import { MenuItem } from "../../../interfaces/MenuItemInterface";
+import { Customer } from "../../../types/customer";
+import { MenuItem } from "../../../types/menu_item";
 import { Plus } from "react-bootstrap-icons";
 
 

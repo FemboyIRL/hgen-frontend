@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import ApiConsumer from '../services/api_consumer';
-import { Customer } from "../interfaces/CustomerInterface";
+import { Customer } from "../types/customer";
 
 // Crear una instancia de ApiConsumer para los clientes
 const apiCustomers = new ApiConsumer({ url: "customers/" });

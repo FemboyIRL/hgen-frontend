@@ -6,7 +6,7 @@ import LoadingSpinnerContainer from "../../components/LoadingSpinner/loading-spi
 import ApiConsumer from "../../services/api_consumer"
 import './rooms.css'
 import CreateRoomModal from "./modals/roomModal/roomModal"
-import { Room } from "../../interfaces/RoomInterface"
+import { Room } from "../../types/room"
 import DeleteRoomModal from "./modals/deleteModal/deleteModal"
 
 const Rooms = new ApiConsumer({ url: 'rooms/' })

@@ -1,4 +1,4 @@
-import { Customer } from '../../../interfaces/CustomerInterface'
+import { Customer } from '../../../types/customer'
 
 const initialState = {
     loading: true,
