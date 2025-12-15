@@ -6,21 +6,14 @@ import ApiConsumer from "../../services/api_consumer";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 import { useUser } from "../../context/UserContext/user-context";
-
+import { useAuth } from "../../hooks/useAuth";
 const Auth = new ApiConsumer({ url: "auth/login/" })
 
 const LoginPage = () => {
-
+    useAuth();
     const [state, dispatch] = useReducer(reducer, initialState)
-    const {user, setUser} = useUser();
-
+    const {setUser} = useUser();
     const navigate = useNavigate();
-
-    useEffect(() => {
-        if(user){
-            navigate("/");
-        }
-    },[])
 
     const changeValueForm = (prop: string, data: any) => {
         dispatch({
@@ -54,7 +47,7 @@ const LoginPage = () => {
             
             if (rememberMe) {
                 console.log("Guardando usuario:", data.data);
-                setUser(data.data); // Esto disparará el useEffect que guarda en localStorage
+                setUser(data.data); // Guardar LocalStorage
             } else {
                 // Si no es "rememberMe", solo mantenemos en estado, no en localStorage
                 setUser(data.data);
