@@ -45,27 +45,26 @@ const ServicesSection = () => {
 
     return (
         <>
-            <div className="servicesContainer p-5" id="servicios">
-                <div className="servicesCards d-flex justify-content-center align-items-center flex-wrap gap-3">
-                    {
-                        services.map((service: Service, index: number) => (
-                            <div className="card d-flex flex-column align-items-center justify-content-center" key={index}>
-                                <div className="card-icon fs-1">
-                                    {service.icono}
-                                </div>
-                                <div className="card-text">
-                                    <div className="card-title fs-5 text-center">
-                                        {service.titulo}
-                                    </div>
-                                    <div className="card-description text-center">
-                                        {service.descripcion}
-                                    </div>
-                                </div>
+            <div className="servicesContainer" id="servicios">
+                <div className="servicesCards">
+                    {services.map((service, index) => (
+                        <div className="serviceCard" key={index}>
+                            <div className="serviceIcon">
+                                {service.icono}
                             </div>
-                        ))
-                    }
+
+                            <h3 className="serviceTitle">
+                                {service.titulo}
+                            </h3>
+
+                            <p className="serviceDescription">
+                                {service.descripcion}
+                            </p>
+                        </div>
+                    ))}
                 </div>
             </div>
+
         </>
     )
 }

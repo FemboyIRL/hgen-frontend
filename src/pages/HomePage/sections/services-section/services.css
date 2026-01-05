@@ -1,11 +1,55 @@
-.servicesContainer{
+.servicesContainer {
+    padding: 3rem 1.5rem;
     background: url('/assets/images/restaurant.jpeg') no-repeat center center/cover; 
-}
-
-.card-description{
-    font-size: 12px;
-}
-
-.card-icon{
-    color: blue;
-}
+  }
+  
+  .servicesCards {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .serviceCard {
+    background: rgba(255, 255, 255, .5);
+    backdrop-filter: blur(8px);
+    border-radius: 16px;
+    padding: 2rem 1.5rem;
+    width: 260px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .serviceCard:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  }
+  
+  .serviceIcon {
+    font-size: 2.5rem;
+    color: #063447;
+    margin-bottom: 1rem;
+  }
+  
+  .serviceTitle {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #063447;
+    margin-bottom: 0.5rem;
+  }
+  
+  .serviceDescription {
+    font-size: 0.95rem;
+    color: #063447;
+    line-height: 1.4;
+  }
+  
+  .serviceCard:hover .serviceIcon {
+    transform: scale(1.15);
+    transition: transform 0.3s ease;
+  }
+  
