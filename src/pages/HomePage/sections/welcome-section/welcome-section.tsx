@@ -45,7 +45,7 @@ const WelcomeSection = () => {
             <div className="content d-flex flex-column center">
                 <h1 className="titulo">Bienvenido a Hgen Suites</h1>
                 <p className="subtitulo">
-                    Confort, estilo y atención personalizada para tu estancia.
+                    Comfort, estilo y atención personalizada para tu estancia.
                 </p>
                 <div className="p-5 w-75 rounded d-flex flex-column flex-nowrap gap-4 bg-white shadow">
                     <span className="text-dark fs-3 fw-bold"> Check In / Check Out</span>

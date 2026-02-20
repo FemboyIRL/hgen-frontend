@@ -86,7 +86,7 @@ const RoomsSection = () => {
 
     return (
         <div className="my-4" id="habitaciones" ref={sectionRef}>
-            <h2 className="fs-1 text-center">Nuestras Habitaciones</h2>
+            <h2 className="text-center title">Nuestras Habitaciones</h2>
             <div className="row m-0">
                 {state!.rooms.length === 0 ? (
                     <p>No hay habitaciones disponibles.</p>

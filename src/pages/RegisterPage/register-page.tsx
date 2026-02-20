@@ -104,7 +104,7 @@ const RegisterPage = () => {
                         <div className="row">
                             <div className="header-text mb-4">
                                 <h1>Hola de nuevo</h1>
-                                <p>Nos hace felices volverlo a ver</p>
+                                <p>Nos hace felices verlo</p>
                             </div>
                             <form id="login-form" onSubmit={handleLogin}>
                                 {state && (

@@ -46,6 +46,9 @@ const ServicesSection = () => {
     return (
         <>
             <div className="servicesContainer" id="servicios">
+                <div className="title text-center text-white mb-4">
+                        Nuestros Servicios
+                </div>
                 <div className="servicesCards">
                     {services.map((service, index) => (
                         <div className="serviceCard" key={index}>

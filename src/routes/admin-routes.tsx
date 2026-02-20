@@ -9,7 +9,7 @@ export const AdminRoutes = () => {
     return [
         {
             path: "home",
-            element: <>nigger</>,
+            element: <></>,
             title: "Inicio",
             icon: <House size={30} />,
         },
