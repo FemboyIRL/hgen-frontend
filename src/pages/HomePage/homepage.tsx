@@ -1,4 +1,5 @@
 import Layout from "../../components/layout/layout"
+import ContactSection from "./sections/contact-section/page"
 import OffersSection from "./sections/offers-section/offers"
 import RoomsSection from "./sections/rooms-section/rooms-section"
 import ServicesSection from "./sections/services-section/services"
@@ -11,6 +12,7 @@ const HomePage = () => {
             <RoomsSection />
             <ServicesSection />
             <OffersSection />
+            <ContactSection />
         </Layout>
     )
 }

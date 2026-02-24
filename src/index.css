@@ -4,5 +4,21 @@ body{
 
 .title{
   font-weight: bold;
+  text-align: center;
   font-size: 2.5em;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 10px;
+}
+
+.title::after{
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 0;
+  width: 75px;          /* ancho de la barra */
+  height: 10px;          /* grosor de la barra */
+  background-color: #007bff;
+  border-radius: 2px;
 }

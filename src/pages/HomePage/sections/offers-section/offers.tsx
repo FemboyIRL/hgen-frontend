@@ -19,8 +19,8 @@ const OffersSection = () => {
                 "https://picsum.photos/800/500?random=11",
                 "https://picsum.photos/800/500?random=12",
             ],
-            original_price: new Float64Array([3200]),
-            discount_price: new Float64Array([2499]),
+            original_price: 3200,
+            discount_price: 2499,
         },
         {
             id: "offer-2",
@@ -32,16 +32,16 @@ const OffersSection = () => {
                 "https://picsum.photos/800/500?random=22",
                 "https://picsum.photos/800/500?random=23",
             ],
-            original_price: new Float64Array([4500]),
-            discount_price: new Float64Array([3899]),
+            original_price: 4500,
+            discount_price: 3899,
         },
         {
             id: "offer-3",
             title: "Suite Premium",
             description: "Suite con jacuzzi privado y vista panorámica.",
             images: ["https://picsum.photos/800/500?random=31"],
-            original_price: new Float64Array([7800]),
-            discount_price: new Float64Array([6499]),
+            original_price: 7800,
+            discount_price: 6499,
         },
         {
             id: "offer-4",
@@ -51,8 +51,8 @@ const OffersSection = () => {
                 "https://picsum.photos/800/500?random=41",
                 "https://picsum.photos/800/500?random=42",
             ],
-            original_price: new Float64Array([2800]),
-            discount_price: new Float64Array([2199]),
+            original_price: 2800,
+            discount_price: 2199,
         },
     ];
 
@@ -63,6 +63,64 @@ const OffersSection = () => {
         }
         setLoading(false);
     }, [loading]);
+
+    useEffect(() => {
+        let lastScrollTop = 0;
+
+        const handleScroll = () => {
+            const container = document.querySelector('.stack-cards-container') as HTMLElement;
+            const cards = document.querySelectorAll('.stack-cards__item');
+
+            if (!container || cards.length === 0) return;
+
+            const containerRect = container.getBoundingClientRect();
+            const windowHeight = window.innerHeight + 300;
+            const scrollPosition = window.scrollY;
+
+            const scrollDown = scrollPosition > lastScrollTop;
+            lastScrollTop = scrollPosition <= 0 ? 0 : scrollPosition;
+
+            const progress = Math.max(
+                0,
+                (scrollPosition - containerRect.top + windowHeight) /
+                (windowHeight * 2)
+            );
+
+            const numCards = cards.length;
+
+            for (let index = numCards - 1; index >= 0; index--) {
+                const card = cards[index];
+
+                if (index === numCards - 1) {
+                    if (scrollPosition > containerRect.top - windowHeight * 0.2) {
+                        card.classList.add('slide-up');
+                    } else {
+                        card.classList.remove('slide-up');
+                    }
+                } else {
+                    if (scrollDown) {
+                        if (index >= numCards - progress && index !== numCards - 1) {
+                            card.classList.add('slide-up');
+                        } else {
+                            card.classList.remove('slide-up');
+                        }
+                    } else {
+                        if (index > numCards - progress - 1 && index !== numCards - 1) {
+                            card.classList.add('slide-up');
+                        } else {
+                            card.classList.remove('slide-up');
+                        }
+                    }
+                }
+            }
+        };
+
+        window.addEventListener("scroll", handleScroll);
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, []);
 
     const getOffers = async () => {
         try {

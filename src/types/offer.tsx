@@ -3,6 +3,6 @@ export type Offer = {
     images: Array<string>,
     title: string,
     description: string
-    original_price: Float64Array,
-    discount_price: Float64Array
+    original_price: number,
+    discount_price: number
 }

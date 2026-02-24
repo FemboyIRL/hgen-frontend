@@ -16,39 +16,39 @@ const RoomsSection = () => {
     // TODO: BORRAR CUANDO LA API FUNCIONE BIEN 
     const dummyRooms: Room[] = [
         {
-          room_number: "101",
-          type: "Deluxe Suite",
-          description: "Amplia habitación con vista al mar",
-          is_available: true,
-          images: [
-            "https://picsum.photos/600/400?random=1",
-            "https://picsum.photos/600/400?random=2",
-          ],
+            room_number: "101",
+            type: "Deluxe Suite",
+            description: "Amplia habitación con vista al mar",
+            is_available: true,
+            images: [
+                "https://picsum.photos/600/400?random=1",
+                "https://picsum.photos/600/400?random=2",
+            ],
         },
         {
-          room_number: "202",
-          type: "Standard Room",
-          description: "Cómoda habitación para dos personas",
-          is_available: false,
-          images: [
-            "https://picsum.photos/600/400?random=3",
-          ],
+            room_number: "202",
+            type: "Standard Room",
+            description: "Cómoda habitación para dos personas",
+            is_available: false,
+            images: [
+                "https://picsum.photos/600/400?random=3",
+            ],
         },
         {
-          room_number: "303",
-          type: "Presidential Suite",
-          description: "Suite premium con jacuzzi privado",
-          is_available: true,
-          images: [
-            "https://picsum.photos/600/400?random=4",
-            "https://picsum.photos/600/400?random=5",
-          ],
+            room_number: "303",
+            type: "Presidential Suite",
+            description: "Suite premium con jacuzzi privado",
+            is_available: true,
+            images: [
+                "https://picsum.photos/600/400?random=4",
+                "https://picsum.photos/600/400?random=5",
+            ],
         },
-      ];
+    ];
 
     useEffect(() => {
         getAllRooms()
-        if(state?.rooms.length === 0){
+        if (state?.rooms.length === 0) {
             dispatch({
                 type: roomsActions.LOADED_ROOMS_LIST,
                 payload: dummyRooms
@@ -85,8 +85,8 @@ const RoomsSection = () => {
     }
 
     return (
-        <div className="my-4" id="habitaciones" ref={sectionRef}>
-            <h2 className="text-center title">Nuestras Habitaciones</h2>
+        <div className="my-4 w-full text-center" id="habitaciones" ref={sectionRef}>
+            <h2 className="title text-center mx-auto">Nuestras Habitaciones</h2>
             <div className="row m-0">
                 {state!.rooms.length === 0 ? (
                     <p>No hay habitaciones disponibles.</p>
