@@ -1,13 +1,9 @@
-import { useEffect } from "react";
 import { CalendarCheckFill } from "react-bootstrap-icons";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./reserve-bar.css";
-import { roomSelectionActions } from "../reducer/reducer";
 import { toast } from "react-toastify";
-import ApiConsumer from "../../../../../services/api_consumer";
-
-const Availability = new ApiConsumer({ url: 'availability/' })
+import HOME_ACTIONS from "../../../reducer/actions";
 
 interface CustomInputProps {
     value?: string
@@ -40,37 +36,18 @@ export const CustomInput: React.FC<CustomInputProps> = ({ value, onClick }) => {
 }
 
 const ReservaBar: React.FC<ReserveBarProps> = ({ state, dispatch }) => {
-    const [startDate, endDate] = state.dateRange;
-
-    useEffect(() => {
-        fetchOccupiedDates()
-    }, [state.loading])
-
-    const fetchOccupiedDates = async () => {
-        try {
-            const { status, data } = await Availability.getAll()
-
-            if (status) {
-                dispatch({
-                    type: roomSelectionActions.GET_OCCUPIED_DATES,
-                    payload: data.data.occupiedDates
-                })
-            }
-        } catch (e) {
-            console.error(e)
-        }
-    }
+    const [startDate, endDate] = state.reserve_bar.date_range;
 
     const handleDateChange = (update: [Date | null, Date | null]) => {
         const [start, end] = update;
 
         if (!start || !end) {
-            changeValue("dateRange", update);
+            changeValue("date_range", update);
             return;
         }
 
         // Verifica si el rango seleccionado se cruza con alguna fecha ocupada
-        const isRangeInvalid = state.occupiedDates.some(({ start: occupiedStart, end: occupiedEnd }: any) => {
+        const isRangeInvalid = state.reserve_bar.occupied_dates.some(({ start: occupiedStart, end: occupiedEnd }: any) => {
             const occupiedStartDate = new Date(occupiedStart);
             const occupiedEndDate = new Date(occupiedEnd);
 
@@ -86,12 +63,12 @@ const ReservaBar: React.FC<ReserveBarProps> = ({ state, dispatch }) => {
             return;
         }
 
-        changeValue("dateRange", update);
+        changeValue("date_range", update);
     };
 
     const changeValue = (prop: string, data: any) => {
         dispatch({
-            type: roomSelectionActions.CHANGE_VALUE,
+            type: HOME_ACTIONS.CHANGE_VALUE_RESERVE_BAR,
             payload: {
                 prop,
                 data
@@ -112,7 +89,7 @@ const ReservaBar: React.FC<ReserveBarProps> = ({ state, dispatch }) => {
                                 startDate={startDate}
                                 endDate={endDate}
                                 excludeDates={
-                                    state.occupiedDates
+                                    state.reserve_bar.occupied_dates
                                         .map(({ start, end }: any) => {
                                             const startDate = new Date(start);
                                             const endDate = new Date(end);

@@ -1,14 +1,20 @@
 
-import { useState, useEffect, useReducer } from "react";
+import { useState, useEffect } from "react";
 import './welcome-section.css'
 import ReservaBar from "./reserve-bar/reserve-bar";
 import { Calendar2CheckFill } from "react-bootstrap-icons";
-import { reducer, roomSelectionInitial } from "./reducer/reducer";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
-const WelcomeSection = () => {
-    const [state, dispatch] = useReducer(reducer, roomSelectionInitial)
+interface WelcomeSectionProps {
+    state: any,
+    dispatch: React.Dispatch<{
+        type: string,
+        payload: any
+    }>;
+}
+
+const WelcomeSection: React.FC<WelcomeSectionProps> = ({ state, dispatch} ) => {
     const [backgroundIndex, setBackgroundIndex] = useState(0);
     const navigate = useNavigate();
 
