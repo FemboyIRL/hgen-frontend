@@ -1,8 +1,8 @@
 import { Room } from "../../../../../types/room"
 
-const RoomCard = ({ room, showRoomData }: { room: Room, showRoomData?: () => void }) => {
+const RoomCard = ({ room, showRoomModal }: { room: Room, showRoomModal: (room: Room) => void }) => {
     return (
-        <div className="card align-items-center" onClick={showRoomData} key={room.room_number}>
+        <div className="card align-items-center" onClick={() => showRoomModal(room)} key={room.room_number}>
             <div className="card-img">
                 <img src={room.images[0]} alt={`habitación ${room.room_number}`} />
             </div>

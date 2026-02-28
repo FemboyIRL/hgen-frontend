@@ -1,0 +1,150 @@
+/* OVERLAY */
+.room-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.65);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+/* CONTENEDOR */
+.room-modal-container.premium {
+    width: 95%;
+    max-width: 1100px;
+    height: 85vh;
+    background: #fff;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.25);
+    position: relative;
+    animation: modalIn 0.25s ease;
+}
+
+/* BOTON CERRAR */
+.room-modal-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    border: none;
+    background: rgba(0,0,0,0.4);
+    color: #fff;
+    border-radius: 50%;
+    padding: 8px;
+    cursor: pointer;
+    z-index: 2;
+    transition: 0.2s;
+}
+.room-modal-close:hover {
+    background: rgba(0,0,0,0.6);
+}
+
+/* GRID PRINCIPAL */
+.room-modal-content {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    height: 100%;
+}
+
+/* LADO IZQUIERDO */
+.room-modal-left {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: #f8fafc;
+}
+
+/* HERO IMAGE */
+.room-modal-hero {
+    flex: 1;
+    border-radius: 14px;
+    overflow: hidden;
+}
+.room-modal-hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* THUMBNAILS */
+.room-modal-thumbs {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 8px;
+}
+.room-modal-thumbs img {
+    width: 100%;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
+    opacity: 0.85;
+    transition: 0.2s;
+}
+.room-modal-thumbs img:hover {
+    opacity: 1;
+    transform: scale(1.03);
+}
+
+/* LADO DERECHO */
+.room-modal-right {
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* HEADER TEXTO */
+.room-modal-header-block h2 {
+    margin: 0;
+    font-size: 26px;
+    font-weight: 600;
+}
+.room-type {
+    display: inline-block;
+    margin-top: 6px;
+    font-size: 14px;
+    color: #64748b;
+}
+
+/* DESCRIPCION */
+.room-modal-description h4 {
+    margin: 20px 0 8px 0;
+}
+.room-modal-description p {
+    color: #334155;
+    line-height: 1.6;
+}
+
+/* BOTON CTA */
+.room-modal-book {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.room-modal-book:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
+}
+
+/* ANIMACION */
+@keyframes modalIn {
+    from {
+        opacity: 0;
+        transform: scale(0.96) translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}

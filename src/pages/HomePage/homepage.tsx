@@ -8,6 +8,7 @@ import WelcomeSection from "./sections/welcome-section/welcome-section"
 import { HOME_ACTIONS, HomeState, reducer } from "./reducer/reducer"
 import ApiConsumer from "../../services/api_consumer"
 import { dummyOffers, dummyRooms } from "./dummy_data"
+import RoomModal from "./modals/room_data_modal"
 
 const Availability = new ApiConsumer({ url: 'availability/' })
 const Rooms = new ApiConsumer({ url: 'rooms/' })
@@ -69,7 +70,7 @@ const HomePage = () => {
                     }
                 });
 
-                changeValue('offers', parsedData.data)
+                changeValue('offers', parsedData)
 
             }
         } catch (e) {
@@ -77,13 +78,45 @@ const HomePage = () => {
         }
     };
 
+    const getAllRooms = async () => {
+        try {
+            const { status, data } = await Rooms.getAll()
+            if (status) {
+                const parsedData = data.data.map((room: any) => {
+                    try {
+                        return {
+                            ...room,
+                            images: JSON.parse(room.images),
+                        };
+                    } catch (error) {
+                        console.error("Error al parsear las imágenes:", error);
+                        return {
+                            ...room,
+                            images: [],
+                        };
+                    }
+                });
+                changeValue('rooms', parsedData)
+            }
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
     return (
         <Layout>
             <WelcomeSection state={state} dispatch={dispatch} />
-            <RoomsSection />
+            <RoomsSection state={state} dispatch={dispatch} />
             <ServicesSection />
             <OffersSection state={state} />
             <ContactSection />
+
+            <RoomModal
+                room={state?.room_modal}
+                mainImage={state!.main_image}
+                switchMainImage={(img) => changeValue('main_image', img)}
+                onClose={() => changeValue('room_modal', null)}
+            />
         </Layout>
     )
 }

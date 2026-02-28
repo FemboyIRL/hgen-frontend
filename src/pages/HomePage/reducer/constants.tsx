@@ -8,7 +8,8 @@ const HomeState = {
         occupied_dates: [],
     },
     rooms: [] as Room[],
-    room_modal: false,
+    room_modal: null as Room | null,
+    main_image: "",
     offers: [] as Offer[],
     loading: true,
 }
