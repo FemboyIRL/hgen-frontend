@@ -5,16 +5,17 @@ import ReservaBar from "./reserve-bar/reserve-bar";
 import { Calendar2CheckFill } from "react-bootstrap-icons";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { HomeReducer } from "../../reducer/constants";
 
 interface WelcomeSectionProps {
-    state: any,
+    state: HomeReducer,
     dispatch: React.Dispatch<{
         type: string,
         payload: any
     }>;
 }
 
-const WelcomeSection: React.FC<WelcomeSectionProps> = ({ state, dispatch} ) => {
+const WelcomeSection: React.FC<WelcomeSectionProps> = ({ state, dispatch }) => {
     const [backgroundIndex, setBackgroundIndex] = useState(0);
     const navigate = useNavigate();
 
@@ -33,7 +34,7 @@ const WelcomeSection: React.FC<WelcomeSectionProps> = ({ state, dispatch} ) => {
     });
 
     const handleSubmit = () => {
-        if (!state.dateRange[0] || !state.dateRange[1]) {
+        if (!state.reserve_bar.date_range[0] || !state.reserve_bar.date_range[1]) {
             toast.error("Por favor, selecciona las fechas de check-in y check-out.");
             return;
         }

@@ -1,68 +1,14 @@
 import "./offers.css";
-import ApiConsumer from "../../../../services/api_consumer";
 import { Offer } from "../../../../types/offer";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import LoadingSpinnerContainer from "../../../../components/LoadingSpinner/loading-spinner";
+import { HomeReducer } from "../../reducer/constants";
 
-const Offers = new ApiConsumer({ url: "offers/" });
+interface OfferSectionProps {
+    state: HomeReducer
+}
 
-const OffersSection = () => {
-    const [offers, setOffers] = useState<Offer[]>([]);
-    const [loading, setLoading] = useState(true);
-    const dummyOffers: Offer[] = [
-        {
-            id: "offer-1",
-            title: "Escapada de Fin de Semana",
-            description:
-                "Disfruta dos noches en una habitación deluxe con desayuno incluido.",
-            images: [
-                "https://picsum.photos/800/500?random=11",
-                "https://picsum.photos/800/500?random=12",
-            ],
-            original_price: 3200,
-            discount_price: 2499,
-        },
-        {
-            id: "offer-2",
-            title: "Paquete Familiar",
-            description:
-                "Habitación familiar + acceso a alberca y actividades para niños.",
-            images: [
-                "https://picsum.photos/800/500?random=21",
-                "https://picsum.photos/800/500?random=22",
-                "https://picsum.photos/800/500?random=23",
-            ],
-            original_price: 4500,
-            discount_price: 3899,
-        },
-        {
-            id: "offer-3",
-            title: "Suite Premium",
-            description: "Suite con jacuzzi privado y vista panorámica.",
-            images: ["https://picsum.photos/800/500?random=31"],
-            original_price: 7800,
-            discount_price: 6499,
-        },
-        {
-            id: "offer-4",
-            title: "Oferta Anticipada",
-            description: "Reserva con anticipación y obtén un descuento exclusivo.",
-            images: [
-                "https://picsum.photos/800/500?random=41",
-                "https://picsum.photos/800/500?random=42",
-            ],
-            original_price: 2800,
-            discount_price: 2199,
-        },
-    ];
-
-    useEffect(() => {
-        getOffers();
-        if (offers.length === 0) {
-            setOffers(dummyOffers);
-        }
-        setLoading(false);
-    }, [loading]);
+const OffersSection: React.FC<OfferSectionProps> = ({ state }) => {
 
     useEffect(() => {
         let lastScrollTop = 0;
@@ -122,30 +68,6 @@ const OffersSection = () => {
         };
     }, []);
 
-    const getOffers = async () => {
-        try {
-            const { data, status } = await Offers.getAll();
-            if (status) {
-                const parsedData = data.data.map((offer: any) => {
-                    try {
-                        return {
-                            ...offer,
-                            images: JSON.parse(offer.images),
-                        };
-                    } catch (error) {
-                        console.error("Error al parsear las imágenes:", error);
-                        return {
-                            ...offer,
-                            images: [],
-                        };
-                    }
-                });
-                setOffers(parsedData);
-            }
-        } catch (e) {
-            console.log(e);
-        }
-    };
 
     return (
         <div className="offersContainer p-5 w-full bg-light">
@@ -165,11 +87,11 @@ const OffersSection = () => {
                     paddingRight: "10px",
                 }}
             >
-                {loading ? (
+                {state.loading ? (
                     <div className="d-flex justify-content-center py-5">
                         <LoadingSpinnerContainer />
                     </div>
-                ) : offers.length === 0 ? (
+                ) : state.offers.length === 0 ? (
                     <div className="empty-offers text-center py-5">
                         <div className="icon mb-3">
                             <i className="bi bi-calendar-x display-1 text-muted"></i>
@@ -181,7 +103,7 @@ const OffersSection = () => {
                     </div>
                 ) : (
                     <div className="row g-4">
-                        {offers.map((offer: Offer, index: number) => (
+                        {state.offers.map((offer: Offer, index: number) => (
                             <div
                                 className="col-12 d-flex justify-content-center"
                                 key={offer.id || index}

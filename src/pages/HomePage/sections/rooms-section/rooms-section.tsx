@@ -6,45 +6,13 @@ import ApiConsumer from "../../../../services/api_consumer";
 import { reducer, roomsActions } from "../../../../adminPages/Rooms/reducer/reducer";
 import { Room } from "../../../../types/room";
 import RoomCard from "./components/room-card";
+import { dummyRooms } from "../../dummy_data";
 
 const Rooms = new ApiConsumer({ url: 'rooms/' })
 
 const RoomsSection = () => {
     const [state, dispatch] = useReducer(reducer, initialState)
     const sectionRef = useRef<HTMLDivElement | null>(null)
-
-    // TODO: BORRAR CUANDO LA API FUNCIONE BIEN 
-    const dummyRooms: Room[] = [
-        {
-            room_number: "101",
-            type: "Deluxe Suite",
-            description: "Amplia habitación con vista al mar",
-            is_available: true,
-            images: [
-                "https://picsum.photos/600/400?random=1",
-                "https://picsum.photos/600/400?random=2",
-            ],
-        },
-        {
-            room_number: "202",
-            type: "Standard Room",
-            description: "Cómoda habitación para dos personas",
-            is_available: false,
-            images: [
-                "https://picsum.photos/600/400?random=3",
-            ],
-        },
-        {
-            room_number: "303",
-            type: "Presidential Suite",
-            description: "Suite premium con jacuzzi privado",
-            is_available: true,
-            images: [
-                "https://picsum.photos/600/400?random=4",
-                "https://picsum.photos/600/400?random=5",
-            ],
-        },
-    ];
 
     useEffect(() => {
         getAllRooms()
