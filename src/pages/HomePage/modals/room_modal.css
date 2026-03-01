@@ -148,3 +148,116 @@
         transform: scale(1) translateY(0);
     }
 }
+
+/* =========================
+   TABLET (<= 900px)
+========================= */
+@media (max-width: 900px) {
+    .room-modal-container.premium {
+        height: 90vh;
+    }
+
+    .room-modal-content {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .room-modal-right {
+        padding: 20px;
+    }
+
+    .room-modal-header-block h2 {
+        font-size: 22px;
+    }
+
+    .room-modal-description p {
+        font-size: 14px;
+    }
+}
+
+
+/* =========================
+   MOBILE (<= 640px)
+========================= */
+@media (max-width: 640px) {
+
+    .room-modal-container.premium {
+        width: 100%;
+        border-radius: 0;
+    }
+
+    .room-modal-content {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    /* LADO IZQUIERDO (IMAGENES) */
+    .room-modal-left {
+        padding: 12px;
+        gap: 10px;
+    }
+
+    .room-modal-hero {
+        height: 220px;
+        flex: unset;
+    }
+
+    /* thumbnails horizontales */
+    .room-modal-thumbs {
+        display: flex;
+        overflow-x: auto;
+        gap: 8px;
+        padding-bottom: 4px;
+    }
+
+    .room-modal-thumbs img {
+        max-width: 90px;
+        height: 70px;
+        flex-shrink: 0;
+    }
+
+    /* LADO DERECHO (INFO) */
+    .room-modal-right {
+        flex: 1;
+        padding: 16px;
+        overflow-y: auto;
+    }
+
+    .room-modal-header-block h2 {
+        font-size: 20px;
+    }
+
+    .room-type {
+        font-size: 13px;
+    }
+
+    .room-modal-description h4 {
+        margin-top: 12px;
+        font-size: 15px;
+    }
+
+    .room-modal-description p {
+        font-size: 14px;
+    }
+
+    /* BOTON CTA fijo abajo */
+    .room-modal-cta {
+        position: sticky;
+        bottom: 0;
+        background: #fff;
+        padding-top: 10px;
+    }
+
+    .room-modal-book {
+        padding: 16px;
+        font-size: 15px;
+        border-radius: 10px;
+    }
+
+    /* BOTON CLOSE MAS GRANDE PARA TOUCH */
+    .room-modal-close {
+        top: 10px;
+        right: 10px;
+        padding: 10px;
+    }
+}

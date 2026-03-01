@@ -1,77 +1,71 @@
-import './footer.css'
+import React from "react";
+import { GeoAltFill, TelephoneFill, EnvelopeFill } from "react-bootstrap-icons";
+import "./hotel-footer.css";
 
-const Footer = () => {
+const HotelFooter: React.FC = () => {
     return (
-        <footer className="footer">
-            <div className="footer-info">
-                <p>Teléfono: (123) 456-7890 | Email: contacto@hgensuites.com</p>
-                <p>Dirección: Calle del Hotel, Ciudad, País</p>
+        <footer className="hotel-footer">
+
+            <div className="footer-container">
+
+                {/* COLUMNA 1: HOTEL */}
+                <div className="footer-col">
+                    <h3 className="footer-logo">HGEN Rooms & Suites</h3>
+                    <p className="footer-description">
+                        Disfruta de una estancia cómoda, moderna y segura en el corazón de la ciudad.
+                    </p>
+                </div>
+
+                {/* COLUMNA 2: CONTACTO */}
+                <div className="footer-col">
+                    <h4>Contacto</h4>
+
+                    <div className="footer-item">
+                        <GeoAltFill />
+                        <span>Los Mochis, Sinaloa</span>
+                    </div>
+
+                    <div className="footer-item">
+                        <TelephoneFill />
+                        <span>+52 668 123 4567</span>
+                    </div>
+
+                    <div className="footer-item">
+                        <EnvelopeFill />
+                        <span>reservaciones@hgen.com</span>
+                    </div>
+                </div>
+
+                {/* COLUMNA 3: LINKS */}
+                <div className="footer-col">
+                    <h4>Enlaces</h4>
+                    <ul className="footer-links">
+                        <li>Inicio</li>
+                        <li>Habitaciones</li>
+                        <li>Servicios</li>
+                        <li>Contacto</li>
+                    </ul>
+                </div>
+
+                {/* COLUMNA 4: REDES */}
+                <div className="footer-col">
+                    <h4>Síguenos</h4>
+                    <div className="footer-socials">
+                        <a href="#">Facebook</a>
+                        <a href="#">Instagram</a>
+                        <a href="#">WhatsApp</a>
+                    </div>
+                </div>
+
             </div>
-            <div className="footer-links">
-                <ul>
-                    <li>
-                        <a href="#reserva">Reserva</a>
-                    </li>
-                    <li>
-                        <a href="#politicas">Políticas</a>
-                    </li>
-                    <li>
-                        <a href="#contacto">Contacto</a>
-                    </li>
-                </ul>
+
+            {/* BOTTOM */}
+            <div className="footer-bottom">
+                © {new Date().getFullYear()} HGEN Rooms & Suites. Todos los derechos reservados.
             </div>
-            <div className="footer-socials">
-                <a
-                    href="https://facebook.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Facebook"
-                >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="feather feather-facebook"
-                        style={{ color: "#fff", backgroundColor: "#000" }}
-                    >
-                        <path d="M18 2h-3a4 4 0 0 0-4 4v3H8v4h3v8h4v-8h3l1-4h-4V6a1 1 0 0 1 1-1h3z" />
-                    </svg>
-                </a>
-                <a
-                    href="https://instagram.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Instagram"
-                >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="feather feather-instagram"
-                    >
-                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-                        <path d="M16 11.37a4 4 0 1 1-4.63-4.63 4 4 0 0 1 4.63 4.63z" />
-                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
-                    </svg>
-                </a>
-            </div>
-            <div className="footer-payment">
-                <p>Aceptamos: Tarjetas, Efectivo, Transferencia</p>
-            </div>
+
         </footer>
     );
 };
 
-export default Footer;
+export default HotelFooter;
