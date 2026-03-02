@@ -6,7 +6,6 @@ export const dummyRooms: Room[] = [
         room_number: "101",
         type: "Deluxe Suite",
         description: "Amplia habitación con vista al mar",
-        is_available: true,
         images: [
             "https://picsum.photos/600/400?random=1",
             "https://picsum.photos/600/400?random=2",
@@ -16,7 +15,6 @@ export const dummyRooms: Room[] = [
         room_number: "202",
         type: "Standard Room",
         description: "Cómoda habitación para dos personas",
-        is_available: false,
         images: [
             "https://picsum.photos/600/400?random=3",
         ],
@@ -25,9 +23,60 @@ export const dummyRooms: Room[] = [
         room_number: "303",
         type: "Presidential Suite",
         description: "Suite premium con jacuzzi privado",
-        is_available: true,
         images: [
             "https://picsum.photos/600/400?random=4",
+            "https://picsum.photos/600/400?random=5",
+        ],
+    },
+    {
+        room_number: "303",
+        type: "Presidential Suite",
+        description: "Suite premium con jacuzzi privado",
+        images: [
+            "https://picsum.photos/600/400?random=4",
+            "https://picsum.photos/600/400?random=5",
+        ],
+    },
+    {
+        room_number: "303",
+        type: "Presidential Suite",
+        description: "Suite premium con jacuzzi privado",
+        images: [
+            "https://picsum.photos/600/400?random=4",
+            "https://picsum.photos/600/400?random=5",
+        ],
+    },
+    {
+        room_number: "303",
+        type: "Presidential Suite",
+        description: "Suite premium con jacuzzi privado",
+        images: [
+            "https://picsum.photos/600/400?random=4",
+            "https://picsum.photos/600/400?random=5",
+        ],
+    },
+    {
+        room_number: "303",
+        type: "Presidential Suite",
+        description: "Suite premium con jacuzzi privado",
+        images: [
+            "https://picsum.photos/600/400?random=4",
+            "https://picsum.photos/600/400?random=5",
+        ],
+    },
+    {
+        room_number: "303",
+        type: "Presidential Suite",
+        description: "Suite premium con jacuzzi privado",
+        images: [
+            "https://picsum.photos/600/400?random=4",
+            "https://picsum.photos/600/400?random=4",
+            "https://picsum.photos/600/400?random=4",
+            "https://picsum.photos/600/400?random=4",
+            "https://picsum.photos/600/400?random=4",
+            "https://picsum.photos/600/400?random=4",
+            "https://picsum.photos/600/400?random=4",
+
             "https://picsum.photos/600/400?random=5",
         ],
     },

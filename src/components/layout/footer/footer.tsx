@@ -12,7 +12,7 @@ const HotelFooter: React.FC = () => {
                 <div className="footer-col">
                     <h3 className="footer-logo">HGEN Rooms & Suites</h3>
                     <p className="footer-description">
-                        Disfruta de una estancia cómoda, moderna y segura en el corazón de la ciudad.
+                        Disfruta de una estancia cómoda, moderna y segura en la parte mas bonita de la ciudad.
                     </p>
                 </div>
 
@@ -32,7 +32,7 @@ const HotelFooter: React.FC = () => {
 
                     <div className="footer-item">
                         <EnvelopeFill />
-                        <span>reservaciones@hgen.com</span>
+                        <span>reservaciones@hgensuites.com</span>
                     </div>
                 </div>
 

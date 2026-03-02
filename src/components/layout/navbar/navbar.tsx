@@ -4,6 +4,7 @@ import {
     People,
     Calendar,
     Phone,
+    Tag,
 } from "react-bootstrap-icons";
 import "./navbar.css";
 import { useNavigate, Link } from "react-router-dom";
@@ -36,6 +37,12 @@ const Navbar = () => {
                         <a className="nav-links" href="#servicios">
                             <People className="nav-icon d-flex justify-content-center align-items-center" />
                             <span className="nav-text">Servicios</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a className="nav-links" href="#ofertas">
+                            <Tag className="nav-icon d-flex justify-content-center align-items-center" />
+                            <span className="nav-text">Ofertas</span>
                         </a>
                     </li>
                     {user ? (

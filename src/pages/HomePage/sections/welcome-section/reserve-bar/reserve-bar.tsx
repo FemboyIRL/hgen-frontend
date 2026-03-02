@@ -127,6 +127,7 @@ const ReservaBar: React.FC<ReserveBarProps> = ({ state, dispatch }) => {
 
     const handleRoomChange = (roomId: string) => {
         changeValue("selected_room", roomId);
+        changeValue("date_range", [null, null])
     };
 
     const handleDateChange = (update: [Date | null, Date | null]) => {
@@ -177,7 +178,7 @@ const ReservaBar: React.FC<ReserveBarProps> = ({ state, dispatch }) => {
             >
                 <div className="reserva-bar-fields d-flex justify-content-center align-items-center flex-wrap gap-4">
                     {/* SELECTOR DE HABITACIONES */}
-                    <div className="reserva-bar-field position-relative flex-grow-1" style={{ minWidth: '280px' }}>
+                    <div className="reserva-bar-field position-relative flex-grow-1">
                         <CustomSelectInput
                             value={
                                 state.rooms.find((r: Room) => r.room_number === selectedRoom)?.room_number || ""
@@ -209,7 +210,7 @@ const ReservaBar: React.FC<ReserveBarProps> = ({ state, dispatch }) => {
                     </div>
 
                     {/* SELECTOR DE FECHAS */}
-                    <div className="reserva-bar-field flex-grow-1" style={{ minWidth: '280px' }}>
+                    <div className="reserva-bar-field flex-grow-1">
                         <div className="datePicker">
                             <DatePicker
                                 selectsRange

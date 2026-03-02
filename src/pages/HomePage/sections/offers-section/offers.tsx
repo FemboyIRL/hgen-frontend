@@ -1,76 +1,19 @@
 import "./offers.css";
 import { Offer } from "../../../../types/offer";
-import { useEffect } from "react";
 import LoadingSpinnerContainer from "../../../../components/LoadingSpinner/loading-spinner";
 import { HomeReducer } from "../../reducer/constants";
+import { useRef } from "react";
 
 interface OfferSectionProps {
     state: HomeReducer
 }
 
 const OffersSection: React.FC<OfferSectionProps> = ({ state }) => {
-
-    useEffect(() => {
-        let lastScrollTop = 0;
-
-        const handleScroll = () => {
-            const container = document.querySelector('.stack-cards-container') as HTMLElement;
-            const cards = document.querySelectorAll('.stack-cards__item');
-
-            if (!container || cards.length === 0) return;
-
-            const containerRect = container.getBoundingClientRect();
-            const windowHeight = window.innerHeight + 300;
-            const scrollPosition = window.scrollY;
-
-            const scrollDown = scrollPosition > lastScrollTop;
-            lastScrollTop = scrollPosition <= 0 ? 0 : scrollPosition;
-
-            const progress = Math.max(
-                0,
-                (scrollPosition - containerRect.top + windowHeight) /
-                (windowHeight * 2)
-            );
-
-            const numCards = cards.length;
-
-            for (let index = numCards - 1; index >= 0; index--) {
-                const card = cards[index];
-
-                if (index === numCards - 1) {
-                    if (scrollPosition > containerRect.top - windowHeight * 0.2) {
-                        card.classList.add('slide-up');
-                    } else {
-                        card.classList.remove('slide-up');
-                    }
-                } else {
-                    if (scrollDown) {
-                        if (index >= numCards - progress && index !== numCards - 1) {
-                            card.classList.add('slide-up');
-                        } else {
-                            card.classList.remove('slide-up');
-                        }
-                    } else {
-                        if (index > numCards - progress - 1 && index !== numCards - 1) {
-                            card.classList.add('slide-up');
-                        } else {
-                            card.classList.remove('slide-up');
-                        }
-                    }
-                }
-            }
-        };
-
-        window.addEventListener("scroll", handleScroll);
-
-        return () => {
-            window.removeEventListener("scroll", handleScroll);
-        };
-    }, []);
+    const sectionRef = useRef<HTMLDivElement | null>(null)
 
 
     return (
-        <div className="offersContainer p-5 w-full bg-light">
+        <div className="offersContainer p-5 w-full bg-light" id="ofertas" ref={sectionRef}>
             <div className="text-center mb-5">
                 <h1 className="title">Ofertas Exclusivas</h1>
                 <p className="text-muted">
@@ -178,8 +121,7 @@ const OffersSection: React.FC<OfferSectionProps> = ({ state }) => {
                                                 </div>
 
                                                 {/* Footer con precios y botón */}
-                                                <div className="d-flex justify-content-between align-items-center pt-3 border-top">
-                                                    <div className="prices">
+                                                <div className="offer-footer d-flex justify-content-between align-items-center pt-3 border-top">                                                    <div className="prices">
                                                         <div className="d-flex align-items-baseline">
                                                             <div className="old-price text-muted me-3">
                                                                 <del className="fs-5">

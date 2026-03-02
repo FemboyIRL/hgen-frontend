@@ -19,11 +19,15 @@ const HomePage = () => {
 
     useEffect(() => {
         if (!state.loading) return;
-
         changeValue("offers", dummyOffers)
         changeValue("rooms", dummyRooms)
         changeValue('loading', false)
     }, [state.loading])
+
+
+    useEffect(() => {
+        fetchOccupiedDates(state?.reserve_bar.selected_room)
+    }, [state.reserve_bar.selected_room])
 
 
     const changeValue = (prop: string, data: any) => {
@@ -36,16 +40,27 @@ const HomePage = () => {
         })
     }
 
-    const fetchOccupiedDates = async () => {
+    const changeValueReserveBar = (prop: string, data: any) => {
+        dispatch({
+            type: HOME_ACTIONS.CHANGE_VALUE_RESERVE_BAR,
+            payload: {
+                prop,
+                data
+            }
+        })
+    }
+
+    const fetchOccupiedDates = async (room_number: string | undefined) => {
         try {
-            const { status, data } = await Availability.getAll()
+
+            const { status, data } = room_number ? await Availability.getById(room_number) : await Availability.getAll() 
+
             if (status) {
                 dispatch({
                     type: HOME_ACTIONS.GET_OCCUPIED_DATES,
                     payload: data.data.occupiedDates
                 })
             }
-
         } catch (e) {
             console.error(e)
         }

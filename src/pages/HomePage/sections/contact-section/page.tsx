@@ -1,8 +1,11 @@
 import { FaMapMarkerAlt, FaEnvelope, FaPhoneAlt, FaFacebookF, FaInstagram, FaWhatsapp } from "react-icons/fa"
 import { ContactCardProp } from "./contact-card-props"
+import { useRef } from "react"
 
 
 function ContactSection() {
+    const sectionRef = useRef<HTMLDivElement | null>(null)
+
 
     const contacts: ContactCardProp[] = [
         {
@@ -23,7 +26,7 @@ function ContactSection() {
     ]
 
     return (
-        <div className="container my-4">
+        <div className="container my-4" id="contacto" ref={sectionRef}>
             <div className="row">
 
                 {/* HEADER */}
