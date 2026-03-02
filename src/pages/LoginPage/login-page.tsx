@@ -1,4 +1,4 @@
-import { useEffect, useReducer } from "react";
+import { useReducer } from "react";
 import { FormCheck, FormControl, FormGroup } from "react-bootstrap";
 import './login-page.css'
 import { initialState, loginActions, reducer } from "./reducer/reducer";
@@ -12,7 +12,7 @@ const Auth = new ApiConsumer({ url: "auth/login/" })
 const LoginPage = () => {
     useAuth();
     const [state, dispatch] = useReducer(reducer, initialState)
-    const {setUser} = useUser();
+    const { setUser } = useUser();
     const navigate = useNavigate();
 
     const changeValueForm = (prop: string, data: any) => {
@@ -26,40 +26,40 @@ const LoginPage = () => {
     }
 
     const handleLogin = async (e: any) => {
-    e.preventDefault();
-    try {
-        const { email, password, rememberMe } = state!.formData;
+        e.preventDefault();
+        try {
+            const { email, password, rememberMe } = state!.formData;
 
-        const body = {
-            email,
-            password
-        };
+            const body = {
+                email,
+                password
+            };
 
-        const { status, data } = await Auth.petition(body, "POST");
+            const { status, data } = await Auth.petition(body, "POST");
 
-        console.log("Respuesta del login:", data);
-        
-        if (status) {
-            toast.success("Sesión iniciada de forma exitosa");
-            
-            // Guardar token primero
-            localStorage.setItem("token", data.token);
-            
-            if (rememberMe) {
-                console.log("Guardando usuario:", data.data);
-                setUser(data.data); // Guardar LocalStorage
-            } else {
-                // Si no es "rememberMe", solo mantenemos en estado, no en localStorage
-                setUser(data.data);
+            console.log("Respuesta del login:", data);
+
+            if (status) {
+                toast.success("Sesión iniciada de forma exitosa");
+
+                // Guardar token primero
+                localStorage.setItem("token", data.token);
+
+                if (rememberMe) {
+                    console.log("Guardando usuario:", data.data);
+                    setUser(data.data); // Guardar LocalStorage
+                } else {
+                    // Si no es "rememberMe", solo mantenemos en estado, no en localStorage
+                    setUser(data.data);
+                }
+
+                navigate("/");
             }
-            
-            navigate("/");
+        } catch (e) {
+            console.log("Error en login:", e);
+            toast.error("Error al iniciar sesión");
         }
-    } catch (e) {
-        console.log("Error en login:", e);
-        toast.error("Error al iniciar sesión");
-    }
-};
+    };
 
     const handleOnChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value, checked } = e.target

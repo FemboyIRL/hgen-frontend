@@ -21,7 +21,7 @@ const CustomDeleteModal: React.FC<CustomDeleteModalProps> = ({
     return (
         <FormModal
             status={show}
-            size='md'
+            size='lg'
             changeModal={onHide}
             modalTitle={title}
             onSubmit={firstBtnClick}

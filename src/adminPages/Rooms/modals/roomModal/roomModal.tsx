@@ -146,7 +146,7 @@ const CreateRoomModal: React.FC<CreateRoomModalProps> = ({ stateReducer, dispatc
                 status={stateReducer.roomModal}
                 btnText={stateReducer.currentRoom ? "Editar" : 'Agregar'}
                 onSubmit={handleSave}
-                size={'md'}
+                size={'lg'}
                 onDelete={stateReducer.currentRoom ? onDelete : undefined}
                 changeModal={() => closeModal()}
             >

@@ -170,7 +170,7 @@ const CreateOrderModal: React.FC<CreateOrderModalProps> = ({ stateReducer, dispa
                 status={stateReducer.orderModal}
                 btnText={stateReducer.currentOrder ? "Editar" : 'Agregar'}
                 onSubmit={handleSave}
-                size={'md'}
+                size={'lg'}
                 onDelete={stateReducer.currentOrder ? onDelete : undefined}
                 changeModal={() => closeModal()}
             >

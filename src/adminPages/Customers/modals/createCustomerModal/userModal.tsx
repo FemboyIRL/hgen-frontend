@@ -102,7 +102,7 @@ const CreateClientModal: React.FC<CreateCustomerModalProps> = ({ stateReducer, d
                 status={stateReducer.customerModal}
                 btnText={stateReducer.currentCustomer ? "Editar" : 'Agregar'}
                 onSubmit={handleSave}
-                size={'md'}
+                size={'lg'}
                 changeModal={() => closeModal()}
             >
                 <Form>

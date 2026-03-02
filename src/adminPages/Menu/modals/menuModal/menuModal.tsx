@@ -142,7 +142,7 @@ const CreateMenuItemModal: React.FC<CreateMenuItemModalProps> = ({ stateReducer,
                 status={stateReducer.menuItemModal}
                 btnText={stateReducer.currentMenuItem ? "Editar" : 'Agregar'}
                 onSubmit={handleSave}
-                size={'md'}
+                size={'lg'}
                 onDelete={stateReducer.currentMenuItem ? onDelete : undefined}
                 changeModal={() => closeModal()}
             >

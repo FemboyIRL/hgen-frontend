@@ -152,7 +152,7 @@ const CreateOfferModal: React.FC<CreateOfferModalProps> = ({ stateReducer, dispa
                 status={stateReducer.offerModal}
                 btnText={stateReducer.currentOffer ? "Editar" : 'Agregar'}
                 onSubmit={handleSave}
-                size={'md'}
+                size={'lg'}
                 onDelete={stateReducer.currentOffer ? onDelete : undefined}
                 changeModal={() => closeModal()}
             >
