@@ -105,14 +105,6 @@ const RoomsPage = () => {
                                                     <div className="roomDetails">
                                                         <h4>{room.type}</h4>
                                                         <p>Número: {room.room_number}</p>
-                                                        <p>
-                                                            Disponible:{" "}
-                                                            {room.is_available ? (
-                                                                <span className="available">Sí</span>
-                                                            ) : (
-                                                                <span className="notAvailable">No</span>
-                                                            )}
-                                                        </p>
                                                         <p>{room.description}</p>
                                                     </div>
                                                 </div>

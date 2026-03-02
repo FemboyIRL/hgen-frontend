@@ -11,8 +11,8 @@ import { dummyOffers, dummyRooms } from "./dummy_data"
 import RoomModal from "./modals/room_data_modal"
 
 const Availability = new ApiConsumer({ url: 'availability/' })
-const Rooms = new ApiConsumer({ url: 'rooms/' })
-const Offers = new ApiConsumer({ url: 'offers/' })
+// const Rooms = new ApiConsumer({ url: 'rooms/' })
+// const Offers = new ApiConsumer({ url: 'offers/' })
 
 const HomePage = () => {
     const [state, dispatch] = useReducer(reducer, HomeState);
@@ -40,20 +40,20 @@ const HomePage = () => {
         })
     }
 
-    const changeValueReserveBar = (prop: string, data: any) => {
-        dispatch({
-            type: HOME_ACTIONS.CHANGE_VALUE_RESERVE_BAR,
-            payload: {
-                prop,
-                data
-            }
-        })
-    }
+    // const changeValueReserveBar = (prop: string, data: any) => {
+    //     dispatch({
+    //         type: HOME_ACTIONS.CHANGE_VALUE_RESERVE_BAR,
+    //         payload: {
+    //             prop,
+    //             data
+    //         }
+    //     })
+    // }
 
     const fetchOccupiedDates = async (room_number: string | undefined) => {
         try {
 
-            const { status, data } = room_number ? await Availability.getById(room_number) : await Availability.getAll() 
+            const { status, data } = room_number ? await Availability.getById(room_number) : await Availability.getAll()
 
             if (status) {
                 dispatch({
@@ -66,57 +66,57 @@ const HomePage = () => {
         }
     }
 
-    const fetchOffers = async () => {
-        try {
-            const { data, status } = await Offers.getAll();
-            if (status) {
-                const parsedData = data.data.map((offer: any) => {
-                    try {
-                        return {
-                            ...offer,
-                            images: JSON.parse(offer.images),
-                        };
-                    } catch (error) {
-                        console.error("Error al parsear las imágenes:", error);
-                        return {
-                            ...offer,
-                            images: [],
-                        };
-                    }
-                });
+    // const fetchOffers = async () => {
+    //     try {
+    //         const { data, status } = await Offers.getAll();
+    //         if (status) {
+    //             const parsedData = data.data.map((offer: any) => {
+    //                 try {
+    //                     return {
+    //                         ...offer,
+    //                         images: JSON.parse(offer.images),
+    //                     };
+    //                 } catch (error) {
+    //                     console.error("Error al parsear las imágenes:", error);
+    //                     return {
+    //                         ...offer,
+    //                         images: [],
+    //                     };
+    //                 }
+    //             });
 
-                changeValue('offers', parsedData)
+    //             changeValue('offers', parsedData)
 
-            }
-        } catch (e) {
-            console.log(e);
-        }
-    };
+    //         }
+    //     } catch (e) {
+    //         console.log(e);
+    //     }
+    // };
 
-    const getAllRooms = async () => {
-        try {
-            const { status, data } = await Rooms.getAll()
-            if (status) {
-                const parsedData = data.data.map((room: any) => {
-                    try {
-                        return {
-                            ...room,
-                            images: JSON.parse(room.images),
-                        };
-                    } catch (error) {
-                        console.error("Error al parsear las imágenes:", error);
-                        return {
-                            ...room,
-                            images: [],
-                        };
-                    }
-                });
-                changeValue('rooms', parsedData)
-            }
-        } catch (e) {
-            console.log(e)
-        }
-    }
+    // const getAllRooms = async () => {
+    //     try {
+    //         const { status, data } = await Rooms.getAll()
+    //         if (status) {
+    //             const parsedData = data.data.map((room: any) => {
+    //                 try {
+    //                     return {
+    //                         ...room,
+    //                         images: JSON.parse(room.images),
+    //                     };
+    //                 } catch (error) {
+    //                     console.error("Error al parsear las imágenes:", error);
+    //                     return {
+    //                         ...room,
+    //                         images: [],
+    //                     };
+    //                 }
+    //             });
+    //             changeValue('rooms', parsedData)
+    //         }
+    //     } catch (e) {
+    //         console.log(e)
+    //     }
+    // }
 
     return (
         <Layout>
