@@ -9,7 +9,7 @@ type FormModalProps = {
     status: boolean
     changeModal?: () => void
     onSubmit: () => void
-    size?: "sm" | "md" | "lg" | "xl" | ""
+    size?: "sm" | "lg" | "xl" | ""
     btnDisable?: boolean
     btnText?: string
     secondBtn?: boolean
