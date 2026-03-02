@@ -3,7 +3,7 @@ import { Room } from '../../../types/room.tsx'
 const reservationsInitial = {
     selectedRoom: null as Room | null,
     rooms: [] as Room[],
-    loading: true,
+    loading: false,
     form: {
         room_number: 101,
         dateRange: [null, null] as [Date | null, Date | null],

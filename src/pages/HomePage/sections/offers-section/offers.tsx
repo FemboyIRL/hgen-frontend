@@ -1,154 +1,19 @@
 import "./offers.css";
-import ApiConsumer from "../../../../services/api_consumer";
 import { Offer } from "../../../../types/offer";
-import { useEffect, useState } from "react";
 import LoadingSpinnerContainer from "../../../../components/LoadingSpinner/loading-spinner";
+import { HomeReducer } from "../../reducer/constants";
+import { useRef } from "react";
 
-const Offers = new ApiConsumer({ url: "offers/" });
+interface OfferSectionProps {
+    state: HomeReducer
+}
 
-const OffersSection = () => {
-    const [offers, setOffers] = useState<Offer[]>([]);
-    const [loading, setLoading] = useState(true);
-    const dummyOffers: Offer[] = [
-        {
-            id: "offer-1",
-            title: "Escapada de Fin de Semana",
-            description:
-                "Disfruta dos noches en una habitación deluxe con desayuno incluido.",
-            images: [
-                "https://picsum.photos/800/500?random=11",
-                "https://picsum.photos/800/500?random=12",
-            ],
-            original_price: 3200,
-            discount_price: 2499,
-        },
-        {
-            id: "offer-2",
-            title: "Paquete Familiar",
-            description:
-                "Habitación familiar + acceso a alberca y actividades para niños.",
-            images: [
-                "https://picsum.photos/800/500?random=21",
-                "https://picsum.photos/800/500?random=22",
-                "https://picsum.photos/800/500?random=23",
-            ],
-            original_price: 4500,
-            discount_price: 3899,
-        },
-        {
-            id: "offer-3",
-            title: "Suite Premium",
-            description: "Suite con jacuzzi privado y vista panorámica.",
-            images: ["https://picsum.photos/800/500?random=31"],
-            original_price: 7800,
-            discount_price: 6499,
-        },
-        {
-            id: "offer-4",
-            title: "Oferta Anticipada",
-            description: "Reserva con anticipación y obtén un descuento exclusivo.",
-            images: [
-                "https://picsum.photos/800/500?random=41",
-                "https://picsum.photos/800/500?random=42",
-            ],
-            original_price: 2800,
-            discount_price: 2199,
-        },
-    ];
+const OffersSection: React.FC<OfferSectionProps> = ({ state }) => {
+    const sectionRef = useRef<HTMLDivElement | null>(null)
 
-    useEffect(() => {
-        getOffers();
-        if (offers.length === 0) {
-            setOffers(dummyOffers);
-        }
-        setLoading(false);
-    }, [loading]);
-
-    useEffect(() => {
-        let lastScrollTop = 0;
-
-        const handleScroll = () => {
-            const container = document.querySelector('.stack-cards-container') as HTMLElement;
-            const cards = document.querySelectorAll('.stack-cards__item');
-
-            if (!container || cards.length === 0) return;
-
-            const containerRect = container.getBoundingClientRect();
-            const windowHeight = window.innerHeight + 300;
-            const scrollPosition = window.scrollY;
-
-            const scrollDown = scrollPosition > lastScrollTop;
-            lastScrollTop = scrollPosition <= 0 ? 0 : scrollPosition;
-
-            const progress = Math.max(
-                0,
-                (scrollPosition - containerRect.top + windowHeight) /
-                (windowHeight * 2)
-            );
-
-            const numCards = cards.length;
-
-            for (let index = numCards - 1; index >= 0; index--) {
-                const card = cards[index];
-
-                if (index === numCards - 1) {
-                    if (scrollPosition > containerRect.top - windowHeight * 0.2) {
-                        card.classList.add('slide-up');
-                    } else {
-                        card.classList.remove('slide-up');
-                    }
-                } else {
-                    if (scrollDown) {
-                        if (index >= numCards - progress && index !== numCards - 1) {
-                            card.classList.add('slide-up');
-                        } else {
-                            card.classList.remove('slide-up');
-                        }
-                    } else {
-                        if (index > numCards - progress - 1 && index !== numCards - 1) {
-                            card.classList.add('slide-up');
-                        } else {
-                            card.classList.remove('slide-up');
-                        }
-                    }
-                }
-            }
-        };
-
-        window.addEventListener("scroll", handleScroll);
-
-        return () => {
-            window.removeEventListener("scroll", handleScroll);
-        };
-    }, []);
-
-    const getOffers = async () => {
-        try {
-            const { data, status } = await Offers.getAll();
-            if (status) {
-                const parsedData = data.data.map((offer: any) => {
-                    try {
-                        return {
-                            ...offer,
-                            images: JSON.parse(offer.images),
-                        };
-                    } catch (error) {
-                        console.error("Error al parsear las imágenes:", error);
-                        return {
-                            ...offer,
-                            images: [],
-                        };
-                    }
-                });
-                setOffers(parsedData);
-            }
-        } catch (e) {
-            console.log(e);
-        }
-    };
 
     return (
-        <div className="offersContainer p-5 w-full bg-light">
+        <div className="offersContainer p-5 w-full bg-light" id="ofertas" ref={sectionRef}>
             <div className="text-center mb-5">
                 <h1 className="title">Ofertas Exclusivas</h1>
                 <p className="text-muted">
@@ -165,11 +30,11 @@ const OffersSection = () => {
                     paddingRight: "10px",
                 }}
             >
-                {loading ? (
+                {state.loading ? (
                     <div className="d-flex justify-content-center py-5">
                         <LoadingSpinnerContainer />
                     </div>
-                ) : offers.length === 0 ? (
+                ) : state.offers.length === 0 ? (
                     <div className="empty-offers text-center py-5">
                         <div className="icon mb-3">
                             <i className="bi bi-calendar-x display-1 text-muted"></i>
@@ -181,7 +46,7 @@ const OffersSection = () => {
                     </div>
                 ) : (
                     <div className="row g-4">
-                        {offers.map((offer: Offer, index: number) => (
+                        {state.offers.map((offer: Offer, index: number) => (
                             <div
                                 className="col-12 d-flex justify-content-center"
                                 key={offer.id || index}
@@ -256,8 +121,7 @@ const OffersSection = () => {
                                                 </div>
 
                                                 {/* Footer con precios y botón */}
-                                                <div className="d-flex justify-content-between align-items-center pt-3 border-top">
-                                                    <div className="prices">
+                                                <div className="offer-footer d-flex justify-content-between align-items-center pt-3 border-top">                                                    <div className="prices">
                                                         <div className="d-flex align-items-baseline">
                                                             <div className="old-price text-muted me-3">
                                                                 <del className="fs-5">

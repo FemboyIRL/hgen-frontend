@@ -1,69 +1,150 @@
+/* CARD BASE */
 .offer-card {
-  border-radius: 15px !important;
-  min-width: 70vw;  
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 16px !important;
+  width: 100%;
+  max-width: 1100px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
   overflow: hidden;
+  background: #fff;
 }
 
 .offer-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1) !important;
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12) !important;
 }
 
+/* IMAGE */
 .offer-card .object-fit-cover {
   object-fit: cover;
+  height: 100%;
 }
 
+/* BADGES */
 .offer-card .badge {
-  border-radius: 20px;
-  font-size: 0.85rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
 }
 
+/* RATING */
 .offer-card .text-warning {
   color: #ffc107 !important;
 }
 
+/* BUTTON */
 .offer-card .btn-primary {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   border: none;
-  border-radius: 25px;
-  padding: 10px 25px;
+  border-radius: 999px;
+  padding: 10px 24px;
   font-weight: 600;
-  transition: all 0.3s ease;
+  transition: all 0.25s ease;
+  white-space: nowrap;
 }
 
 .offer-card .btn-primary:hover {
-  transform: scale(1.05);
-  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(102, 126, 234, 0.35);
 }
 
+/* PRICE */
 .offer-card .display-6 {
-  font-size: 2.5rem;
+  font-size: 2.2rem;
+  line-height: 1;
 }
 
+/* BORDER TAGS */
 .offer-card .border {
   border: 1px solid #dee2e6 !important;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .offer-card {
-    min-width: 25vw;  
+/* DESCRIPTION */
+.offer-card .description p {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
 
-  }
+/* ===================== */
+/* 📱 MOBILE FIRST */
+/* ===================== */
+
+@media (max-width: 768px) {
+  /* Layout vertical */
   .offer-card .row {
-      flex-direction: column;
+    flex-direction: column;
   }
-  
+
+  /* Imagen arriba */
   .offer-card .col-md-5 {
-      height: 200px;
+    height: auto;
+    max-height: 240px;
+    overflow: hidden;
+    position: relative;
+}
+
+  /* Contenido abajo */
+  .offer-card .col-md-7 {
+    width: 100%;
   }
-  
+
+  /* Header stack */
+  .offer-card .card-body {
+    padding: 16px;
+  }
+
+  .offer-card .card-title {
+    font-size: 1.2rem;
+  }
+
+  /* Rating + badge vertical */
+  .offer-card .card-body > div:first-child {
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: 8px;
+  }
+
+  /* Footer columna */
+  .offer-card .d-flex.justify-content-between.align-items-center.pt-3 {
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: 14px;
+  }
+
+  /* Precio más pequeño */
   .offer-card .display-6 {
-      font-size: 2rem;
+    font-size: 1.8rem;
   }
-  
+
+  /* Botón ancho completo */
   .offer-card .btn-primary {
-      padding: 8px 20px;
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* ===================== */
+/* 📲 TABLET */
+/* ===================== */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .offer-card .display-6 {
+    font-size: 2rem;
+  }
+
+  .offer-card .btn-primary {
+    padding: 10px 20px;
+  }
+}
+
+/* ===================== */
+/* 💻 DESKTOP GRANDE */
+/* ===================== */
+@media (min-width: 1400px) {
+  .offer-card {
+    max-width: 1200px;
+  }
+
+  .offer-card .display-6 {
+    font-size: 2.6rem;
   }
 }

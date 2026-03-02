@@ -1,8 +1,11 @@
 import { FaMapMarkerAlt, FaEnvelope, FaPhoneAlt, FaFacebookF, FaInstagram, FaWhatsapp } from "react-icons/fa"
 import { ContactCardProp } from "./contact-card-props"
+import { useRef } from "react"
 
 
 function ContactSection() {
+    const sectionRef = useRef<HTMLDivElement | null>(null)
+
 
     const contacts: ContactCardProp[] = [
         {
@@ -23,7 +26,7 @@ function ContactSection() {
     ]
 
     return (
-        <div className="container my-4">
+        <div className="container my-4" id="contacto" ref={sectionRef}>
             <div className="row">
 
                 {/* HEADER */}
@@ -50,7 +53,7 @@ function ContactSection() {
                                             width: "70px",
                                             height: "70px",
                                             borderRadius: "50%",
-                                            backgroundColor: "#6c757d",
+                                            backgroundColor: "#007bff",
                                             border: "3px solid white",
                                             color: "white",
                                             fontSize: "28px"
@@ -77,22 +80,6 @@ function ContactSection() {
                         {contacts.length % 2 !== 0 && (
                             <div className="col-12 col-sm-6 d-flex">
                                 <div className="bg-light p-4 rounded w-100 text-center d-flex flex-column align-items-center justify-content-center">
-
-                                    <div
-                                        className="d-flex align-items-center justify-content-center mb-3"
-                                        style={{
-                                            width: "70px",
-                                            height: "70px",
-                                            borderRadius: "50%",
-                                            backgroundColor: "#6c757d",
-                                            border: "3px solid white",
-                                            color: "white",
-                                            fontSize: "26px"
-                                        }}
-                                    >
-                                        <FaWhatsapp />
-                                    </div>
-
                                     <div className="fw-bold mb-2">
                                         Contáctanos
                                     </div>
@@ -127,11 +114,12 @@ function ContactSection() {
                         style={{ minHeight: "320px", height: "100%" }}
                     >
                         <iframe
-                            title="mapa"
+                            title="HGEN Rooms & Suites Los Mochis"
                             className="w-100 h-100 border-0"
-                            src="https://www.google.com/maps?q=Av.%20Monterrey%20729%20Col.%20Anahuac&output=embed"
                             loading="lazy"
-                        ></iframe>
+                            allowFullScreen
+                            src="https://www.google.com/maps?q=HGEN+ROOMS+%26+SUITES+LOS+MOCHIS&output=embed">
+                        </iframe>
                     </div>
                 </div>
 

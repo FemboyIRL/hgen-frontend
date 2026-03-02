@@ -1,16 +1,51 @@
-import { Room } from "../../../../../types/room"
+import { Room } from "../../../../../types/room";
+import './room-card.css'
 
-const RoomCard = ({ room, showRoomData }: { room: Room, showRoomData?: () => void }) => {
-    return (
-        <div className="card align-items-center" onClick={showRoomData} key={room.room_number}>
-            <div className="card-img">
-                <img src={room.images[0]} alt={`habitación ${room.room_number}`} />
-            </div>
-            <div className="card-title fs-2">
-                {room.room_number}
-            </div>
-        </div>
-    )
+interface Props {
+    room: Room;
+    showRoomModal: (room: Room) => void;
 }
 
-export default RoomCard
+const RoomCard = ({ room, showRoomModal }: Props) => {
+    const mainImage = room.images?.[0];
+
+    return (
+        <div
+            className="room-card-pro"
+            onClick={() => showRoomModal(room)}
+        >
+            <div className="room-card-pro-img">
+                <img src={mainImage} alt={`Habitación ${room.room_number}`} />
+
+                {/* Overlay oscuro */}
+                <div className="room-card-pro-overlay" />
+
+                {/* Número de habitación */}
+                <div className="room-card-pro-number">
+                    #{room.room_number}
+                </div>
+
+                {/* Tipo */}
+                <div className="room-card-pro-type">
+                    {room.type}
+                </div>
+            </div>
+
+            {/* Panel inferior */}
+            <div className="room-card-pro-body">
+                <h3>Habitación {room.room_number}</h3>
+
+                <p className="room-card-pro-desc">
+                    {room.description}
+                </p>
+
+                <div className="room-card-pro-action">
+                    <span>Ver detalles</span>
+                    <i className="bi bi-arrow-right"></i>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default RoomCard;

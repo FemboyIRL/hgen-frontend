@@ -1,0 +1,126 @@
+/* CARD */
+.room-card-pro {
+    width: 100%;
+    max-width: 320px;
+    border-radius: 18px;
+    overflow: hidden;
+    background: #fff;
+    cursor: pointer;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+    transition: all 0.25s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.room-card-pro:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 25px 45px rgba(0,0,0,0.2);
+}
+
+/* IMAGE */
+.room-card-pro-img {
+    position: relative;
+    height: 200px;
+}
+
+.room-card-pro-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* OVERLAY */
+.room-card-pro-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.6));
+}
+
+/* ROOM NUMBER */
+.room-card-pro-number {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: #ffffff;
+    color: #111;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* TYPE */
+.room-card-pro-type {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    color: #fff;
+    font-weight: 500;
+    font-size: 13px;
+    background: rgba(0,0,0,0.35);
+    padding: 4px 10px;
+    border-radius: 999px;
+    backdrop-filter: blur(6px);
+}
+
+/* BODY */
+.room-card-pro-body {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.room-card-pro-body h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #111;
+}
+
+/* DESCRIPTION */
+.room-card-pro-desc {
+    font-size: 13px;
+    color: #555;
+    line-height: 1.4;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* ACTION */
+.room-card-pro-action {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 600;
+    color: #2563eb;
+    font-size: 14px;
+}
+
+.room-card-pro-action i {
+    transition: transform 0.2s;
+}
+
+.room-card-pro:hover .room-card-pro-action i {
+    transform: translateX(4px);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .room-card-pro {
+        max-width: 100%;
+    }
+
+    .room-card-pro-img {
+        height: 180px;
+    }
+
+    .room-card-pro-body h3 {
+        font-size: 16px;
+    }
+}
