@@ -14,7 +14,7 @@ interface RoomsSectionProps {
     }>
 }
 
-const RoomsSection: React.FC<RoomsSectionProps> = ({ state, dispatch}) => {
+const RoomsSection: React.FC<RoomsSectionProps> = ({ state, dispatch }) => {
     const sectionRef = useRef<HTMLDivElement | null>(null)
 
     const showRoomModal = (room: Room) => {
@@ -22,7 +22,7 @@ const RoomsSection: React.FC<RoomsSectionProps> = ({ state, dispatch}) => {
             type: HOME_ACTIONS.CHANGE_VALUE,
             payload: {
                 prop: "room_modal",
-                data: room  
+                data: room
             }
         })
         dispatch({
@@ -34,23 +34,53 @@ const RoomsSection: React.FC<RoomsSectionProps> = ({ state, dispatch}) => {
         })
     }
 
-    console.log(state.room_modal)
-
     return (
-        <div className="my-4 w-full text-center" id="habitaciones" ref={sectionRef}>
-            <h2 className="title text-center mx-auto">Nuestras Habitaciones</h2>
-            <div className="row m-0">
-                {state!.rooms.length === 0 ? (
-                    <p>No hay habitaciones disponibles.</p>
-                ) : state!.loading ? <LoadingSpinnerContainer /> : (
-                    state!.rooms.map((habitacion: Room) => (
-                        <div className="center col-12 col-md-4 py-3">
-                            <RoomCard room={habitacion} showRoomModal={showRoomModal} />
-                        </div>
-                    ))
+        <section
+            className="rooms-section-parallax"
+            id="habitaciones"
+            ref={sectionRef}
+        >
+            {/* Fondo Parallax */}
+            <div className="rooms-parallax-bg" />
+
+            {/* Overlay */}
+            <div className="rooms-overlay" />
+
+            {/* Contenido */}
+            <div className="rooms-content">
+
+                <div className="rooms-header">
+                    <span className="rooms-tag">HGEN SUITES</span>
+                    <h2 className="rooms-title">
+                        Nuestras Habitaciones
+                    </h2>
+                    <p className="rooms-subtitle">
+                        Diseño, confort y elegancia pensados para tu descanso
+                    </p>
+                </div>
+
+                {state!.loading ? (
+                    <div className="rooms-loading">
+                        <LoadingSpinnerContainer />
+                    </div>
+                ) : state!.rooms.length === 0 ? (
+                    <div className="rooms-empty">
+                        <h4>No hay habitaciones disponibles</h4>
+                        <p>Pronto tendremos nuevas opciones para ti.</p>
+                    </div>
+                ) : (
+                    <div className="rooms-grid">
+                        {state!.rooms.map((habitacion: Room) => (
+                            <RoomCard
+                                key={habitacion.room_number}
+                                room={habitacion}
+                                showRoomModal={showRoomModal}
+                            />
+                        ))}
+                    </div>
                 )}
             </div>
-        </div>
+        </section>
     );
 };
 
