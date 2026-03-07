@@ -17,6 +17,7 @@ interface ReserveBarProps {
         type: string,
         payload: any
     }>;
+    handleSubmit: () => void
 }
 
 interface CustomSelectInputProps {
@@ -66,7 +67,7 @@ export const CustomInput: React.FC<CustomInputProps> = ({ value, onClick }) => {
     );
 };
 
-const ReservaBar: React.FC<ReserveBarProps> = ({ state, dispatch }) => {
+const ReservaBar: React.FC<ReserveBarProps> = ({ state, dispatch, handleSubmit }) => {
     const [startDate, endDate] = state.reserve_bar.date_range;
 
     const selectedRoom = state.reserve_bar.selected_room;
@@ -202,7 +203,7 @@ const ReservaBar: React.FC<ReserveBarProps> = ({ state, dispatch }) => {
 
                     <button
                         className="reserve-btn"
-                    // onClick={() => navigate("/Reservation")}
+                        onClick={handleSubmit}
                     >
                         Reservar
                     </button>

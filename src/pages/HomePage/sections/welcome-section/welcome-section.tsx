@@ -2,7 +2,6 @@
 import { useState, useEffect } from "react";
 import './welcome-section.css'
 import ReservaBar from "./reserve-bar/reserve-bar";
-import { Calendar2CheckFill } from "react-bootstrap-icons";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { HomeReducer } from "../../reducer/constants";
@@ -69,6 +68,7 @@ const WelcomeSection: React.FC<WelcomeSectionProps> = ({ state, dispatch }) => {
                     <ReservaBar
                         state={state}
                         dispatch={dispatch}
+                        handleSubmit={handleSubmit}
                     />
 
                 </div>
