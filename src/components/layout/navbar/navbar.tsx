@@ -9,80 +9,96 @@ import {
 import "./navbar.css";
 import { useNavigate, Link } from "react-router-dom";
 import { useUser } from "../../../context/UserContext/user-context";
+import { useEffect, useState } from "react";
 
 const Navbar = () => {
     const { user } = useUser();
     const navigate = useNavigate();
 
+    const [scrolled, setScrolled] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setScrolled(window.scrollY > 20);
+        };
+
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
     return (
-        <header className="header px-3 py-1 d-flex justify-content-between align-items-center">
-            <div className="logo">
-                <img src="/assets/images/logo.jpeg" alt="Hgen Suites Logo" />
-            </div>
-            <nav className="nav d-flex justify-content-center align-items-center">
-                <ul className="d-flex align-items-center mt-3 gap-5">
-                    <li>
-                        <a className="nav-links" href="#home">
-                            <House className="nav-icon d-flex justify-content-center align-items-center" />
-                            <span className="nav-text">Inicio</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a className="nav-links" href="#habitaciones">
-                            <DoorClosed className="nav-icon d-flex justify-content-center align-items-center" />
-                            <span className="nav-text">Habitaciones</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a className="nav-links" href="#servicios">
-                            <People className="nav-icon d-flex justify-content-center align-items-center" />
-                            <span className="nav-text">Servicios</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a className="nav-links" href="#ofertas">
-                            <Tag className="nav-icon d-flex justify-content-center align-items-center" />
-                            <span className="nav-text">Ofertas</span>
-                        </a>
-                    </li>
-                    {user ? (
+        <div className="header-baboon">
+
+            <header className={`headerPremium ${scrolled ? "scrolled" : ""}`}>
+                <div className="logo">
+                    <img src="/assets/images/logo.jpeg" alt="Hgen Suites Logo" />
+                </div>
+                <nav className="nav d-flex justify-content-center align-items-center">
+                    <ul className="d-flex align-items-center mt-3 gap-5">
                         <li>
-                            <Link to="/Reservation">
-                                <Calendar className="nav-icon d-flex justify-content-center align-items-center" />
-                                <span className="nav-text">Mis Reservas</span>
-                            </Link>
+                            <a className="nav-links" href="#home">
+                                <House className="nav-icon d-flex justify-content-center align-items-center" />
+                                <span className="nav-text">Inicio</span>
+                            </a>
                         </li>
-                    ) : (
-                        <></>
-                    )}
-                    <li>
-                        <a className="nav-links" href="#contacto">
-                            <Phone className="nav-icon d-flex justify-content-center align-items-center" />
-                            <span className="nav-text">Contacto</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-            {user ? (
-                <>
-                    <div className="button-container">
-                        <button
-                            className="btn-reserva"
-                            onClick={() => navigate("/Reservation")}
-                        >
-                            Reserva aquí
-                        </button>
-                    </div>
-                </>
-            ) : (
-                <a
-                    href="/Login"
-                    className="btn-inicia-sesion"
-                >
-                    Inicia Sesión
-                </a>
-            )}
-        </header>
+                        <li>
+                            <a className="nav-links" href="#habitaciones">
+                                <DoorClosed className="nav-icon d-flex justify-content-center align-items-center" />
+                                <span className="nav-text">Habitaciones</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a className="nav-links" href="#servicios">
+                                <People className="nav-icon d-flex justify-content-center align-items-center" />
+                                <span className="nav-text">Servicios</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a className="nav-links" href="#ofertas">
+                                <Tag className="nav-icon d-flex justify-content-center align-items-center" />
+                                <span className="nav-text">Ofertas</span>
+                            </a>
+                        </li>
+                        {user ? (
+                            <li>
+                                <Link to="/Reservation">
+                                    <Calendar className="nav-icon d-flex justify-content-center align-items-center" />
+                                    <span className="nav-text">Mis Reservas</span>
+                                </Link>
+                            </li>
+                        ) : (
+                            <></>
+                        )}
+                        <li>
+                            <a className="nav-links" href="#contacto">
+                                <Phone className="nav-icon d-flex justify-content-center align-items-center" />
+                                <span className="nav-text">Contacto</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                {user ? (
+                    <>
+                        <div className="button-container">
+                            <button
+                                className="btn-reserva"
+                                onClick={() => navigate("/Reservation")}
+                            >
+                                Reserva aquí
+                            </button>
+                        </div>
+                    </>
+                ) : (
+                    <a
+                        href="/Login"
+                        className="btn-inicia-sesion"
+                    >
+                        Inicia Sesión
+                    </a>
+                )}
+            </header>
+        </div>
+
     );
 };
 

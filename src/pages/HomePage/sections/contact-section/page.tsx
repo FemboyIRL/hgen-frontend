@@ -1,6 +1,7 @@
 import { FaMapMarkerAlt, FaEnvelope, FaPhoneAlt, FaFacebookF, FaInstagram, FaWhatsapp } from "react-icons/fa"
 import { ContactCardProp } from "./contact-card-props"
 import { useRef } from "react"
+import './styles.css'
 
 
 function ContactSection() {
@@ -26,105 +27,81 @@ function ContactSection() {
     ]
 
     return (
-        <div className="container my-4" id="contacto" ref={sectionRef}>
-            <div className="row">
+        <section className="contactSectionPremium" id="contacto" ref={sectionRef}>
+            <div className="contactContainer">
 
                 {/* HEADER */}
-                <div className="col-12 text-center mb-3">
-                    <h4 className="title">Contáctanos</h4>
-                    <p className="text-muted">
-                        No dudes en contactarnos si necesitas ayuda con tu reserva
+                <div className="contactHeader">
+                    <span className="contactTag">HGEN SUITES</span>
+                    <h2 className="contactTitle">Contáctanos</h2>
+                    <p className="contactSubtitle">
+                        Estamos disponibles para ayudarte con tu reserva o cualquier consulta.
                     </p>
                 </div>
 
-                {/* IZQUIERDA: GRID */}
-                <div className="col-12 col-lg-6 order-2 order-lg-1 mb-4 mb-lg-0">
-                    <div className="row g-4">
+                <div className="contactContent">
 
-                        {/* CARDS DINÁMICAS */}
-                        {contacts.map((contact, index) => (
-                            <div key={index} className="col-12 col-sm-6 d-flex">
-                                <div className="bg-light p-4 rounded w-100 text-center d-flex flex-column align-items-center justify-content-center">
+                    {/* IZQUIERDA: INFO */}
+                    <div className="contactInfo">
 
-                                    {/* ICONO */}
-                                    <div
-                                        className="d-flex align-items-center justify-content-center mb-3"
-                                        style={{
-                                            width: "70px",
-                                            height: "70px",
-                                            borderRadius: "50%",
-                                            backgroundColor: "#007bff",
-                                            border: "3px solid white",
-                                            color: "white",
-                                            fontSize: "28px"
-                                        }}
-                                    >
+                        <div className="contactGrid">
+
+                            {contacts.map((contact, index) => (
+                                <div key={index} className="contactCard">
+
+                                    <div className="contactIcon">
                                         {contact.icon}
                                     </div>
 
-                                    {/* NOMBRE */}
-                                    <div className="fw-bold mb-1">
+                                    <h4 className="contactCardTitle">
                                         {contact.name}
-                                    </div>
+                                    </h4>
 
-                                    {/* INFO */}
-                                    <div className="text-muted small">
+                                    <p className="contactCardText">
                                         {contact.information}
+                                    </p>
+
+                                </div>
+                            ))}
+
+                            {contacts.length % 2 !== 0 && (
+                                <div className="contactCard socialCard">
+
+                                    <h4 className="contactCardTitle">
+                                        Síguenos
+                                    </h4>
+
+                                    <p className="contactCardText">
+                                        Mantente conectado con nosotros en redes sociales
+                                    </p>
+
+                                    <div className="contactSocials">
+                                        <a href="#"><FaFacebookF /></a>
+                                        <a href="#"><FaInstagram /></a>
+                                        <a href="#"><FaWhatsapp /></a>
                                     </div>
 
                                 </div>
-                            </div>
-                        ))}
+                            )}
 
-                        {/* ÚLTIMA CARD (REDES) */}
-                        {contacts.length % 2 !== 0 && (
-                            <div className="col-12 col-sm-6 d-flex">
-                                <div className="bg-light p-4 rounded w-100 text-center d-flex flex-column align-items-center justify-content-center">
-                                    <div className="fw-bold mb-2">
-                                        Contáctanos
-                                    </div>
-
-                                    <div className="text-muted small mb-3">
-                                        Contáctanos si necesitas realizar una reserva o para cualquier información adicional
-                                    </div>
-
-                                    <div className="d-flex gap-3">
-                                        <a href="#" className="text-decoration-none text-dark fs-5">
-                                            <FaFacebookF />
-                                        </a>
-                                        <a href="#" className="text-decoration-none text-dark fs-5">
-                                            <FaInstagram />
-                                        </a>
-                                        <a href="#" className="text-decoration-none text-dark fs-5">
-                                            <FaWhatsapp />
-                                        </a>
-                                    </div>
-
-                                </div>
-                            </div>
-                        )}
-
+                        </div>
                     </div>
-                </div>
 
-                {/* DERECHA: MAPA */}
-                <div className="col-12 col-lg-6 order-1 order-lg-2">
-                    <div
-                        className="w-100 rounded overflow-hidden"
-                        style={{ minHeight: "320px", height: "100%" }}
-                    >
+                    {/* DERECHA: MAPA */}
+                    <div className="contactMap">
                         <iframe
                             title="HGEN Rooms & Suites Los Mochis"
-                            className="w-100 h-100 border-0"
                             loading="lazy"
                             allowFullScreen
-                            src="https://www.google.com/maps?q=HGEN+ROOMS+%26+SUITES+LOS+MOCHIS&output=embed">
-                        </iframe>
+                            src="https://www.google.com/maps?q=HGEN+ROOMS+%26+SUITES+LOS+MOCHIS&output=embed"
+                        />
                     </div>
+
                 </div>
 
             </div>
-        </div>
+        </section>
+
     )
 }
 
