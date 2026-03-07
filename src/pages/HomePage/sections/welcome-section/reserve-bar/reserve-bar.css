@@ -1,29 +1,258 @@
+.premium-input {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
-/* Botón de búsqueda */
-.reserva-bar-button button{
-    background-color: #007bff;
-    border: none;
-    border-radius: 4px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+  width: 100%;
+  padding: 14px 18px;
+
+  border-radius: 14px;
+  cursor: pointer;
+
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+
+  backdrop-filter: blur(10px);
+
+  transition: all 0.25s ease;
 }
 
-.reserva-bar-button button:hover {
-    background-color: #0056b3;
+/* hover */
+
+.premium-input:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
 }
 
-.input-group{
-    height: 55px;
+/* focus */
+
+.premium-input:focus-within {
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.25);
+}
+
+/* input */
+
+.premium-input-field {
+  flex: 1;
+  border: none;
+  outline: none;
+
+  background: transparent;
+  color: white;
+
+  font-size: 15px;
+  font-weight: 500;
+
+  cursor: pointer;
+}
+
+/* placeholder */
+
+.premium-input-field::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* icon */
+
+.premium-input-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: rgba(255, 255, 255, 0.7);
+
+  transition: all 0.25s ease;
+}
+
+.premium-input:hover .premium-input-icon {
+  color: white;
+}
+
+.booking-search-box {
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(18px);
+
+  padding: 25px;
+  border-radius: 18px;
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.reserve-bar-premium {
+  max-width: 950px;
+  margin: auto;
+
+  padding: 20px;
+
+  border-radius: 18px;
+
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(18px);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
+}
+
+/* layout */
+
+.reserve-bar-grid {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr auto;
+
+  gap: 16px;
+
+  align-items: center;
+}
+
+/* campos */
+
+.reserve-field {
+  position: relative;
+}
+
+/* select oculto */
+
+.reserve-hidden-select {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  opacity: 0;
+
+  cursor: pointer;
+}
+
+/* botón reservar */
+
+.reserve-btn {
+  padding: 14px 28px;
+
+  border-radius: 12px;
+
+  border: none;
+
+  background: linear-gradient(135deg, #0d6efd, #0a58ca);
+
+  color: white;
+
+  font-weight: 600;
+
+  font-size: 15px;
+
+  transition: all 0.25s ease;
+
+  white-space: nowrap;
+}
+
+/* hover */
+
+.reserve-btn:hover {
+  transform: translateY(-2px);
+
+  box-shadow: 0 10px 25px rgba(13, 110, 253, 0.35);
+}
+
+.react-datepicker__portal {
+  position: fixed !important;
+
+  top: 50% !important;
+  left: 50% !important;
+
+  transform: translate(-50%, -50%);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 9999;
+}
+
+/* calendario */
+
+.react-datepicker {
+  border-radius: 16px;
+  border: none;
+
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+}
+
+@media (max-width: 1024px) {
+  .reserve-bar-premium {
+    max-width: 90%;
+    padding: 18px;
+  }
+
+  .reserve-bar-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .reserve-btn {
+    grid-column: span 2;
     width: 100%;
-    border: 2px solid black;
-    border-radius: 20px;    
+  }
+}
+@media (max-width: 768px) {
+  .premium-input {
+    padding: 12px 14px;
+  }
+
+  .premium-input-field {
+    font-size: 14px;
+  }
+
+  .reserve-bar-premium {
+    padding: 16px;
+    border-radius: 16px;
+  }
+
+  .reserve-bar-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .reserve-btn {
+    grid-column: auto;
+    width: 100%;
+    padding: 14px;
+    font-size: 15px;
+  }
 }
 
+@media (max-width: 480px) {
+  .premium-input {
+    padding: 10px 12px;
+    border-radius: 12px;
+  }
 
-.input-group-append{
-    height: 50px;
-        svg{
-     color: #000;
-    }
+  .premium-input-field {
+    font-size: 13px;
+  }
+
+  .premium-input-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .reserve-bar-premium {
+    padding: 14px;
+  }
+
+  .reserve-bar-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .reserve-btn {
+    font-size: 14px;
+    padding: 12px;
+    width: 100%;
+  }
 }

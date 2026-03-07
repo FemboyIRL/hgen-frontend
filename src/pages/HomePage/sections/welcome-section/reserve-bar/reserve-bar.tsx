@@ -27,46 +27,19 @@ interface CustomSelectInputProps {
 export const CustomSelectInput: React.FC<CustomSelectInputProps> = ({ value, onClick }) => {
     return (
         <div
-            className="input-group flex-nowrap shadow-sm rounded-3 border-0"
+            className="premium-input"
             onClick={onClick}
-            style={{
-                cursor: "pointer",
-                transition: 'all 0.2s ease',
-                border: '2px solid #e9ecef',
-                backgroundColor: '#f8f9fa'
-            }}
-            onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = '#dee2e6';
-                e.currentTarget.style.backgroundColor = '#f1f3f5';
-            }}
-            onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = '#e9ecef';
-                e.currentTarget.style.backgroundColor = '#f8f9fa';
-            }}
-            onFocus={(e) => {
-                e.currentTarget.style.borderColor = '#0d6efd';
-                e.currentTarget.style.backgroundColor = '#ffffff';
-                e.currentTarget.style.boxShadow = '0 0 0 0.25rem rgba(13, 110, 253, 0.25)';
-            }}
         >
             <input
                 type="text"
-                className="form-control border-0 bg-transparent py-3"
+                className="premium-input-field"
                 value={value}
                 readOnly
                 placeholder="Selecciona habitación"
-                style={{
-                    fontSize: '1rem',
-                    cursor: "pointer",
-                    boxShadow: 'none'
-                }}
             />
-            <div className="input-group-append d-flex justify-content-end align-items-center px-3">
-                <DoorOpenFill
-                    size={20}
-                    className="text-secondary"
-                    style={{ transition: 'color 0.2s ease' }}
-                />
+
+            <div className="premium-input-icon">
+                <DoorOpenFill size={20} />
             </div>
         </div>
     );
@@ -75,46 +48,19 @@ export const CustomSelectInput: React.FC<CustomSelectInputProps> = ({ value, onC
 export const CustomInput: React.FC<CustomInputProps> = ({ value, onClick }) => {
     return (
         <div
-            className="input-group flex-nowrap shadow-sm rounded-3 border-0"
+            className="premium-input"
             onClick={onClick}
-            style={{
-                cursor: 'pointer',
-                transition: 'all 0.2s ease',
-                border: '2px solid #e9ecef',
-                backgroundColor: '#f8f9fa'
-            }}
-            onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = '#dee2e6';
-                e.currentTarget.style.backgroundColor = '#f1f3f5';
-            }}
-            onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = '#e9ecef';
-                e.currentTarget.style.backgroundColor = '#f8f9fa';
-            }}
-            onFocus={(e) => {
-                e.currentTarget.style.borderColor = '#0d6efd';
-                e.currentTarget.style.backgroundColor = '#ffffff';
-                e.currentTarget.style.boxShadow = '0 0 0 0.25rem rgba(13, 110, 253, 0.25)';
-            }}
         >
             <input
                 type="text"
-                className="form-control border-0 bg-transparent py-3"
+                className="premium-input-field"
                 value={value}
                 readOnly
                 placeholder="Selecciona fechas"
-                style={{
-                    fontSize: '1rem',
-                    cursor: 'pointer',
-                    boxShadow: 'none'
-                }}
             />
-            <div className="input-group-append d-flex justify-content-end align-items-center px-3">
-                <CalendarCheckFill
-                    size={20}
-                    className="text-secondary"
-                    style={{ transition: 'color 0.2s ease' }}
-                />
+
+            <div className="premium-input-icon">
+                <CalendarCheckFill size={20} />
             </div>
         </div>
     );
@@ -172,13 +118,14 @@ const ReservaBar: React.FC<ReserveBarProps> = ({ state, dispatch }) => {
     return (
         <>
             <form
-                className="reserva-bar-form bg-white p-4 rounded-4 shadow-sm"
+                className="reserve-bar-premium"
                 onSubmit={(e) => e.preventDefault()}
-                style={{ maxWidth: '800px', margin: '0 auto' }}
             >
-                <div className="reserva-bar-fields d-flex justify-content-center align-items-center flex-wrap gap-4">
-                    {/* SELECTOR DE HABITACIONES */}
-                    <div className="reserva-bar-field position-relative flex-grow-1">
+                <div className="reserve-bar-grid">
+
+                    {/* HABITACIÓN */}
+                    <div className="reserve-field position-relative">
+
                         <CustomSelectInput
                             value={
                                 state.rooms.find((r: Room) => r.room_number === selectedRoom)?.room_number || ""
@@ -187,6 +134,7 @@ const ReservaBar: React.FC<ReserveBarProps> = ({ state, dispatch }) => {
                                 const select = document.getElementById("room-select");
                                 select?.focus();
                                 select?.click();
+
                             }}
                         />
 
@@ -194,8 +142,7 @@ const ReservaBar: React.FC<ReserveBarProps> = ({ state, dispatch }) => {
                             id="room-select"
                             value={selectedRoom || ""}
                             onChange={(e) => handleRoomChange(e.target.value)}
-                            className="position-absolute top-0 start-0 w-100 h-100 opacity-0"
-                            style={{ cursor: "pointer" }}
+                            className="reserve-hidden-select"
                         >
                             <option value="" disabled>
                                 Selecciona habitación
@@ -207,44 +154,63 @@ const ReservaBar: React.FC<ReserveBarProps> = ({ state, dispatch }) => {
                                 </option>
                             ))}
                         </select>
+
                     </div>
 
-                    {/* SELECTOR DE FECHAS */}
-                    <div className="reserva-bar-field flex-grow-1">
-                        <div className="datePicker">
-                            <DatePicker
-                                selectsRange
-                                startDate={startDate}
-                                endDate={endDate}
-                                excludeDates={
-                                    state.reserve_bar.occupied_dates
-                                        .map(({ start, end }: any) => {
-                                            const startDate = new Date(start);
-                                            const endDate = new Date(end);
-                                            const datesInRange = [];
-                                            const currentDate = new Date(startDate);
+                    {/* FECHAS */}
 
-                                            while (currentDate <= endDate) {
-                                                datesInRange.push(new Date(currentDate));
-                                                currentDate.setDate(currentDate.getDate() + 1);
-                                            }
-                                            return datesInRange;
-                                        })
-                                        .flat()
-                                }
-                                onChange={handleDateChange}
-                                placeholderText="Selecciona fechas"
-                                id="date-picker"
-                                className="w-100"
-                                customInput={<CustomInput />}
-                                withPortal
-                            />
-                        </div>
+                    <div className="reserve-field">
+
+                        <DatePicker
+                            selectsRange
+                            startDate={startDate}
+                            endDate={endDate}
+
+                            excludeDates={
+                                state.reserve_bar.occupied_dates
+                                    .map(({ start, end }: any) => {
+                                        const startDate = new Date(start);
+                                        const endDate = new Date(end);
+
+                                        const datesInRange = [];
+                                        const currentDate = new Date(startDate);
+
+                                        while (currentDate <= endDate) {
+                                            datesInRange.push(new Date(currentDate));
+                                            currentDate.setDate(currentDate.getDate() + 1);
+                                        }
+
+                                        return datesInRange;
+                                    })
+                                    .flat()
+                            }
+
+                            onChange={handleDateChange}
+
+                            placeholderText="Selecciona fechas"
+
+                            customInput={<CustomInput />}
+
+                            withPortal
+                            portalId="root"
+                            popperPlacement="bottom"
+                        />
+
                     </div>
+
+                    {/* BOTÓN */}
+
+                    <button
+                        className="reserve-btn"
+                    // onClick={() => navigate("/Reservation")}
+                    >
+                        Reservar
+                    </button>
+
                 </div>
             </form>
         </>
     );
-};
+}
 
 export default ReservaBar;
