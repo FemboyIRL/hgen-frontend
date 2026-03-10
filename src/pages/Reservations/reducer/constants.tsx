@@ -1,15 +1,14 @@
 import { Room } from '../../../types/room.tsx'
 
 const reservationsInitial = {
-    selectedRoom: null as Room | null,
     rooms: [] as Room[],
     loading: false,
     form: {
-        room_number: 101,
-        dateRange: [null, null] as [Date | null, Date | null],
-        occupiedDates: [] as Date[],
+        selected_room: null as Room | null,
+        date_range: [null, null] as [Date | null, Date | null],
+        occupied_dates: [] as Date[],
         numPeople: 1,
-        totalPrice: 0,
+        price: 0,
     }
 }
 

@@ -118,6 +118,7 @@ const HomePage = () => {
     //     }
     // }
 
+
     return (
         <Layout>
             <WelcomeSection state={state} dispatch={dispatch} />

@@ -20,13 +20,6 @@ const reducer = (state = reservationsInitial, action: { payload: any; type: any 
                 [payload.prop]: payload.data
             }
 
-        case reservationsActions.LOADED_ROOMS_LIST:
-            return {
-                ...state,
-                rooms: payload,
-                loading: false,
-            }
-
         default:
             return state
     }

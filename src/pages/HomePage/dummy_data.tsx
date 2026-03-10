@@ -28,58 +28,6 @@ export const dummyRooms: Room[] = [
             "https://picsum.photos/600/400?random=5",
         ],
     },
-    {
-        room_number: "303",
-        type: "Presidential Suite",
-        description: "Suite premium con jacuzzi privado",
-        images: [
-            "https://picsum.photos/600/400?random=4",
-            "https://picsum.photos/600/400?random=5",
-        ],
-    },
-    {
-        room_number: "303",
-        type: "Presidential Suite",
-        description: "Suite premium con jacuzzi privado",
-        images: [
-            "https://picsum.photos/600/400?random=4",
-            "https://picsum.photos/600/400?random=5",
-        ],
-    },
-    {
-        room_number: "303",
-        type: "Presidential Suite",
-        description: "Suite premium con jacuzzi privado",
-        images: [
-            "https://picsum.photos/600/400?random=4",
-            "https://picsum.photos/600/400?random=5",
-        ],
-    },
-    {
-        room_number: "303",
-        type: "Presidential Suite",
-        description: "Suite premium con jacuzzi privado",
-        images: [
-            "https://picsum.photos/600/400?random=4",
-            "https://picsum.photos/600/400?random=5",
-        ],
-    },
-    {
-        room_number: "303",
-        type: "Presidential Suite",
-        description: "Suite premium con jacuzzi privado",
-        images: [
-            "https://picsum.photos/600/400?random=4",
-            "https://picsum.photos/600/400?random=4",
-            "https://picsum.photos/600/400?random=4",
-            "https://picsum.photos/600/400?random=4",
-            "https://picsum.photos/600/400?random=4",
-            "https://picsum.photos/600/400?random=4",
-            "https://picsum.photos/600/400?random=4",
-
-            "https://picsum.photos/600/400?random=5",
-        ],
-    },
 ];
 
 export const dummyOffers: Offer[] = [

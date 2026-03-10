@@ -8,14 +8,39 @@ import ApiConsumer from "../../services/api_consumer";
 import LoadingSpinnerContainer from "../../components/LoadingSpinner/loading-spinner";
 import { Room } from "../../types/room";
 import './reservations.css'
+import { dummyRooms } from "../HomePage/dummy_data";
+import { useLocation } from "react-router-dom";
 
 const Rooms = new ApiConsumer({ url: 'rooms' })
 
-const ReservePage = () => {
+const ReservePage= () => {
     const [state, dispatch] = useReducer(reducer, reservationsInitial);
 
+    const location = useLocation()
+    
+    const { selected_room, date_range } = location.state || {}
+
     useEffect(() => {
-        getAllRooms()
+        if(selected_room != null) {
+            changeValueForm("selected_room", selected_room)
+        }
+        if (date_range && (date_range[0] !== null || date_range[1] !== null)) {
+            changeValueForm("date_range", date_range)
+          }          
+    }, [])
+
+console.log(state.form.date_range)
+console.log(state.form.selected_room)
+    
+    useEffect(() => {
+        dispatch({
+            type: reservationsActions.CHANGE_VALUE,
+            payload: {
+                prop: "rooms",
+                data: dummyRooms
+            }
+        })
+        // getAllRooms()
     }, [state.loading])
 
     const getAllRooms = async () => {
@@ -46,7 +71,7 @@ const ReservePage = () => {
         }
     }
 
-    const [startDate, endDate] = state.form.dateRange;
+    const [startDate, endDate] = state.form.date_range;
 
     const changeValueForm = (prop: string, data: any) => {
         dispatch({
@@ -86,7 +111,7 @@ const ReservePage = () => {
             return;
         }
 
-        const isRangeInvalid = state.form.occupiedDates.some(({ start: occupiedStart, end: occupiedEnd }: any) => {
+        const isRangeInvalid = state.form.occupied_dates.some(({ start: occupiedStart, end: occupiedEnd }: any) => {
             const occupiedStartDate = new Date(occupiedStart);
             const occupiedEndDate = new Date(occupiedEnd);
 
@@ -118,7 +143,7 @@ const ReservePage = () => {
                             type="number"
                             name="room_number"
                             placeholder="Número de habitación"
-                            value={state.form.room_number}
+                            value={state.form.selected_room?.room_number || ""}
                             onChange={handleOnChangeInput}
                             className="text-input"
                         />
@@ -128,7 +153,7 @@ const ReservePage = () => {
                         startDate={startDate}
                         endDate={endDate}
                         excludeDates={
-                            state.form.occupiedDates
+                            state.form.occupied_dates
                                 .map(({ start, end }: any) => {
                                     const startDate = new Date(start);
                                     const endDate = new Date(end);
