@@ -13,25 +13,25 @@ import { useLocation } from "react-router-dom";
 
 const Rooms = new ApiConsumer({ url: 'rooms' })
 
-const ReservePage= () => {
+const ReservePage = () => {
     const [state, dispatch] = useReducer(reducer, reservationsInitial);
 
     const location = useLocation()
-    
+
     const { selected_room, date_range } = location.state || {}
 
     useEffect(() => {
-        if(selected_room != null) {
+        if (selected_room != null) {
             changeValueForm("selected_room", selected_room)
         }
         if (date_range && (date_range[0] !== null || date_range[1] !== null)) {
             changeValueForm("date_range", date_range)
-          }          
+        }
     }, [])
 
-console.log(state.form.date_range)
-console.log(state.form.selected_room)
-    
+    console.log(state.form.date_range)
+    console.log(state.form.selected_room)
+
     useEffect(() => {
         dispatch({
             type: reservationsActions.CHANGE_VALUE,
@@ -130,93 +130,126 @@ console.log(state.form.selected_room)
         changeValueForm("dateRange", update);
     };
 
+    const handleRoomChange = (room: Room) => {
+        console.log(room)
+        changeValueForm("selected_room", room)
+    }
+
     if (state.loading) return <LoadingSpinnerContainer />
-
-    return (<div>
-        <div className="w-100 bg-primary p-0 m-0" style={{ height: '5vh' }}>
+    return (
+        <div className="reservation-page">
+        
+          <div className="reservation-layout">
+        
+            {/* SIDEBAR RESERVA */}
+            <aside className="reservation-sidebar">
+        
+              <h2 className="sidebar-title">
+                Reserva tu habitación
+              </h2>
+        
+              <form className="reservation-form">
+        
+                <InputGroup>
+                  <Form.Control
+                    type="number"
+                    name="room_number"
+                    placeholder="Número de habitación"
+                    value={state.form.selected_room?.room_number || ""}
+                    onChange={handleOnChangeInput}
+                  />
+                </InputGroup>
+                
+        
+                <DatePicker
+                  selectsRange
+                  startDate={startDate}
+                  endDate={endDate}
+                  onChange={handleDateChange}
+                  placeholderText="Selecciona fechas"
+                  customInput={<CustomInput />}
+                  withPortal
+                />
+        
+                <InputGroup>
+                  <Form.Control
+                    type="number"
+                    name="totalPrice"
+                    placeholder="Precio total"
+                    value={state.form.price}
+                    readOnly
+                  />
+                </InputGroup>
+        
+                <button className="reserve-confirm-btn">
+                  Confirmar reserva
+                </button>
+        
+              </form>
+        
+            </aside>
+        
+        
+            {/* CONTENIDO */}
+            <main className="reservation-content">
+        
+              {/* HABITACIÓN SELECCIONADA */}
+              {state.form.selected_room && (
+                <div className="selected-room">
+        
+                  <img
+                    src={state.form.selected_room?.images[0]}
+                    className="selected-room-image"
+                  />
+        
+                  <div className="selected-room-info">
+        
+                    <h2>
+                      Habitación {state.form.selected_room?.room_number}
+                    </h2>
+        
+                    <p>
+                      {state.form.selected_room?.description}
+                    </p>
+        
+                  </div>
+        
+                </div>
+              )}
+        
+        
+              {/* LISTA DE HABITACIONES */}
+              <div className="rooms-grid">
+        
+                {state.rooms.map((room: Room) => (
+        
+                  <div
+                    key={room.room_number}
+                    className={`room-card ${
+                      state.form.selected_room?.room_number === room.room_number
+                      ? "active"
+                      : ""
+                    }`}
+                    onClick={() => handleRoomChange(room)}
+                  >
+        
+                    <img src={room.images[0]} />
+        
+                    <div className="room-card-body">
+                      <h4>Habitación {room.room_number}</h4>
+                    </div>
+        
+                  </div>
+        
+                ))}
+        
+              </div>
+        
+            </main>
+        
+          </div>
+        
         </div>
-        <div className="m-0 px-3 py-2 d-flex align-items-center flex-wrap" style={{ height: '100vh', width: "100vw" }}>
-            <div className="d-flex flex-column h-75 w-lg-50 w-100 justify-content-evenly align-items-center">
-                <form className="d-flex justify-content-evenly p-4 h-100 w-100 flex-column">
-                    <InputGroup >
-                        <Form.Control
-                            type="number"
-                            name="room_number"
-                            placeholder="Número de habitación"
-                            value={state.form.selected_room?.room_number || ""}
-                            onChange={handleOnChangeInput}
-                            className="text-input"
-                        />
-                    </InputGroup>
-                    <DatePicker
-                        selectsRange
-                        startDate={startDate}
-                        endDate={endDate}
-                        excludeDates={
-                            state.form.occupied_dates
-                                .map(({ start, end }: any) => {
-                                    const startDate = new Date(start);
-                                    const endDate = new Date(end);
-                                    const datesInRange = [];
-                                    const currentDate = new Date(startDate);
-
-                                    while (currentDate <= endDate) {
-                                        datesInRange.push(new Date(currentDate));
-                                        currentDate.setDate(currentDate.getDate() + 1);
-                                    }
-                                    return datesInRange;
-                                })
-                                .flat()
-                        }
-                        onChange={handleDateChange}
-                        placeholderText="Selecciona fechas"
-                        id="date-picker"
-                        className="w-100"
-                        customInput={<CustomInput />}
-                        withPortal
-                    />
-
-                    <InputGroup >
-
-                    </InputGroup>
-                    <InputGroup >
-
-                    </InputGroup>
-
-                    {/* Campo para precio total (solo lectura) */}
-                    <InputGroup >
-                        <Form.Control
-                            type="number"
-                            name="totalPrice"
-                            placeholder="Precio total"
-                            value={state.form.totalPrice}
-                            onChange={handleOnChangeInput}
-                            className="text-input"
-                            readOnly
-                        />
-                    </InputGroup>
-                </form>
-            </div>
-            <div className="w-100 center p-3 w-lg-50 h-75 card bg-primary rounded" >
-                {
-                    state.rooms.map((room: Room) => (
-                        <div
-                            key={room.room_number}
-                            className={`room-card ${state.selectedRoom?.room_number == room.room_number ? "selected" : ""}`}
-                        >
-                            <img
-                                src={room.images[0]}
-                                alt={`Habitación ${room.room_number}`}
-                                className="room-image"
-                            />
-                            <p>Habitación {room.room_number}</p>
-                        </div>
-                    ))
-                }
-            </div>
-        </div >
-    </div>
-    );
-};
-
+        )
+}
 export default ReservePage
