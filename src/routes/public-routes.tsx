@@ -17,7 +17,7 @@ export const outSidePages = [
     element: <LoginPage />,
   },
   {
-    path: "/Reservations",
+    path: "/reservation",
     element: <ReservePage />
   },
   {

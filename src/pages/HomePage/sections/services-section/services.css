@@ -1,55 +1,133 @@
-.servicesContainer {
-    padding: 3rem 1.5rem;
-    background: url('/assets/images/restaurant.jpeg') no-repeat center center/cover; 
+/* ===== SECCIÓN BASE ===== */
+.servicesSection {
+  position: relative;
+  padding: 120px 20px;
+  background: url("/assets/images/restaurant.jpeg") center/cover no-repeat;
+  background-attachment: fixed;
+  color: white;
+  overflow: hidden;
+}
+
+/* Overlay elegante */
+.servicesOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.7),
+    rgba(0, 0, 0, 0.85)
+  );
+  z-index: 1;
+}
+
+/* Contenido */
+.servicesContent {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ===== HEADER ===== */
+.servicesHeader {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.servicesTag {
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #d4af37;
+}
+
+.servicesTitle {
+  font-size: 3rem;
+  font-weight: 700;
+  margin: 20px 0;
+}
+
+.servicesSubtitle {
+  max-width: 600px;
+  margin: 0 auto;
+  opacity: 0.85;
+  font-weight: 300;
+}
+
+/* ===== GRID ===== */
+.servicesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 40px;
+}
+
+/* ===== CARD ===== */
+.serviceCard {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  padding: 40px 25px;
+  text-align: center;
+  transition: all 0.4s ease;
+  cursor: pointer;
+}
+
+.serviceCard:hover {
+  transform: translateY(-12px);
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+}
+
+/* ===== ICONO ===== */
+.serviceIconWrapper {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 25px auto;
+  border-radius: 50%;
+  background: rgba(13, 110, 253, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s ease;
+}
+
+.serviceIcon {
+  font-size: 2rem;
+  color: #0d6efd;
+  transition: transform 0.4s ease;
+}
+
+.serviceCard:hover .serviceIconWrapper {
+  background: #0d6efd;
+}
+
+.serviceCard:hover .serviceIcon {
+  color: #ffffff;
+  transform: scale(1.2);
+}
+
+/* ===== TEXTOS ===== */
+.serviceTitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.serviceDescription {
+  font-size: 0.95rem;
+  opacity: 0.85;
+  line-height: 1.6;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .servicesTitle {
+    font-size: 2.2rem;
   }
-  
-  .servicesCards {
-    display: flex;
-    justify-content: center;
-    align-items: stretch;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-    max-width: 1200px;
-    margin: 0 auto;
+
+  .servicesSection {
+    background-attachment: scroll;
+    padding: 80px 16px;
   }
-  
-  .serviceCard {
-    background: rgba(255, 255, 255, 1);
-    backdrop-filter: blur(8px);
-    border-radius: 16px;
-    padding: 2rem 1.5rem;
-    width: 260px;
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    cursor: pointer;
-  }
-  
-  .serviceCard:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-  }
-  
-  .serviceIcon {
-    font-size: 2.5rem;
-    color: #063447;
-    margin-bottom: 1rem;
-  }
-  
-  .serviceTitle {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: #063447;
-    margin-bottom: 0.5rem;
-  }
-  
-  .serviceDescription {
-    font-size: 0.95rem;
-    color: #063447;
-    line-height: 1.4;
-  }
-  
-  .serviceCard:hover .serviceIcon {
-    transform: scale(1.15);
-    transition: transform 0.3s ease;
-  }
-  
+}

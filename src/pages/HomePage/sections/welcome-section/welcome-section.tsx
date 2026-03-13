@@ -2,7 +2,6 @@
 import { useState, useEffect } from "react";
 import './welcome-section.css'
 import ReservaBar from "./reserve-bar/reserve-bar";
-import { Calendar2CheckFill } from "react-bootstrap-icons";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { HomeReducer } from "../../reducer/constants";
@@ -38,38 +37,49 @@ const WelcomeSection: React.FC<WelcomeSectionProps> = ({ state, dispatch }) => {
             toast.error("Por favor, selecciona las fechas de check-in y check-out.");
             return;
         }
-        navigate("/Reservation");
+        navigate("/reservation", {
+            state: {
+                selected_room: state.reserve_bar.selected_room,
+                date_range: state.reserve_bar.date_range
+            }
+        });
     };
 
     return (
         <section
-            className="primera-seccion"
+            className="hero-section"
             id="home"
             style={{ backgroundImage: images[backgroundIndex] }}
         >
-            {" "}
-            <div className="overlay" />
-            <div className="content d-flex flex-column center">
-                <h1 className="titulo">Bienvenido a Hgen Suites</h1>
-                <p className="subtitulo">
-                    Comfort, estilo y atención personalizada para tu estancia.
+
+            <div className="hero-overlay" />
+
+            <div className="hero-content">
+
+                <h1 className="hero-title">
+                    Bienvenido a Hgen Suites
+                </h1>
+
+                <p className="hero-subtitle">
+                    Comfort, estilo y atención personalizada para tu estancia
                 </p>
-                <div className="p-5 w-75 rounded d-flex flex-column flex-nowrap gap-4 bg-white shadow">
-                    <span className="text-dark fs-3 fw-bold"> Check In / Check Out</span>
-                    <ReservaBar state={state} dispatch={dispatch} />
-                    <div className="reserva-bar-button d-flex justify-content-center py-3">
-                        <button
-                            type="submit"
-                            className="center gap-2 py-3 px-3 border border-0 rounded text-light"
-                            onClick={handleSubmit}
-                            aria-label="Reservar"
-                        >
-                            <Calendar2CheckFill />
-                            <span>Reservar</span>
-                        </button>
-                    </div>
+
+                <div className="hero-booking-box">
+
+                    <span className="hero-booking-title">
+                        Check In / Check Out
+                    </span>
+
+                    <ReservaBar
+                        state={state}
+                        dispatch={dispatch}
+                        handleSubmit={handleSubmit}
+                    />
+
                 </div>
+
             </div>
+
         </section>
     );
 };

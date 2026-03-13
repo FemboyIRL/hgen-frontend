@@ -4,7 +4,7 @@ import { Room } from "../../../types/room"
 const HomeState = {
     reserve_bar: {
         date_range: [null, null] as [Date | null, Date | null],
-        selected_room: "",
+        selected_room: null as Room | null,
         occupied_dates: [],
     },
     rooms: [] as Room[],

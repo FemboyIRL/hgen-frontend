@@ -1,0 +1,114 @@
+/* SECCIÓN BASE */
+.rooms-section-parallax {
+    position: relative;
+    padding: 120px 20px;
+    overflow: hidden;
+    color: white;
+}
+
+/* FONDO PARALLAX */
+.rooms-parallax-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url("/assets/images/hotel-bg.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    transform: scale(1.15);
+    filter: brightness(0.8) contrast(1.1);
+    z-index: 0;
+    transition: transform 0.6s ease;
+}
+
+.rooms-section-parallax:hover .rooms-parallax-bg {
+    transform: scale(1.18);
+}
+
+/* OVERLAY OSCURO */
+.rooms-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at center, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.75) 70%),
+        linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.85));
+    z-index: 1;
+}
+
+/* CONTENIDO */
+.rooms-content {
+    position: relative;
+    z-index: 2;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+/* HEADER */
+.rooms-header {
+    text-align: center;
+    margin-bottom: 90px;
+    animation: fadeUp 0.8s ease forwards;
+}
+
+.rooms-tag {
+    font-size: 12px;
+    letter-spacing: 3px;
+    font-weight: 600;
+    color: #d4af37;
+    text-transform: uppercase;
+}
+
+.rooms-title {
+    font-size: 3.2rem;
+    font-weight: 700;
+    margin: 20px 0;
+    letter-spacing: 1px;
+}
+
+.rooms-subtitle {
+    font-size: 1rem;
+    opacity: 0.85;
+    font-weight: 300;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* GRID */
+.rooms-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 50px;
+}
+
+/* EMPTY / LOADING */
+.rooms-empty,
+.rooms-loading {
+    text-align: center;
+    padding: 60px 0;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .rooms-title {
+        font-size: 2.2rem;
+    }
+
+    .rooms-section-parallax {
+        padding: 80px 16px;
+    }
+
+    /* Parallax fix para mobile */
+    .rooms-parallax-bg {
+        background-attachment: scroll;
+    }
+}

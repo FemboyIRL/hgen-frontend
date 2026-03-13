@@ -44,16 +44,25 @@ const ServicesSection = () => {
 
 
     return (
-        <>
-            <div className="servicesContainer w-full text-center" id="servicios">
-                <div className="title text-white mb-4">
-                    Nuestros Servicios
+        <section className="servicesSection" id="servicios">
+            <div className="servicesOverlay" />
+
+            <div className="servicesContent">
+                <div className="servicesHeader">
+                    <span className="servicesTag">HGEN EXPERIENCE</span>
+                    <h2 className="servicesTitle">Nuestros Servicios</h2>
+                    <p className="servicesSubtitle">
+                        Comodidades diseñadas para una estancia excepcional
+                    </p>
                 </div>
-                <div className="servicesCards">
+
+                <div className="servicesGrid">
                     {services.map((service, index) => (
                         <div className="serviceCard" key={index}>
-                            <div className="serviceIcon">
-                                {service.icono}
+                            <div className="serviceIconWrapper">
+                                <div className="serviceIcon">
+                                    {service.icono}
+                                </div>
                             </div>
 
                             <h3 className="serviceTitle">
@@ -67,9 +76,8 @@ const ServicesSection = () => {
                     ))}
                 </div>
             </div>
-
-        </>
-    )
+        </section>
+    );
 }
 
 export default ServicesSection

@@ -1,102 +1,165 @@
- .logo{
-  width: 200px;
-  img{
-    width: calc(1em + 75%);
-    object-fit: cover;
-  }
- }
-  
-  .nav ul {
-    list-style-type: none;
-  }
-  
-  .nav-links{
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-  } 
+/* ============================= */
+/* HEADER BASE */
+/* ============================= */
 
-  .nav li a {
-    color: #333;
-    font-weight: bold;
-    transition: color 0.3s;
+.header-baboon {
+  background: #0f172a;
+}
+
+.headerPremium {
+  top: 0;
+  width: 100%;
+  padding: 18px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background: rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.headerPremium.scrolled {
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ============================= */
+/* LOGO */
+/* ============================= */
+
+.logo {
+  width: 180px;
+}
+
+.logo img {
+  width: 100%;
+  object-fit: contain;
+}
+
+/* ============================= */
+/* NAV */
+/* ============================= */
+
+.nav ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  margin: 0;
+  padding: 0;
+}
+
+/* LINKS */
+
+.nav-links,
+.nav li a {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 500;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+/* Hover elegante */
+
+.nav-links::after,
+.nav li a::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: #0071c2;
+  transition: width 0.3s ease;
+}
+
+.nav-links:hover,
+.nav li a:hover {
+  color: #ffffff;
+}
+
+.nav-links:hover::after,
+.nav li a:hover::after {
+  width: 100%;
+}
+
+/* ICON */
+
+.nav-icon {
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ============================= */
+/* BUTTONS */
+/* ============================= */
+
+.btn-reserva {
+  padding: 10px 26px;
+  background: linear-gradient(135deg, #0071c2, #003580);
+  color: white;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-reserva:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0, 113, 194, 0.4);
+}
+
+/* Login */
+
+.btn-inicia-sesion {
+  padding: 10px 26px;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-inicia-sesion:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* ============================= */
+/* RESPONSIVE */
+/* ============================= */
+
+@media (max-width: 960px) {
+  .headerPremium {
+    flex-direction: column;
+    padding: 20px;
   }
-  
-  .nav-icon {
-    margin-right: 2px;
-    width: calc(2em + 0%);
-    display: block;
+
+  .nav ul {
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
   }
-  
+
   .nav-text {
-    display: inline-block;
+    display: none;
   }
-  
-  .nav a:hover {
-    color: #0056b3;
+
+  .nav-icon {
+    font-size: 22px;
   }
-  
-  .btn-reserva {
-    padding: 10px 20px;
-    background-color: #0056b3;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .btn-reserva:hover {
-    background-color: #01244b; 
-  }
-  
+
+  .btn-reserva,
   .btn-inicia-sesion {
-    background-color: #0056b3;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    text-decoration: none;
-    font-size: 16px;
-    display: inline-block;
-    text-align: center;
+    margin-top: 15px;
   }
-  
-  .btn-inicia-sesion:hover {
-    background-color: #01244b;
-  }
-  
-  
-  @media (max-width: 960px) {
-    .header {
-      flex-direction: column;
-      text-align: center;
-    }
-  
-    .header .logo img {
-      max-width: 250px;
-    }
-  
-    .nav ul {
-      flex-direction: row; 
-      gap: 10px;
-      justify-content: center;
-    }
-  
-    .nav .nav-text {
-      display: none; 
-    }
-  
-    .nav .nav-icon {
-      font-size: 30px;  
-    }
-  
-    .btn-reserva {
-      margin-top: 15px;
-    }
-  
-    .btn-inicia-sesion{
-      margin-top: 15px;
-    }
-  }
+}
