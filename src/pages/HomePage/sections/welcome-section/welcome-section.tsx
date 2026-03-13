@@ -37,7 +37,12 @@ const WelcomeSection: React.FC<WelcomeSectionProps> = ({ state, dispatch }) => {
             toast.error("Por favor, selecciona las fechas de check-in y check-out.");
             return;
         }
-        navigate("/Reservation");
+        navigate("/reservation", {
+            state: {
+                selected_room: state.reserve_bar.selected_room,
+                date_range: state.reserve_bar.date_range
+            }
+        });
     };
 
     return (

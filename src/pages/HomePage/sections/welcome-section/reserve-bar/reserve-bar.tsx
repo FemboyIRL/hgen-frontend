@@ -70,11 +70,17 @@ export const CustomInput: React.FC<CustomInputProps> = ({ value, onClick }) => {
 const ReservaBar: React.FC<ReserveBarProps> = ({ state, dispatch, handleSubmit }) => {
     const [startDate, endDate] = state.reserve_bar.date_range;
 
-    const selectedRoom = state.reserve_bar.selected_room;
+    const selectedRoom = state.reserve_bar.selected_room?.room_number;
 
     const handleRoomChange = (roomId: string) => {
-        changeValue("selected_room", roomId);
-        changeValue("date_range", [null, null])
+
+        const selected_room = state.rooms.find(
+            (room: Room) => room.room_number === roomId
+        );
+
+        changeValue("selected_room", selected_room);
+
+        changeValue("date_range", [null, null]);
     };
 
     const handleDateChange = (update: [Date | null, Date | null]) => {
@@ -115,7 +121,6 @@ const ReservaBar: React.FC<ReserveBarProps> = ({ state, dispatch, handleSubmit }
         })
     }
 
-
     return (
         <>
             <form
@@ -141,7 +146,7 @@ const ReservaBar: React.FC<ReserveBarProps> = ({ state, dispatch, handleSubmit }
 
                         <select
                             id="room-select"
-                            value={selectedRoom || ""}
+                            value={state.reserve_bar.selected_room || ""}
                             onChange={(e) => handleRoomChange(e.target.value)}
                             className="reserve-hidden-select"
                         >
@@ -191,7 +196,8 @@ const ReservaBar: React.FC<ReserveBarProps> = ({ state, dispatch, handleSubmit }
                             placeholderText="Selecciona fechas"
 
                             customInput={<CustomInput />}
-
+                            minDate={new Date()}
+                            dateFormat="dd/MM/yyyy"
                             withPortal
                             portalId="root"
                             popperPlacement="bottom"
