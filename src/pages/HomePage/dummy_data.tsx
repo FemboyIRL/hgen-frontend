@@ -4,30 +4,49 @@ import { Room } from "../../types/room";
 export const dummyRooms: Room[] = [
     {
         room_number: "101",
-        type: "Deluxe Suite",
-        description: "Amplia habitación con vista al mar",
-        images: [
-            "https://picsum.photos/600/400?random=1",
-            "https://picsum.photos/600/400?random=2",
-        ],
+        type: "Individual",
+        description: "Habitación acogedora con cama individual, perfecta para viajeros solitarios",
+        images: ["https://picsum.photos/800/500?random=2", "https://picsum.photos/800/500?random=1"],
+        beds: 1,
+        capacity: 1,
+        amenities: ["WiFi", "TV", "Aire acondicionado", "Escritorio"],
+        price: 75,
+        size: 18,
+        bed_type: "Individual",
+        floor: 1,
+        available: true,
+        features: ["Silenciosa", "Cerca del ascensor"]
     },
     {
-        room_number: "202",
-        type: "Standard Room",
-        description: "Cómoda habitación para dos personas",
-        images: [
-            "https://picsum.photos/600/400?random=3",
-        ],
+        room_number: "205",
+        type: "Doble",
+        description: "Espaciosa habitación con dos camas individuales, ideal para amigos o compañeros",
+        images: ["https://picsum.photos/800/500?random=3", "https://picsum.photos/800/500?random=4", "https://picsum.photos/800/500?random=5"],
+        beds: 2,
+        capacity: 2,
+        amenities: ["WiFi", "TV", "Aire acondicionado", "Minibar", "Caja fuerte"],
+        price: 120,
+        size: 25,
+        bed_type: "Individual",
+        floor: 2,
+        available: true,
+        features: ["Balcón", "Bañera"]
     },
     {
-        room_number: "303",
-        type: "Presidential Suite",
-        description: "Suite premium con jacuzzi privado",
-        images: [
-            "https://picsum.photos/600/400?random=4",
-            "https://picsum.photos/600/400?random=5",
-        ],
-    },
+        room_number: "310",
+        type: "Suite Familiar",
+        description: "Amplia suite con cama king size y sofá cama, perfecta para familias",
+        images: ["https://picsum.photos/800/500?random=6", "https://picsum.photos/800/500?random=7", "https://picsum.photos/800/500?random=8", "https://picsum.photos/800/500?random=9"],
+        beds: 2,  // Una cama king + sofá cama
+        capacity: 4,
+        amenities: ["WiFi", "TV", "Aire acondicionado", "Minibar", "Caja fuerte", "Chimenea", "Jacuzzi"],
+        price: 250,
+        size: 45,
+        bed_type: "King size",
+        floor: 3,
+        available: true,
+        features: ["Terraza privada", "Sala de estar separada", "Servicio de habitaciones 24h"]
+    }
 ];
 
 export const dummyOffers: Offer[] = [

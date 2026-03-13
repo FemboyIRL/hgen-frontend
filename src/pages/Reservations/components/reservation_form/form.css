@@ -1,0 +1,593 @@
+/* ===== SIDEBAR ===== */
+.reservation-sidebar {
+  position: sticky;
+  min-width: 500px;
+  top: 100px;
+  height: fit-content;
+  padding: 32px;
+  border-radius: 28px;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-lg);
+  transition: var(--transition);
+  animation: slideInLeft 0.5s ease-out;
+}
+
+.reservation-sidebar:hover {
+  border-color: rgba(13, 110, 253, 0.3);
+  box-shadow: 0 30px 60px -15px rgba(13, 110, 253, 0.3);
+}
+
+/* title */
+.sidebar-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 28px;
+  background: linear-gradient(135deg, #fff, #a0b0ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.02em;
+  position: relative;
+}
+
+.sidebar-title::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary), transparent);
+  border-radius: 2px;
+}
+
+.reservation-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ===== FORM SECTIONS ===== */
+.form-section {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 16px;
+  padding: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: var(--transition);
+}
+
+.form-section:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(13, 110, 253, 0.2);
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.section-icon {
+  font-size: 1.3rem;
+  filter: drop-shadow(0 2px 5px rgba(13, 110, 253, 0.3));
+}
+
+.section-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  letter-spacing: 0.3px;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+/* ===== CUSTOM SELECT ===== */
+.custom-select {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1.5px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+  border-radius: 12px;
+  padding: 12px;
+  width: 100%;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.custom-select option {
+  background: #1a1f2e;
+  color: white;
+  padding: 10px;
+}
+
+/* ===== ROOM SELECTED INFO ===== */
+.room-selected-info {
+  margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.info-chip {
+  background: rgba(13, 110, 253, 0.15);
+  border-radius: 30px;
+  padding: 6px 14px;
+  font-size: 0.85rem;
+  border: 1px solid rgba(13, 110, 253, 0.3);
+  backdrop-filter: blur(5px);
+}
+
+.amenities-preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.amenity-tag {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 4px 10px;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.amenity-tag.more {
+  background: rgba(13, 110, 253, 0.2);
+  color: var(--primary);
+}
+
+/* ===== DATE SUMMARY ===== */
+.date-summary {
+  margin-top: 12px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.date-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+  font-size: 0.9rem;
+}
+
+.date-label {
+  color: var(--text-muted);
+}
+
+.date-value {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.date-value.highlight {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.total-nights {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: 6px;
+  padding-top: 10px;
+}
+
+/* ===== GUESTS SELECTOR ===== */
+.guests-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.guests-input-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 50px;
+  padding: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.guest-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(13, 110, 253, 0.2);
+  color: white;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.guest-btn:hover:not(:disabled) {
+  background: var(--primary);
+  transform: scale(1.1);
+}
+
+.guest-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.guest-count {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 80px;
+}
+
+.guest-number {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.guest-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.capacity-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: rgba(255, 193, 7, 0.1);
+  border-radius: 8px;
+  font-size: 0.85rem;
+  color: #ffc107;
+}
+
+/* ===== PRICE SECTION ===== */
+.price-section {
+  background: linear-gradient(
+    135deg,
+    rgba(13, 110, 253, 0.1),
+    rgba(0, 0, 0, 0.3)
+  );
+  border: 1px solid rgba(13, 110, 253, 0.2);
+}
+
+.price-detail {
+  margin-bottom: 15px;
+}
+
+.price-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  font-size: 0.95rem;
+}
+
+.price-row.total {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.price-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--primary), transparent);
+  margin: 10px 0;
+}
+
+.total-amount {
+  font-size: 1.4rem;
+  background: linear-gradient(135deg, #fff, var(--primary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.price-input {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 700;
+  background: rgba(13, 110, 253, 0.15) !important;
+  border-color: var(--primary) !important;
+}
+
+/* ===== BUTTON WITH PRICE ===== */
+.reserve-confirm-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 28px;
+  border-radius: 60px;
+  border: none;
+  background: linear-gradient(135deg, #0d6efd, #0a58ca, #0d6efd);
+  background-size: 200% 200%;
+  color: white;
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+  box-shadow:
+    0 10px 25px -5px rgba(13, 110, 253, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+  width: 100%;
+  animation: gradientShift 8s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Efecto de brillo */
+.reserve-confirm-btn::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.3) 0%,
+    transparent 70%
+  );
+  transform: translate(-50%, -50%);
+  transition:
+    width 0.6s ease-out,
+    height 0.6s ease-out;
+  pointer-events: none;
+}
+
+.reserve-confirm-btn:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+/* Efecto hover principal */
+.reserve-confirm-btn:hover:not(:disabled) {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow:
+    0 20px 30px -8px rgba(13, 110, 253, 0.7),
+    0 0 0 2px rgba(255, 255, 255, 0.2) inset;
+  background: linear-gradient(135deg, #0a58ca, #0d6efd, #0a58ca);
+  background-size: 200% 200%;
+}
+
+/* Efecto active (click) */
+.reserve-confirm-btn:active:not(:disabled) {
+  transform: translateY(2px) scale(0.98);
+  box-shadow:
+    0 5px 15px -3px rgba(13, 110, 253, 0.6),
+    0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+  transition: all 0.1s ease;
+}
+
+/* Ícono del botón */
+.btn-icon {
+  font-size: 1.3rem;
+  margin-right: 12px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+  transition: transform 0.3s ease;
+}
+
+.reserve-confirm-btn:hover .btn-icon {
+  transform: rotate(-5deg) scale(1.1);
+}
+
+/* Texto del botón */
+.btn-text {
+  flex: 1;
+  text-align: left;
+  font-size: 1.1rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.btn-text::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: white;
+  transition: width 0.3s ease;
+}
+
+.reserve-confirm-btn:hover .btn-text::after {
+  width: 30px;
+}
+
+/* Precio en el botón */
+.btn-price {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 8px 18px;
+  border-radius: 40px;
+  font-size: 1.1rem;
+  font-weight: 800;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  letter-spacing: 0.5px;
+  margin-left: 12px;
+}
+
+.reserve-confirm-btn:hover .btn-price {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* ===== ESTADO DISABLED ===== */
+.reserve-confirm-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+  background: linear-gradient(135deg, #4a5568, #2d3748);
+  box-shadow:
+    0 5px 15px -5px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+  animation: none;
+}
+
+.reserve-confirm-btn:disabled::before {
+  display: none;
+}
+
+.reserve-confirm-btn:disabled .btn-icon,
+.reserve-confirm-btn:disabled .btn-text,
+.reserve-confirm-btn:disabled .btn-price {
+  filter: grayscale(0.5);
+  opacity: 0.8;
+}
+
+.reserve-confirm-btn:disabled .btn-price {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: none;
+}
+
+/* ===== ESTADOS DE VALIDACIÓN ===== */
+/* Botón con advertencia (campos incompletos pero con datos) */
+.reserve-confirm-btn.warning {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  box-shadow: 0 10px 25px -5px rgba(245, 158, 11, 0.5);
+}
+
+.reserve-confirm-btn.warning:hover:not(:disabled) {
+  box-shadow: 0 20px 30px -8px rgba(245, 158, 11, 0.7);
+}
+
+/* Botón de éxito (cuando la reserva es posible) */
+.reserve-confirm-btn.success {
+  background: linear-gradient(135deg, #10b981, #059669);
+  box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.5);
+}
+
+.reserve-confirm-btn.success:hover:not(:disabled) {
+  box-shadow: 0 20px 30px -8px rgba(16, 185, 129, 0.7);
+}
+
+/* ===== LOADING STATE ===== */
+.reserve-confirm-btn.loading {
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+.reserve-confirm-btn.loading .btn-icon {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.reserve-confirm-btn.loading .btn-text::after {
+  width: 100%;
+  background: linear-gradient(90deg, white, transparent);
+  animation: loadingPulse 1.5s ease infinite;
+}
+
+@keyframes loadingPulse {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ===== VERSIÓN COMPACTA ===== */
+.reserve-confirm-btn.compact {
+  padding: 12px 20px;
+  font-size: 0.95rem;
+  border-radius: 40px;
+}
+
+.reserve-confirm-btn.compact .btn-price {
+  padding: 4px 12px;
+  font-size: 0.95rem;
+}
+
+.reserve-confirm-btn.compact .btn-icon {
+  font-size: 1.1rem;
+}
+
+/* ===== VERSIÓN LARGE ===== */
+.reserve-confirm-btn.large {
+  padding: 22px 32px;
+  font-size: 1.2rem;
+  border-radius: 70px;
+}
+
+.reserve-confirm-btn.large .btn-price {
+  padding: 10px 22px;
+  font-size: 1.2rem;
+}
+
+/* ===== EFECTO DE ONDA (RIPPLE) ===== */
+.reserve-confirm-btn .ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  transform: scale(0);
+  animation: ripple 0.6s ease-out;
+  pointer-events: none;
+}
+
+@keyframes ripple {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* ===== MEDIA QUERIES ===== */
+@media (max-width: 768px) {
+  .reserve-confirm-btn {
+    padding: 16px 22px;
+    font-size: 1rem;
+  }
+
+  .btn-price {
+    padding: 6px 14px;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .reserve-confirm-btn {
+    padding: 14px 18px;
+    font-size: 0.95rem;
+  }
+
+  .btn-price {
+    display: none; /* Ocultar precio en móvil para simplificar */
+  }
+
+  .reserve-confirm-btn:hover .btn-text::after {
+    width: 20px;
+  }
+}

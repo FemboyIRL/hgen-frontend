@@ -77,9 +77,9 @@ const ReservaBar: React.FC<ReserveBarProps> = ({ state, dispatch, handleSubmit }
         const selected_room = state.rooms.find(
             (room: Room) => room.room_number === roomId
         );
-    
+
         changeValue("selected_room", selected_room);
-    
+
         changeValue("date_range", [null, null]);
     };
 
@@ -196,7 +196,8 @@ const ReservaBar: React.FC<ReserveBarProps> = ({ state, dispatch, handleSubmit }
                             placeholderText="Selecciona fechas"
 
                             customInput={<CustomInput />}
-
+                            minDate={new Date()}
+                            dateFormat="dd/MM/yyyy"
                             withPortal
                             portalId="root"
                             popperPlacement="bottom"

@@ -6,6 +6,10 @@ const reservationsInitial = {
     form: {
         selected_room: null as Room | null,
         date_range: [null, null] as [Date | null, Date | null],
+        guests: {
+            adults: 0,
+            children: 0
+        },
         occupied_dates: [] as Date[],
         numPeople: 1,
         price: 0,
@@ -13,3 +17,5 @@ const reservationsInitial = {
 }
 
 export default reservationsInitial
+
+export type ReservationsReducer = typeof reservationsInitial

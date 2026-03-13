@@ -6,11 +6,10 @@ import RoomsSection from "./sections/rooms-section/rooms-section"
 import ServicesSection from "./sections/services-section/services"
 import WelcomeSection from "./sections/welcome-section/welcome-section"
 import { HOME_ACTIONS, HomeState, reducer } from "./reducer/reducer"
-import ApiConsumer from "../../services/api_consumer"
 import { dummyOffers, dummyRooms } from "./dummy_data"
 import RoomModal from "./modals/room_data_modal"
 
-const Availability = new ApiConsumer({ url: 'availability/' })
+// const Availability = new ApiConsumer({ url: 'availability/' })
 // const Rooms = new ApiConsumer({ url: 'rooms/' })
 // const Offers = new ApiConsumer({ url: 'offers/' })
 
@@ -26,7 +25,7 @@ const HomePage = () => {
 
 
     useEffect(() => {
-        fetchOccupiedDates(state?.reserve_bar.selected_room)
+        // fetchOccupiedDates(state?.reserve_bar.selected_room)
     }, [state.reserve_bar.selected_room])
 
 
@@ -50,21 +49,21 @@ const HomePage = () => {
     //     })
     // }
 
-    const fetchOccupiedDates = async (room_number: string | undefined) => {
-        try {
+    // const fetchOccupiedDates = async (room_number: string | undefined) => {
+    //     try {
 
-            const { status, data } = room_number ? await Availability.getById(room_number) : await Availability.getAll()
+    //         const { status, data } = room_number ? await Availability.getById(room_number) : await Availability.getAll()
 
-            if (status) {
-                dispatch({
-                    type: HOME_ACTIONS.GET_OCCUPIED_DATES,
-                    payload: data.data.occupiedDates
-                })
-            }
-        } catch (e) {
-            console.error(e)
-        }
-    }
+    //         if (status) {
+    //             dispatch({
+    //                 type: HOME_ACTIONS.GET_OCCUPIED_DATES,
+    //                 payload: data.data.occupiedDates
+    //             })
+    //         }
+    //     } catch (e) {
+    //         console.error(e)
+    //     }
+    // }
 
     // const fetchOffers = async () => {
     //     try {
