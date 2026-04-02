@@ -314,7 +314,11 @@ const ReservationForm: React.FC<ReservationFormProps> = ({ state, dispatch, hand
                             <div className="price-detail">
                                 <div className="price-row">
                                     <span>Precio por noche:</span>
-                                    <span>${state.form.selected_room.price || 0}</span>
+                                    <span>
+                                        {state.form.price && (state.form.guests.adults + state.form.guests.children) > 0
+                                            ? `$${(state.form.price / (state.form.guests.adults + state.form.guests.children)).toFixed(2)}`
+                                            : '$0'}
+                                    </span>
                                 </div>
                                 <div className="price-row">
                                     <span>Noches:</span>

@@ -7,6 +7,7 @@ import { dummyRooms } from "../HomePage/dummy_data";
 import { useLocation } from "react-router-dom";
 import ReservationForm from "./components/reservation_form/form";
 import HotelFooter from "../../components/layout/footer/footer";
+import PaymentModal from "./components/payment_modal/payment_modal";
 
 // const Rooms = new ApiConsumer({ url: 'rooms' })
 
@@ -76,15 +77,15 @@ const ReservePage = () => {
     });
   };
 
-  // const changeValue = (prop: string, data: any) => {
-  //     dispatch({
-  //         type: reservationsActions.CHANGE_VALUE,
-  //         payload: {
-  //             prop,
-  //             data
-  //         }
-  //     });
-  // };
+  const changeValue = (prop: string, data: any) => {
+    dispatch({
+      type: reservationsActions.CHANGE_VALUE,
+      payload: {
+        prop,
+        data
+      }
+    });
+  };
 
   const changeValueGuests = (prop: string, data: any) => {
     dispatch({
@@ -173,6 +174,9 @@ const ReservePage = () => {
         </div>
 
       </div>
+
+      <PaymentModal isOpen={state.payment_modal} onClose={() => changeValue("payment_modal", !state.payment_modal)} onConfirm={() => { }} totalAmount={state.form.price} />
+
       <HotelFooter />
 
     </div>
