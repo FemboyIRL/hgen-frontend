@@ -1,3 +1,4 @@
+import { Customer } from "../../types/customer";
 import { Offer } from "../../types/offer";
 import { Room } from "../../types/room";
 
@@ -95,3 +96,181 @@ export const dummyOffers: Offer[] = [
         discount_price: 2199,
     },
 ];
+
+export const dummyCustomers: Customer[] = [
+    {
+      user_id: "usr_001",
+      phone: "+1 (555) 123-4567",
+      address: "123 Maple Street, Springfield, IL 62701",
+      email: "emily.johnson@example.com",
+      fullName: "Emily Johnson"
+    },
+    {
+      user_id: "usr_002",
+      phone: "+44 7700 900123",
+      address: "42 Baker Street, London, W1U 7AJ, UK",
+      email: "james.smith@example.co.uk",
+      fullName: "James Smith"
+    },
+    {
+      user_id: "usr_003",
+      phone: "+61 412 345 678",
+      address: "7/89 George Street, Sydney, NSW 2000, Australia",
+      email: "mia.wong@example.com.au",
+      fullName: "Mia Wong"
+    },
+    {
+      user_id: "usr_004",
+      phone: "+1 (555) 987-6543",
+      address: "456 Oak Avenue, Austin, TX 73301",
+      email: "carlos.ramirez@example.com",
+      fullName: "Carlos Ramirez"
+    },
+    {
+      user_id: "usr_005",
+      phone: "+49 151 23456789",
+      address: "Friedrichstraße 12, 10117 Berlin, Germany",
+      email: "laura.schmidt@example.de",
+      fullName: "Laura Schmidt"
+    },
+    {
+      user_id: "usr_001",
+      phone: "+1 (555) 123-4567",
+      address: "123 Maple Street, Springfield, IL 62701",
+      email: "emily.johnson@example.com",
+      fullName: "Emily Johnson"
+    },
+    {
+      user_id: "usr_002",
+      phone: "+44 7700 900123",
+      address: "42 Baker Street, London, W1U 7AJ, UK",
+      email: "james.smith@example.co.uk",
+      fullName: "James Smith"
+    },
+    {
+      user_id: "usr_003",
+      phone: "+61 412 345 678",
+      address: "7/89 George Street, Sydney, NSW 2000, Australia",
+      email: "mia.wong@example.com.au",
+      fullName: "Mia Wong"
+    },
+    {
+      user_id: "usr_004",
+      phone: "+1 (555) 987-6543",
+      address: "456 Oak Avenue, Austin, TX 73301",
+      email: "carlos.ramirez@example.com",
+      fullName: "Carlos Ramirez"
+    },
+    {
+      user_id: "usr_005",
+      phone: "+49 151 23456789",
+      address: "Friedrichstraße 12, 10117 Berlin, Germany",
+      email: "laura.schmidt@example.de",
+      fullName: "Laura Schmidt"
+    },
+    {
+      user_id: "usr_001",
+      phone: "+1 (555) 123-4567",
+      address: "123 Maple Street, Springfield, IL 62701",
+      email: "emily.johnson@example.com",
+      fullName: "Emily Johnson"
+    },
+    {
+      user_id: "usr_002",
+      phone: "+44 7700 900123",
+      address: "42 Baker Street, London, W1U 7AJ, UK",
+      email: "james.smith@example.co.uk",
+      fullName: "James Smith"
+    },
+    {
+      user_id: "usr_003",
+      phone: "+61 412 345 678",
+      address: "7/89 George Street, Sydney, NSW 2000, Australia",
+      email: "mia.wong@example.com.au",
+      fullName: "Mia Wong"
+    },
+    {
+      user_id: "usr_004",
+      phone: "+1 (555) 987-6543",
+      address: "456 Oak Avenue, Austin, TX 73301",
+      email: "carlos.ramirez@example.com",
+      fullName: "Carlos Ramirez"
+    },
+    {
+      user_id: "usr_005",
+      phone: "+49 151 23456789",
+      address: "Friedrichstraße 12, 10117 Berlin, Germany",
+      email: "laura.schmidt@example.de",
+      fullName: "Laura Schmidt"
+    },
+    {
+      user_id: "usr_001",
+      phone: "+1 (555) 123-4567",
+      address: "123 Maple Street, Springfield, IL 62701",
+      email: "emily.johnson@example.com",
+      fullName: "Emily Johnson"
+    },
+    {
+      user_id: "usr_002",
+      phone: "+44 7700 900123",
+      address: "42 Baker Street, London, W1U 7AJ, UK",
+      email: "james.smith@example.co.uk",
+      fullName: "James Smith"
+    },
+    {
+      user_id: "usr_003",
+      phone: "+61 412 345 678",
+      address: "7/89 George Street, Sydney, NSW 2000, Australia",
+      email: "mia.wong@example.com.au",
+      fullName: "Mia Wong"
+    },
+    {
+      user_id: "usr_004",
+      phone: "+1 (555) 987-6543",
+      address: "456 Oak Avenue, Austin, TX 73301",
+      email: "carlos.ramirez@example.com",
+      fullName: "Carlos Ramirez"
+    },
+    {
+      user_id: "usr_005",
+      phone: "+49 151 23456789",
+      address: "Friedrichstraße 12, 10117 Berlin, Germany",
+      email: "laura.schmidt@example.de",
+      fullName: "Laura Schmidt"
+    },
+    {
+      user_id: "usr_001",
+      phone: "+1 (555) 123-4567",
+      address: "123 Maple Street, Springfield, IL 62701",
+      email: "emily.johnson@example.com",
+      fullName: "Emily Johnson"
+    },
+    {
+      user_id: "usr_002",
+      phone: "+44 7700 900123",
+      address: "42 Baker Street, London, W1U 7AJ, UK",
+      email: "james.smith@example.co.uk",
+      fullName: "James Smith"
+    },
+    {
+      user_id: "usr_003",
+      phone: "+61 412 345 678",
+      address: "7/89 George Street, Sydney, NSW 2000, Australia",
+      email: "mia.wong@example.com.au",
+      fullName: "Mia Wong"
+    },
+    {
+      user_id: "usr_004",
+      phone: "+1 (555) 987-6543",
+      address: "456 Oak Avenue, Austin, TX 73301",
+      email: "carlos.ramirez@example.com",
+      fullName: "Carlos Ramirez"
+    },
+    {
+      user_id: "usr_005",
+      phone: "+49 151 23456789",
+      address: "Friedrichstraße 12, 10117 Berlin, Germany",
+      email: "laura.schmidt@example.de",
+      fullName: "Laura Schmidt"
+    },
+  ];
