@@ -3,18 +3,16 @@ import { Room } from "../../types/room";
 
 export const dummyRooms: Room[] = [
     {
-        room_number: "101",
+        room_number: "102",
         type: "Individual",
         description: "Habitación acogedora con cama individual, perfecta para viajeros solitarios",
         images: ["https://picsum.photos/800/500?random=2", "https://picsum.photos/800/500?random=1"],
         beds: 1,
         capacity: 1,
         amenities: ["WiFi", "TV", "Aire acondicionado", "Escritorio"],
-        price: 75,
         size: 18,
         bed_type: "Individual",
         floor: 1,
-        available: true,
         features: ["Silenciosa", "Cerca del ascensor"]
     },
     {
@@ -25,11 +23,9 @@ export const dummyRooms: Room[] = [
         beds: 2,
         capacity: 2,
         amenities: ["WiFi", "TV", "Aire acondicionado", "Minibar", "Caja fuerte"],
-        price: 120,
         size: 25,
         bed_type: "Individual",
         floor: 2,
-        available: true,
         features: ["Balcón", "Bañera"]
     },
     {
@@ -40,11 +36,9 @@ export const dummyRooms: Room[] = [
         beds: 2,  // Una cama king + sofá cama
         capacity: 4,
         amenities: ["WiFi", "TV", "Aire acondicionado", "Minibar", "Caja fuerte", "Chimenea", "Jacuzzi"],
-        price: 250,
         size: 45,
         bed_type: "King size",
         floor: 3,
-        available: true,
         features: ["Terraza privada", "Sala de estar separada", "Servicio de habitaciones 24h"]
     }
 ];
