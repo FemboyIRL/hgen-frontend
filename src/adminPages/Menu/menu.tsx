@@ -8,6 +8,8 @@ import './menu.css'
 import { MenuItem } from "../../types/menu_item"
 import CreateMenuItemModal from "./modals/menuModal/menuModal"
 import DeleteMenuItemModal from "./modals/deleteModal/deleteModal"
+import { dummyMenuItems } from "../../pages/HomePage/dummy_data"
+import { FaUtensils } from "react-icons/fa";
 
 const MenuItems = new ApiConsumer({ url: 'menu/' })
 
@@ -15,7 +17,11 @@ const MenuItemsPage = () => {
     const [state, dispatch] = useReducer(reducer, initialState)
 
     useEffect(() => {
-        getmenuItems()
+        // getmenuItems()
+        dispatch({
+            type: menuItemsActions.LOADED_MENU_LIST,
+            payload: dummyMenuItems
+        })
     }, [state.loading])
 
     const filterMenuItemList = () => {
@@ -82,7 +88,7 @@ const MenuItemsPage = () => {
                     <div className="innerContent">
                         <div className="innerContain">
                             <div className="titleContain">
-                                <img src="/assets/icons/icon-menu.svg" alt="" width={50} />
+                                <FaUtensils size={50}/>
                                 <div className="title">
                                     <h3>Menu</h3>
                                     <p>Lista de items del menu registrados</p>
@@ -118,7 +124,15 @@ const MenuItemsPage = () => {
                                 <p>No se encontraron habitaciones</p>
                             ) : (
                                 <>
-                                    <Row>
+                                    <Row style={{
+                                        flex: 1,
+                                        overflowY: 'auto',
+                                        overflowX: 'hidden',
+                                        margin: 0,
+                                        padding: '16px',
+                                        maxHeight: 'calc(100vh - 300px)' // Ajusta según necesidad
+                                    }}>
+
                                         {temporal_list.map((menuItem: MenuItem) => (
                                             <Col key={menuItem.id} xs="12" sm="6" md="4" lg="3">
                                                 <div className="menuItemCard" onClick={() => selectmenuItem("menuItemModal", !state.menuItemModal, menuItem)}>

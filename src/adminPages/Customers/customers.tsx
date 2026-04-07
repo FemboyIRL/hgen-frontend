@@ -9,6 +9,7 @@ import ApiConsumer from "../../services/api_consumer";
 import DeleteModal from "./modals/deleteCustomerModal/deleteModal";
 import { Customer } from "../../types/customer";
 import CreateClientModal from "./modals/createCustomerModal/userModal";
+import { dummyCustomers } from "../../pages/HomePage/dummy_data";
 
 const Customers = new ApiConsumer({ url: "clients" })
 
@@ -29,7 +30,11 @@ const CustomersPage = () => {
     };
 
     useEffect(() => {
-        getCustomers();
+        // getCustomers();
+        dispatch({
+            type: CustomerActions.LOADED_CUSTOMERS_LIST,
+            payload: dummyCustomers
+        })
     }, [state.loading]);
 
     const getCustomers = async () => {

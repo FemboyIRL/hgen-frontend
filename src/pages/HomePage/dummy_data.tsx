@@ -1,4 +1,7 @@
+import { Customer } from "../../types/customer";
+import { MenuItem } from "../../types/menu_item";
 import { Offer } from "../../types/offer";
+import { Order } from "../../types/order";
 import { Room } from "../../types/room";
 
 export const dummyRooms: Room[] = [
@@ -89,3 +92,499 @@ export const dummyOffers: Offer[] = [
         discount_price: 2199,
     },
 ];
+
+export const dummyCustomers: Customer[] = [
+    {
+      user_id: "usr_001",
+      phone: "+1 (555) 123-4567",
+      address: "123 Maple Street, Springfield, IL 62701",
+      email: "emily.johnson@example.com",
+      fullName: "Emily Johnson"
+    },
+    {
+      user_id: "usr_002",
+      phone: "+44 7700 900123",
+      address: "42 Baker Street, London, W1U 7AJ, UK",
+      email: "james.smith@example.co.uk",
+      fullName: "James Smith"
+    },
+    {
+      user_id: "usr_003",
+      phone: "+61 412 345 678",
+      address: "7/89 George Street, Sydney, NSW 2000, Australia",
+      email: "mia.wong@example.com.au",
+      fullName: "Mia Wong"
+    },
+    {
+      user_id: "usr_004",
+      phone: "+1 (555) 987-6543",
+      address: "456 Oak Avenue, Austin, TX 73301",
+      email: "carlos.ramirez@example.com",
+      fullName: "Carlos Ramirez"
+    },
+    {
+      user_id: "usr_005",
+      phone: "+49 151 23456789",
+      address: "Friedrichstraße 12, 10117 Berlin, Germany",
+      email: "laura.schmidt@example.de",
+      fullName: "Laura Schmidt"
+    },
+    {
+      user_id: "usr_001",
+      phone: "+1 (555) 123-4567",
+      address: "123 Maple Street, Springfield, IL 62701",
+      email: "emily.johnson@example.com",
+      fullName: "Emily Johnson"
+    },
+    {
+      user_id: "usr_002",
+      phone: "+44 7700 900123",
+      address: "42 Baker Street, London, W1U 7AJ, UK",
+      email: "james.smith@example.co.uk",
+      fullName: "James Smith"
+    },
+    {
+      user_id: "usr_003",
+      phone: "+61 412 345 678",
+      address: "7/89 George Street, Sydney, NSW 2000, Australia",
+      email: "mia.wong@example.com.au",
+      fullName: "Mia Wong"
+    },
+    {
+      user_id: "usr_004",
+      phone: "+1 (555) 987-6543",
+      address: "456 Oak Avenue, Austin, TX 73301",
+      email: "carlos.ramirez@example.com",
+      fullName: "Carlos Ramirez"
+    },
+    {
+      user_id: "usr_005",
+      phone: "+49 151 23456789",
+      address: "Friedrichstraße 12, 10117 Berlin, Germany",
+      email: "laura.schmidt@example.de",
+      fullName: "Laura Schmidt"
+    },
+    {
+      user_id: "usr_001",
+      phone: "+1 (555) 123-4567",
+      address: "123 Maple Street, Springfield, IL 62701",
+      email: "emily.johnson@example.com",
+      fullName: "Emily Johnson"
+    },
+    {
+      user_id: "usr_002",
+      phone: "+44 7700 900123",
+      address: "42 Baker Street, London, W1U 7AJ, UK",
+      email: "james.smith@example.co.uk",
+      fullName: "James Smith"
+    },
+    {
+      user_id: "usr_003",
+      phone: "+61 412 345 678",
+      address: "7/89 George Street, Sydney, NSW 2000, Australia",
+      email: "mia.wong@example.com.au",
+      fullName: "Mia Wong"
+    },
+    {
+      user_id: "usr_004",
+      phone: "+1 (555) 987-6543",
+      address: "456 Oak Avenue, Austin, TX 73301",
+      email: "carlos.ramirez@example.com",
+      fullName: "Carlos Ramirez"
+    },
+    {
+      user_id: "usr_005",
+      phone: "+49 151 23456789",
+      address: "Friedrichstraße 12, 10117 Berlin, Germany",
+      email: "laura.schmidt@example.de",
+      fullName: "Laura Schmidt"
+    },
+    {
+      user_id: "usr_001",
+      phone: "+1 (555) 123-4567",
+      address: "123 Maple Street, Springfield, IL 62701",
+      email: "emily.johnson@example.com",
+      fullName: "Emily Johnson"
+    },
+    {
+      user_id: "usr_002",
+      phone: "+44 7700 900123",
+      address: "42 Baker Street, London, W1U 7AJ, UK",
+      email: "james.smith@example.co.uk",
+      fullName: "James Smith"
+    },
+    {
+      user_id: "usr_003",
+      phone: "+61 412 345 678",
+      address: "7/89 George Street, Sydney, NSW 2000, Australia",
+      email: "mia.wong@example.com.au",
+      fullName: "Mia Wong"
+    },
+    {
+      user_id: "usr_004",
+      phone: "+1 (555) 987-6543",
+      address: "456 Oak Avenue, Austin, TX 73301",
+      email: "carlos.ramirez@example.com",
+      fullName: "Carlos Ramirez"
+    },
+    {
+      user_id: "usr_005",
+      phone: "+49 151 23456789",
+      address: "Friedrichstraße 12, 10117 Berlin, Germany",
+      email: "laura.schmidt@example.de",
+      fullName: "Laura Schmidt"
+    },
+    {
+      user_id: "usr_001",
+      phone: "+1 (555) 123-4567",
+      address: "123 Maple Street, Springfield, IL 62701",
+      email: "emily.johnson@example.com",
+      fullName: "Emily Johnson"
+    },
+    {
+      user_id: "usr_002",
+      phone: "+44 7700 900123",
+      address: "42 Baker Street, London, W1U 7AJ, UK",
+      email: "james.smith@example.co.uk",
+      fullName: "James Smith"
+    },
+    {
+      user_id: "usr_003",
+      phone: "+61 412 345 678",
+      address: "7/89 George Street, Sydney, NSW 2000, Australia",
+      email: "mia.wong@example.com.au",
+      fullName: "Mia Wong"
+    },
+    {
+      user_id: "usr_004",
+      phone: "+1 (555) 987-6543",
+      address: "456 Oak Avenue, Austin, TX 73301",
+      email: "carlos.ramirez@example.com",
+      fullName: "Carlos Ramirez"
+    },
+    {
+      user_id: "usr_005",
+      phone: "+49 151 23456789",
+      address: "Friedrichstraße 12, 10117 Berlin, Germany",
+      email: "laura.schmidt@example.de",
+      fullName: "Laura Schmidt"
+    },
+  ];
+
+export const dummyMenuItems: MenuItem[] = [
+    {
+      id: "menu_001",
+      name: "Club Sandwich",
+      description: "Triple layer sandwich with grilled chicken, bacon, lettuce, tomato, and mayonnaise",
+      price: 12.99,
+      is_available: true,
+      images: [
+        "https://picsum.photos/800/500?random=1",
+        "https://picsum.photos/800/500?random=2",
+      ]
+    },
+    {
+      id: "menu_002",
+      name: "Caesar Salad",
+      description: "Fresh romaine lettuce, parmesan cheese, croutons, and creamy Caesar dressing",
+      price: 10.50,
+      is_available: true,
+      images: [
+        "https://picsum.photos/800/500?random=3",
+      ]
+    },
+    {
+      id: "menu_003",
+      name: "Margherita Pizza",
+      description: "Wood-fired pizza with fresh mozzarella, tomatoes, basil, and olive oil",
+      price: 16.99,
+      is_available: true,
+      images: [
+        "https://picsum.photos/800/500?random=4",
+        "https://picsum.photos/800/500?random=5",
+        "https://picsum.photos/800/500?random=6",
+      ]
+    },
+    {
+      id: "menu_004",
+      name: "Grilled Salmon",
+      description: "Atlantic salmon with lemon butter sauce, served with seasonal vegetables",
+      price: 24.99,
+      is_available: false,
+      images: [
+        "https://picsum.photos/800/500?random=7",
+      ]
+    },
+    {
+      id: "menu_005",
+      name: "Chocolate Lava Cake",
+      description: "Warm chocolate cake with molten center, served with vanilla ice cream",
+      price: 8.50,
+      is_available: true,
+      images: [
+        "https://picsum.photos/800/500?random=8",
+        "https://picsum.photos/800/500?random=9",
+      ]
+    },
+    {
+      id: "menu_006",
+      name: "Mojito",
+      description: "Fresh mint, lime, rum, soda water, and sugar",
+      price: 9.99,
+      is_available: true,
+      images: [
+        "https://picsum.photos/800/500?random=10",
+      ]
+    },
+    {
+      id: "menu_007",
+      name: "Pasta Carbonara",
+      description: "Spaghetti with eggs, pecorino cheese, guanciale, and black pepper",
+      price: 14.99,
+      is_available: false,
+      images: [
+        "https://picsum.photos/800/500?random=11",
+        "https://picsum.photos/800/500?random=12",
+      ]
+    },
+    {
+      id: "menu_008",
+      name: "Breakfast Burrito",
+      description: "Scrambled eggs, chorizo, beans, cheese, and salsa wrapped in a flour tortilla",
+      price: 11.99,
+      is_available: true,
+      images: [
+        "https://picsum.photos/800/500?random=13",
+        "https://picsum.photos/800/500?random=14",
+      ]
+    },
+    {
+      id: "menu_009",
+      name: "French Onion Soup",
+      description: "Caramelized onions in rich beef broth, topped with toasted bread and melted Gruyère",
+      price: 9.50,
+      is_available: true,
+      images: [
+        "https://picsum.photos/800/500?random=15",
+      ]
+    },
+    {
+      id: "menu_010",
+      name: "New York Cheesecake",
+      description: "Creamy cheesecake with graham cracker crust and strawberry topping",
+      price: 7.99,
+      is_available: true,
+      images: [
+        "https://picsum.photos/800/500?random=16",
+        "https://picsum.photos/800/500?random=17",
+      ]
+    }
+  ];
+
+export const dummyOrders: Order[] = [
+    {
+      order_id: "ORD-001",
+      order_date: new Date("2026-03-15T12:30:00"),
+      total_price: 45.97,
+      user_id: "usr_001",
+      user_name: "Emily Johnson",
+      user_email: "emily.johnson@example.com",
+      menu_items: [
+        {
+          id: "menu_001",
+          name: "Club Sandwich",
+          description: "Triple layer sandwich with grilled chicken, bacon, lettuce, tomato, and mayonnaise",
+          price: 12.99,
+          is_available: true,
+          images: ["https://picsum.photos/800/500?random=1"]
+        },
+        {
+          id: "menu_003",
+          name: "Margherita Pizza",
+          description: "Wood-fired pizza with fresh mozzarella, tomatoes, basil, and olive oil",
+          price: 16.99,
+          is_available: true,
+          images: ["https://picsum.photos/800/500?random=4"]
+        },
+        {
+          id: "menu_006",
+          name: "Mojito",
+          description: "Fresh mint, lime, rum, soda water, and sugar",
+          price: 9.99,
+          is_available: true,
+          images: ["https://picsum.photos/800/500?random=10"]
+        }
+      ]
+    },
+    {
+      order_id: "ORD-002",
+      order_date: new Date("2026-03-15T19:45:00"),
+      total_price: 32.49,
+      user_id: "usr_002",
+      user_name: "James Smith",
+      user_email: "james.smith@example.co.uk",
+      menu_items: [
+        {
+          id: "menu_002",
+          name: "Caesar Salad",
+          description: "Fresh romaine lettuce, parmesan cheese, croutons, and creamy Caesar dressing",
+          price: 10.50,
+          is_available: true,
+          images: ["https://picsum.photos/800/500?random=3"]
+        },
+        {
+          id: "menu_005",
+          name: "Chocolate Lava Cake",
+          description: "Warm chocolate cake with molten center, served with vanilla ice cream",
+          price: 8.50,
+          is_available: true,
+          images: ["https://picsum.photos/800/500?random=8"]
+        },
+        {
+          id: "menu_008",
+          name: "Breakfast Burrito",
+          description: "Scrambled eggs, chorizo, beans, cheese, and salsa wrapped in a flour tortilla",
+          price: 11.99,
+          is_available: true,
+          images: ["https://picsum.photos/800/500?random=13"]
+        }
+      ]
+    },
+    {
+      order_id: "ORD-003",
+      order_date: new Date("2026-03-16T13:15:00"),
+      total_price: 24.99,
+      user_id: "usr_003",
+      user_name: "Mia Wong",
+      user_email: "mia.wong@example.com.au",
+      menu_items: [
+        {
+          id: "menu_004",
+          name: "Grilled Salmon",
+          description: "Atlantic salmon with lemon butter sauce, served with seasonal vegetables",
+          price: 24.99,
+          is_available: false,
+          images: ["https://picsum.photos/800/500?random=7"]
+        }
+      ]
+    },
+    {
+      order_id: "ORD-004",
+      order_date: new Date("2026-03-16T20:00:00"),
+      total_price: 58.97,
+      user_id: "usr_004",
+      user_name: "Carlos Ramirez",
+      user_email: "carlos.ramirez@example.com",
+      menu_items: [
+        {
+          id: "menu_007",
+          name: "Pasta Carbonara",
+          description: "Spaghetti with eggs, pecorino cheese, guanciale, and black pepper",
+          price: 14.99,
+          is_available: false,
+          images: ["https://picsum.photos/800/500?random=11"]
+        },
+        {
+          id: "menu_009",
+          name: "French Onion Soup",
+          description: "Caramelized onions in rich beef broth, topped with toasted bread and melted Gruyère",
+          price: 9.50,
+          is_available: true,
+          images: ["https://picsum.photos/800/500?random=15"]
+        },
+        {
+          id: "menu_010",
+          name: "New York Cheesecake",
+          description: "Creamy cheesecake with graham cracker crust and strawberry topping",
+          price: 7.99,
+          is_available: true,
+          images: ["https://picsum.photos/800/500?random=16"]
+        },
+        {
+          id: "menu_006",
+          name: "Mojito",
+          description: "Fresh mint, lime, rum, soda water, and sugar",
+          price: 9.99,
+          is_available: true,
+          images: ["https://picsum.photos/800/500?random=10"]
+        },
+        {
+          id: "menu_001",
+          name: "Club Sandwich",
+          description: "Triple layer sandwich with grilled chicken, bacon, lettuce, tomato, and mayonnaise",
+          price: 12.99,
+          is_available: true,
+          images: ["https://picsum.photos/800/500?random=1"]
+        }
+      ]
+    },
+    {
+      order_id: "ORD-005",
+      order_date: new Date("2026-03-17T11:30:00"),
+      total_price: 18.49,
+      user_id: "usr_005",
+      user_name: "Laura Schmidt",
+      user_email: "laura.schmidt@example.de",
+      menu_items: [
+        {
+          id: "menu_008",
+          name: "Breakfast Burrito",
+          description: "Scrambled eggs, chorizo, beans, cheese, and salsa wrapped in a flour tortilla",
+          price: 11.99,
+          is_available: true,
+          images: ["https://picsum.photos/800/500?random=13"]
+        },
+        {
+          id: "menu_005",
+          name: "Chocolate Lava Cake",
+          description: "Warm chocolate cake with molten center, served with vanilla ice cream",
+          price: 8.50,
+          is_available: true,
+          images: ["https://picsum.photos/800/500?random=8"]
+        }
+      ]
+    },
+    {
+      order_id: "ORD-006",
+      order_date: new Date("2026-03-17T18:30:00"),
+      total_price: 41.97,
+      user_id: "usr_001",
+      user_name: "Emily Johnson",
+      user_email: "emily.johnson@example.com",
+      menu_items: [
+        {
+          id: "menu_003",
+          name: "Margherita Pizza",
+          description: "Wood-fired pizza with fresh mozzarella, tomatoes, basil, and olive oil",
+          price: 16.99,
+          is_available: true,
+          images: ["https://picsum.photos/800/500?random=4"]
+        },
+        {
+          id: "menu_009",
+          name: "French Onion Soup",
+          description: "Caramelized onions in rich beef broth, topped with toasted bread and melted Gruyère",
+          price: 9.50,
+          is_available: true,
+          images: ["https://picsum.photos/800/500?random=15"]
+        },
+        {
+          id: "menu_010",
+          name: "New York Cheesecake",
+          description: "Creamy cheesecake with graham cracker crust and strawberry topping",
+          price: 7.99,
+          is_available: true,
+          images: ["https://picsum.photos/800/500?random=16"]
+        },
+        {
+          id: "menu_006",
+          name: "Mojito",
+          description: "Fresh mint, lime, rum, soda water, and sugar",
+          price: 9.99,
+          is_available: true,
+          images: ["https://picsum.photos/800/500?random=10"]
+        }
+      ]
+    }
+  ];
+  
