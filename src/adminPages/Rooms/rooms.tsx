@@ -8,6 +8,7 @@ import './rooms.css'
 import CreateRoomModal from "./modals/roomModal/roomModal"
 import { Room } from "../../types/room"
 import DeleteRoomModal from "./modals/deleteModal/deleteModal"
+import { dummyRooms } from "../../pages/HomePage/dummy_data"
 
 const Rooms = new ApiConsumer({ url: 'rooms/' })
 
@@ -15,7 +16,11 @@ const RoomsPage = () => {
     const [state, dispatch] = useReducer(reducer, initialState)
 
     useEffect(() => {
-        getRooms()
+        // getRooms()
+        dispatch({
+            type: roomsActions.LOADED_ROOMS_LIST,
+            payload: dummyRooms
+        })
     }, [state.loading])
 
     const getRooms = async () => {
