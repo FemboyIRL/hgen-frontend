@@ -1,41 +1,135 @@
-.roomCard {
-    border: 1px solid #ddd;
-    border-radius: 8px;
+/* Admin Room Card Styles */
+.admin-room-card {
+    background: white;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
     overflow: hidden;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
-.roomCard:hover {
-    transform: translateY(-5px);
+.admin-room-card:hover {
+    border-color: #adb5bd;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
-.roomImage {
+/* Image Wrapper */
+.admin-room-image-wrapper {
+    position: relative;
+    background-color: #f8f9fa;
+    height: 160px;
+    overflow: hidden;
+}
+
+.admin-room-image {
     width: 100%;
-    height: 200px;
-    object-fit: contain;
+    height: 100%;
+    object-fit: cover;
 }
 
-.roomDetails {
-    padding: 15px;
+/* Badge */
+.admin-room-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 500;
+    background: rgba(0,0,0,0.7);
+    color: white;
 }
 
-.roomDetails h4 {
-    margin-top: 0;
-    font-size: 1.25rem;
+.admin-room-badge.available {
+    background: #28a745;
 }
 
-.roomDetails p {
-    margin: 5px 0;
+.admin-room-badge.unavailable {
+    background: #dc3545;
 }
 
-.available {
-    color: green;
-    font-weight: bold;
+/* Info Container */
+.admin-room-info {
+    padding: 12px;
+    flex: 1;
 }
 
-.notAvailable {
-    color: red;
-    font-weight: bold;
+.admin-room-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 8px;
+}
+
+.admin-room-type {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0;
+    color: #212529;
+}
+
+.admin-room-number {
+    font-size: 12px;
+    color: #6c757d;
+    font-weight: 500;
+}
+
+/* Features */
+.admin-room-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.admin-feature {
+    font-size: 12px;
+    color: #495057;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.admin-feature i {
+    font-size: 11px;
+    color: #6c757d;
+}
+
+/* Description */
+.admin-room-description {
+    font-size: 12px;
+    color: #6c757d;
+    margin: 0 0 8px 0;
+    line-height: 1.4;
+}
+
+/* Amenities Tags */
+.admin-room-amenities {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: auto;
+}
+
+.admin-amenity-tag {
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 10px;
+    color: #495057;
+}
+
+.admin-amenity-more {
+    background: #e9ecef;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 10px;
+    color: #6c757d;
+    font-weight: 500;
 }

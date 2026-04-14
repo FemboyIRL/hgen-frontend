@@ -43,7 +43,46 @@ export const dummyRooms: Room[] = [
         bed_type: "King size",
         floor: 3,
         features: ["Terraza privada", "Sala de estar separada", "Servicio de habitaciones 24h"]
-    }
+    },
+    {
+        room_number: "310",
+        type: "Suite Familiar",
+        description: "Amplia suite con cama king size y sofá cama, perfecta para familias",
+        images: ["https://picsum.photos/800/500?random=6", "https://picsum.photos/800/500?random=7", "https://picsum.photos/800/500?random=8", "https://picsum.photos/800/500?random=9"],
+        beds: 2,  // Una cama king + sofá cama
+        capacity: 4,
+        amenities: ["WiFi", "TV", "Aire acondicionado", "Minibar", "Caja fuerte", "Chimenea", "Jacuzzi"],
+        size: 45,
+        bed_type: "King size",
+        floor: 3,
+        features: ["Terraza privada", "Sala de estar separada", "Servicio de habitaciones 24h"]
+    },
+    {
+        room_number: "310",
+        type: "Suite Familiar",
+        description: "Amplia suite con cama king size y sofá cama, perfecta para familias",
+        images: ["https://picsum.photos/800/500?random=6", "https://picsum.photos/800/500?random=7", "https://picsum.photos/800/500?random=8", "https://picsum.photos/800/500?random=9"],
+        beds: 2,  // Una cama king + sofá cama
+        capacity: 4,
+        amenities: ["WiFi", "TV", "Aire acondicionado", "Minibar", "Caja fuerte", "Chimenea", "Jacuzzi"],
+        size: 45,
+        bed_type: "King size",
+        floor: 3,
+        features: ["Terraza privada", "Sala de estar separada", "Servicio de habitaciones 24h"]
+    },
+    {
+        room_number: "310",
+        type: "Suite Familiar",
+        description: "Amplia suite con cama king size y sofá cama, perfecta para familias",
+        images: ["https://picsum.photos/800/500?random=6", "https://picsum.photos/800/500?random=7", "https://picsum.photos/800/500?random=8", "https://picsum.photos/800/500?random=9"],
+        beds: 2,  // Una cama king + sofá cama
+        capacity: 4,
+        amenities: ["WiFi", "TV", "Aire acondicionado", "Minibar", "Caja fuerte", "Chimenea", "Jacuzzi"],
+        size: 45,
+        bed_type: "King size",
+        floor: 3,
+        features: ["Terraza privada", "Sala de estar separada", "Servicio de habitaciones 24h"]
+    },
 ];
 
 export const dummyOffers: Offer[] = [
@@ -79,6 +118,83 @@ export const dummyOffers: Offer[] = [
         images: ["https://picsum.photos/800/500?random=31"],
         original_price: 7800,
         discount_price: 6499,
+    },
+    {
+        id: "offer-4",
+        title: "Oferta Anticipada",
+        description: "Reserva con anticipación y obtén un descuento exclusivo.",
+        images: [
+            "https://picsum.photos/800/500?random=41",
+            "https://picsum.photos/800/500?random=42",
+        ],
+        original_price: 2800,
+        discount_price: 2199,
+    },
+    {
+        id: "offer-4",
+        title: "Oferta Anticipada",
+        description: "Reserva con anticipación y obtén un descuento exclusivo.",
+        images: [
+            "https://picsum.photos/800/500?random=41",
+            "https://picsum.photos/800/500?random=42",
+        ],
+        original_price: 2800,
+        discount_price: 2199,
+    },
+    {
+        id: "offer-4",
+        title: "Oferta Anticipada",
+        description: "Reserva con anticipación y obtén un descuento exclusivo.",
+        images: [
+            "https://picsum.photos/800/500?random=41",
+            "https://picsum.photos/800/500?random=42",
+        ],
+        original_price: 2800,
+        discount_price: 2199,
+    },
+    {
+        id: "offer-4",
+        title: "Oferta Anticipada",
+        description: "Reserva con anticipación y obtén un descuento exclusivo.",
+        images: [
+            "https://picsum.photos/800/500?random=41",
+            "https://picsum.photos/800/500?random=42",
+        ],
+        original_price: 2800,
+        discount_price: 2199,
+    },
+    {
+        id: "offer-4",
+        title: "Oferta Anticipada",
+        description: "Reserva con anticipación y obtén un descuento exclusivo.",
+        images: [
+            "https://picsum.photos/800/500?random=41",
+            "https://picsum.photos/800/500?random=42",
+        ],
+        original_price: 2800,
+        discount_price: 2199,
+    },
+    {
+        id: "offer-4",
+        title: "Oferta Anticipada",
+        description: "Reserva con anticipación y obtén un descuento exclusivo.",
+        images: [
+            "https://picsum.photos/800/500?random=41",
+            "https://picsum.photos/800/500?random=42",
+        ],
+        original_price: 2800,
+        discount_price: 2199,
+    },
+    {
+        id: "offer-4",
+        title: "Oferta Anticipada",
+        description: "Reserva con anticipación y obtén un descuento exclusivo.",
+        images: [
+            "https://picsum.photos/800/500?random=41",
+            "https://picsum.photos/800/500?random=42",
+        ],
+        original_price: 2800,
+        discount_price: 2199,
     },
     {
         id: "offer-4",
