@@ -6,6 +6,7 @@ import LoadingSpinnerContainer from "../../components/LoadingSpinner/loading-spi
 import ApiConsumer from "../../services/api_consumer"
 import { Order } from "../../types/order"
 import CreateOrderModal from "./orderModal/orderModal"
+import { dummyCustomers, dummyMenuItems, dummyOrders } from "../../pages/HomePage/dummy_data"
 
 const Orders = new ApiConsumer({ url: "orders/" })
 const Customers = new ApiConsumer({ url: "clients/" })
@@ -22,9 +23,27 @@ const OrderPage = () => {
     }
 
     useEffect(() => {
-        getOrders()
-        getCustomers()
-        getMenuItems()
+        // getOrders()
+        // getCustomers()
+        // getMenuItems()
+        dispatch({
+            type: ordersActions.CHANGE_VALUE,
+            payload: {
+                prop: 'menuItems',
+                data: dummyMenuItems
+            }
+        })
+        dispatch({
+            type: ordersActions.CHANGE_VALUE,
+            payload: {
+                prop: 'customers',
+                data: dummyCustomers
+            }
+        })
+        dispatch({
+            type: ordersActions.LOADED_ORDERS_LIST,
+            payload: dummyOrders
+        })
     }, [state.loading])
 
     const getMenuItems = async () => {

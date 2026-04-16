@@ -102,7 +102,7 @@ const OffersPage = () => {
                                         <Row className="admin-cards-row">
                                             {state.offers.map((offer: Offer) => (
                                                 <Col key={offer.id} xs="12" sm="6" md="4" lg="3" className="admin-card-col">
-                                                    <div className="admin-room-card" onClick={() => selectOffer("offerModal", !state?.offerModal, room)}>
+                                                    <div className="admin-room-card" onClick={() => selectOffer("offerModal", !state?.offerModal, offer)}>
                                                         {/* Imagen principal */}
                                                         <div className="admin-offer-image-wrapper">
                                                             <img

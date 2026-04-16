@@ -10,7 +10,7 @@ export interface MenuItemsList {
 
 
 const initialState = {
-    loading: true,
+    loading: false,
     orderModal: false,
     deleteOrderModal: false,
     menuItems: [] as MenuItem[],
