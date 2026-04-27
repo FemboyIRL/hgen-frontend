@@ -9,7 +9,7 @@ import { MenuItem } from "../../types/menu_item"
 import CreateMenuItemModal from "./modals/menuModal/menuModal"
 import DeleteMenuItemModal from "./modals/deleteModal/deleteModal"
 import { dummyMenuItems } from "../../pages/HomePage/dummy_data"
-import { FaUtensils } from "react-icons/fa";
+import { FaSearch, FaUtensils } from "react-icons/fa";
 
 const MenuItems = new ApiConsumer({ url: 'menu/' })
 
@@ -88,7 +88,7 @@ const MenuItemsPage = () => {
                     <div className="innerContent">
                         <div className="innerContain">
                             <div className="titleContain">
-                                <FaUtensils size={50}/>
+                                <FaUtensils size={50} />
                                 <div className="title">
                                     <h3>Menu</h3>
                                     <p>Lista de items del menu registrados</p>
@@ -99,12 +99,16 @@ const MenuItemsPage = () => {
                                     <Col xs="12" sm="7" md="7" lg="7" xl="8">
                                         <Row>
                                             <form action="">
-                                                <img src="/icons/iconSearch.svg" alt="" />
+                                                <FaSearch size={18} />
+
                                                 <input
                                                     type="search"
                                                     name="searchBar"
                                                     value={state.searchTerm}
-                                                    onChange={(e) => changeValue("searchTerm", e.target.value)}
+                                                    onChange={(e) =>
+                                                        changeValue("searchTerm", e.target.value)
+                                                    }
+                                                    placeholder="Buscar cliente..."
                                                 />
                                             </form>
                                         </Row>

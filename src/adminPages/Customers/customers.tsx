@@ -9,6 +9,7 @@ import ApiConsumer from "../../services/api_consumer";
 import DeleteModal from "./modals/deleteCustomerModal/deleteModal";
 import { Customer } from "../../types/customer";
 import CreateClientModal from "./modals/createCustomerModal/userModal";
+import { FaSearch, FaUserPlus } from "react-icons/fa";
 import { dummyCustomers } from "../../pages/HomePage/dummy_data";
 
 const Customers = new ApiConsumer({ url: "clients" })
@@ -88,19 +89,31 @@ const CustomersPage = () => {
                                     <Col xs="12" sm="7" md="7" lg="7" xl="8">
                                         <Row>
                                             <form action="">
-                                                <img src="/icons/iconSearch.svg" alt="" />
+                                                <FaSearch size={18} />
+
                                                 <input
                                                     type="search"
                                                     name="searchBar"
                                                     value={state.searchTerm}
-                                                    onChange={(e) => changeValue("searchTerm", e.target.value)}
+                                                    onChange={(e) =>
+                                                        changeValue("searchTerm", e.target.value)
+                                                    }
+                                                    placeholder="Buscar cliente..."
                                                 />
                                             </form>
                                         </Row>
                                     </Col>
+
                                     <Col xs="12" sm="5" md="5" lg="5" xl="4">
                                         <Row style={{ justifyContent: "end" }}>
-                                            <Button onClick={() => changeValue("customerModal", !state.customerModal)}>
+                                            <Button
+                                                onClick={() =>
+                                                    changeValue(
+                                                        "customerModal",
+                                                        !state.customerModal
+                                                    )
+                                                }
+                                            >
                                                 Nuevo Cliente
                                             </Button>
                                         </Row>

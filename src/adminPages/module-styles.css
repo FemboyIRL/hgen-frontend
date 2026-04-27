@@ -44,14 +44,14 @@
 
 .moduleContain .moduleInner .innerContent .innerContain .searchBarContain {
   position: relative;
-  margin: 2% 13px 2% 0;
+  margin: 2% 15px 2% 0px;
 }
 
-.moduleContain .moduleInner .innerContent .innerContain .searchBarContain img {
+.moduleContain .moduleInner .innerContent .innerContain .searchBarContain svg {
   position: absolute;
+  margin-left: 8px;
   margin-top: 8px; /* Ajusta para centrar verticalmente */
   width: 24px; /* Reduce un poco el tamaño si es necesario */
-  left: 15px; /* Usa px en lugar de % para más precisión */
   z-index: 1; /* Asegura que el ícono esté encima */
   pointer-events: none; /* Permite hacer clic a través del ícono */
 }
