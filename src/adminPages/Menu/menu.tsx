@@ -3,7 +3,7 @@ import menuItemsActions from "./reducer/actions"
 import { useEffect, useReducer } from "react"
 import { initialState, reducer } from "./reducer/reducer"
 import LoadingSpinnerContainer from "../../components/LoadingSpinner/loading-spinner"
-import ApiConsumer from "../../services/api_consumer"
+// import ApiConsumer from "../../services/api_consumer"
 import './menu.css'
 import { MenuItem } from "../../types/menu_item"
 import CreateMenuItemModal from "./modals/menuModal/menuModal"
@@ -11,7 +11,7 @@ import DeleteMenuItemModal from "./modals/deleteModal/deleteModal"
 import { dummyMenuItems } from "../../pages/HomePage/dummy_data"
 import { FaSearch, FaUtensils } from "react-icons/fa";
 
-const MenuItems = new ApiConsumer({ url: 'menu/' })
+// const MenuItems = new ApiConsumer({ url: 'menu/' })
 
 const MenuItemsPage = () => {
     const [state, dispatch] = useReducer(reducer, initialState)
@@ -34,35 +34,35 @@ const MenuItemsPage = () => {
         return filteredList;
     };
 
-    const getmenuItems = async () => {
-        try {
-            const { status, data } = await MenuItems.getAll(
-                state.searchTerm ? `?search=${state.searchTerm}` : ''
-            )
-            if (status) {
-                const parsedData = data.data.map((menuItem: any) => {
-                    try {
-                        return {
-                            ...menuItem,
-                            images: JSON.parse(menuItem.images),
-                        };
-                    } catch (error) {
-                        console.error("Error al parsear las imágenes:", error);
-                        return {
-                            ...menuItem,
-                            images: [],
-                        };
-                    }
-                });
-                dispatch({
-                    type: menuItemsActions.LOADED_MENU_LIST,
-                    payload: parsedData
-                })
-            }
-        } catch (e) {
-            console.log(e)
-        }
-    }
+    // const getmenuItems = async () => {
+    //     try {
+    //         const { status, data } = await MenuItems.getAll(
+    //             state.searchTerm ? `?search=${state.searchTerm}` : ''
+    //         )
+    //         if (status) {
+    //             const parsedData = data.data.map((menuItem: any) => {
+    //                 try {
+    //                     return {
+    //                         ...menuItem,
+    //                         images: JSON.parse(menuItem.images),
+    //                     };
+    //                 } catch (error) {
+    //                     console.error("Error al parsear las imágenes:", error);
+    //                     return {
+    //                         ...menuItem,
+    //                         images: [],
+    //                     };
+    //                 }
+    //             });
+    //             dispatch({
+    //                 type: menuItemsActions.LOADED_MENU_LIST,
+    //                 payload: parsedData
+    //             })
+    //         }
+    //     } catch (e) {
+    //         console.log(e)
+    //     }
+    // }
 
     const changeValue = (prop: string, data: any) => {
         dispatch({

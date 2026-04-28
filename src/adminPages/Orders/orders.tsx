@@ -3,14 +3,14 @@ import { Button, Col, Row } from "react-bootstrap"
 import { PencilFill, Trash3Fill } from "react-bootstrap-icons"
 import { initialState, ordersActions, reducer } from "./reducer/reducer"
 import LoadingSpinnerContainer from "../../components/LoadingSpinner/loading-spinner"
-import ApiConsumer from "../../services/api_consumer"
+// import ApiConsumer from "../../services/api_consumer"
 import { Order } from "../../types/order"
 import CreateOrderModal from "./orderModal/orderModal"
 import { dummyCustomers, dummyMenuItems, dummyOrders } from "../../pages/HomePage/dummy_data"
 
-const Orders = new ApiConsumer({ url: "orders/" })
-const Customers = new ApiConsumer({ url: "clients/" })
-const MenuItems = new ApiConsumer({ url: "menu/" })
+// const Orders = new ApiConsumer({ url: "orders/" })
+// const Customers = new ApiConsumer({ url: "clients/" })
+// const MenuItems = new ApiConsumer({ url: "menu/" })
 
 const OrderPage = () => {
     const [state, dispatch] = useReducer(reducer, initialState)
@@ -46,68 +46,68 @@ const OrderPage = () => {
         })
     }, [state.loading])
 
-    const getMenuItems = async () => {
-        try {
-            const { status, data } = await MenuItems.getAll()
-            if (status) {
-                const parsedData = data.data.map((menuItem: any) => {
-                    try {
-                        return {
-                            ...menuItem,
-                            images: JSON.parse(menuItem.images),
-                        };
-                    } catch (error) {
-                        console.error("Error al parsear las imágenes:", error);
-                        return {
-                            ...menuItem,
-                            images: [],
-                        };
-                    }
-                });
-                dispatch({
-                    type: ordersActions.CHANGE_VALUE,
-                    payload: {
-                        prop: "menuItems",
-                        data: parsedData
-                    }
-                })
-            }
-        } catch (e) {
-            console.log(e)
-        }
-    }
+    // const getMenuItems = async () => {
+    //     try {
+    //         const { status, data } = await MenuItems.getAll()
+    //         if (status) {
+    //             const parsedData = data.data.map((menuItem: any) => {
+    //                 try {
+    //                     return {
+    //                         ...menuItem,
+    //                         images: JSON.parse(menuItem.images),
+    //                     };
+    //                 } catch (error) {
+    //                     console.error("Error al parsear las imágenes:", error);
+    //                     return {
+    //                         ...menuItem,
+    //                         images: [],
+    //                     };
+    //                 }
+    //             });
+    //             dispatch({
+    //                 type: ordersActions.CHANGE_VALUE,
+    //                 payload: {
+    //                     prop: "menuItems",
+    //                     data: parsedData
+    //                 }
+    //             })
+    //         }
+    //     } catch (e) {
+    //         console.log(e)
+    //     }
+    // }
 
-    const getCustomers = async () => {
-        try {
-            const { status, data } = await Customers.getAll()
-            if (status) {
-                dispatch({
-                    type: ordersActions.CHANGE_VALUE,
-                    payload: {
-                        prop: 'customers',
-                        data: data.data
-                    }
-                })
-            }
-        } catch (e) {
-            console.log(e)
-        }
-    }
+    // const getCustomers = async () => {
+    //     try {
+    //         const { status, data } = await Customers.getAll()
+    //         if (status) {
+    //             dispatch({
+    //                 type: ordersActions.CHANGE_VALUE,
+    //                 payload: {
+    //                     prop: 'customers',
+    //                     data: data.data
+    //                 }
+    //             })
+    //         }
+    //     } catch (e) {
+    //         console.log(e)
+    //     }
+    // }
 
-    const getOrders = async () => {
-        try {
-            const { status, data } = await Orders.getAll()
-            if (status) {
-                console.log(data)
-                dispatch({
-                    type: ordersActions.LOADED_ORDERS_LIST,
-                    payload: data.data
-                })
-            }
-        } catch (e) {
-            console.log('papu', e)
-        }
-    }
+    // const getOrders = async () => {
+    //     try {
+    //         const { status, data } = await Orders.getAll()
+    //         if (status) {
+    //             console.log(data)
+    //             dispatch({
+    //                 type: ordersActions.LOADED_ORDERS_LIST,
+    //                 payload: data.data
+    //             })
+    //         }
+    //     } catch (e) {
+    //         console.log('papu', e)
+    //     }
+    // }
 
     const changeValue = (prop: string, data: any) => {
         dispatch({

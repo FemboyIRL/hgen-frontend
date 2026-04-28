@@ -2,7 +2,7 @@ import { Button, Col, Form, FormControl, FormGroup, Row, } from "react-bootstrap
 import { TrashFill } from "react-bootstrap-icons";
 import ApiConsumer from "../../../../services/api_consumer";
 import roomsActions from "../../reducer/actions";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { RoomReducer } from "../../reducer/constants";
 import FormModal from "../../../../components/FormModal/form-modal";
 import { toast } from "react-toastify";
@@ -20,8 +20,8 @@ interface CreateRoomModalProps {
 const Rooms = new ApiConsumer({ url: 'rooms/' })
 
 const CreateRoomModal: React.FC<CreateRoomModalProps> = ({ stateReducer, dispatch, changeModal }) => {
-    const [amenitiesInput, setAmenitiesInput] = useState('');
-    const [featuresInput, setFeaturesInput] = useState('');
+    // const [amenitiesInput, setAmenitiesInput] = useState('');
+    // const [featuresInput, setFeaturesInput] = useState('');
 
     // Sugerencias predefinidas (opcional)
     const amenitySuggestions = [
@@ -62,7 +62,40 @@ const CreateRoomModal: React.FC<CreateRoomModalProps> = ({ stateReducer, dispatc
     }
 
     const handleOnChangeInput = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        const { name, files, value } = e.target
+        const { name, value } = e.target;
+
+        // Para inputs de tipo file, necesitamos un manejo especial
+        if (e.target instanceof HTMLInputElement && name === 'images' && e.target.files) {
+            const { files } = e.target;
+
+            if (files && files.length > 0) {
+                // Validar tamaño y tipo de imágenes
+                const validFiles = Array.from(files).filter(file => {
+                    const isValidType = ['image/jpeg', 'image/png', 'image/jpg', 'image/webp'].includes(file.type);
+                    const isValidSize = file.size <= 5 * 1024 * 1024; // 5MB
+
+                    if (!isValidType) {
+                        toast.error(`El archivo ${file.name} no es una imagen válida (solo JPG, PNG, WEBP)`);
+                        return false;
+                    }
+                    if (!isValidSize) {
+                        toast.error(`El archivo ${file.name} excede el tamaño máximo de 5MB`);
+                        return false;
+                    }
+                    return true;
+                });
+
+                if (validFiles.length > 0) {
+                    dispatch({
+                        type: roomsActions.ADD_IMAGES,
+                        payload: {
+                            data: validFiles
+                        }
+                    });
+                }
+            }
+            return;
+        }
 
         // Validación para número de habitación (solo números)
         if (name === 'room_number') {
@@ -133,35 +166,8 @@ const CreateRoomModal: React.FC<CreateRoomModalProps> = ({ stateReducer, dispatc
             }
         }
 
-        // Manejo de imágenes
-        if (name === 'images' && files && files.length > 0) {
-            // Validar tamaño y tipo de imágenes
-            const validFiles = Array.from(files).filter(file => {
-                const isValidType = ['image/jpeg', 'image/png', 'image/jpg', 'image/webp'].includes(file.type);
-                const isValidSize = file.size <= 5 * 1024 * 1024; // 5MB
-
-                if (!isValidType) {
-                    toast.error(`El archivo ${file.name} no es una imagen válida (solo JPG, PNG, WEBP)`);
-                    return false;
-                }
-                if (!isValidSize) {
-                    toast.error(`El archivo ${file.name} excede el tamaño máximo de 5MB`);
-                    return false;
-                }
-                return true;
-            });
-
-            if (validFiles.length > 0) {
-                dispatch({
-                    type: roomsActions.ADD_IMAGES,
-                    payload: {
-                        data: validFiles
-                    }
-                });
-            }
-        }
         // Manejo de amenities (convierte string separado por comas a array)
-        else if (name === 'amenities') {
+        if (name === 'amenities') {
             const amenitiesArray = value.split(',').map(item => item.trim()).filter(item => item !== '');
 
             // Validar que no haya elementos duplicados
@@ -184,9 +190,11 @@ const CreateRoomModal: React.FC<CreateRoomModalProps> = ({ stateReducer, dispatc
             }
 
             changeValueForm(name, uniqueAmenities);
+            return;
         }
+
         // Manejo de features (convierte string separado por comas a array)
-        else if (name === 'features') {
+        if (name === 'features') {
             const featuresArray = value.split(',').map(item => item.trim()).filter(item => item !== '');
 
             // Validar que no haya elementos duplicados
@@ -209,28 +217,34 @@ const CreateRoomModal: React.FC<CreateRoomModalProps> = ({ stateReducer, dispatc
             }
 
             changeValueForm(name, uniqueFeatures);
+            return;
         }
+
         // Manejo de tipo de cama
-        else if (name === 'bed_type') {
+        if (name === 'bed_type') {
             if (value.length > 50) {
                 toast.error('El tipo de cama no puede tener más de 50 caracteres');
                 return;
             }
             changeValueForm(name, value);
+            return;
         }
+
         // Manejo de descripción
-        else if (name === 'description') {
+        if (name === 'description') {
             if (value.length > 500) {
                 toast.error('La descripción no puede tener más de 500 caracteres');
                 return;
             }
             changeValueForm(name, value);
+            return;
         }
+
         // Para los demás campos
-        else if (name !== 'images') {
+        if (name !== 'images') {
             changeValueForm(name, value);
         }
-    }
+    };
 
     const closeModal = () => {
         dispatch({

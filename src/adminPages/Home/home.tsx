@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
     FaUsers,
     FaUserTie,
@@ -7,18 +7,15 @@ import {
     FaShoppingCart,
     FaCalendarCheck,
     FaBed,
-    FaConciergeBell,
     FaArrowRight,
     FaEye,
     FaSignOutAlt,
     FaSignInAlt,
-    FaClock,
-    FaChartLine,
-    FaMoneyBillWave,
+
 } from 'react-icons/fa';
 import './AdminDashboard.css';
 import { useNavigate } from 'react-router-dom';
-import CreateEmployeeModal from '../Employers/modals/createEmployeeModal/userModal';
+// import CreateEmployeeModal from '../Employers/modals/createEmployeeModal/userModal';
 
 const AdminDashboard: React.FC = () => {
 

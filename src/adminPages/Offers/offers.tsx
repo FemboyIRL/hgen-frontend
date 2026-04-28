@@ -1,5 +1,5 @@
 import { useEffect, useReducer } from "react"
-import ApiConsumer from "../../services/api_consumer"
+// import ApiConsumer from "../../services/api_consumer"
 import initialState from "./reducer/constants"
 import { reducer, offerActions } from "./reducer/reducer"
 import { Offer } from "../../types/offer"
@@ -10,7 +10,7 @@ import CreateOfferModal from "./modals/offerModal/offerModal"
 import DeleteOfferModal from "./modals/deleteModal/deleteOffer"
 import { dummyOffers } from "../../pages/HomePage/dummy_data"
 
-const Offers = new ApiConsumer({ url: 'offers/' })
+// const Offers = new ApiConsumer({ url: 'offers/' })
 
 const OffersPage = () => {
     const [state, dispatch] = useReducer(reducer, initialState)
@@ -23,33 +23,33 @@ const OffersPage = () => {
         })
     }, [state.loading])
 
-    const getOffers = async () => {
-        try {
-            const { status, data } = await Offers.getAll()
-            if (status) {
-                const parsedData = data.data.map((offer: any) => {
-                    try {
-                        return {
-                            ...offer,
-                            images: JSON.parse(offer.images),
-                        };
-                    } catch (error) {
-                        console.error("Error al parsear las imágenes:", error);
-                        return {
-                            ...offer,
-                            images: [],
-                        };
-                    }
-                });
-                dispatch({
-                    type: offerActions.LOADED_OFFER_LIST,
-                    payload: parsedData
-                })
-            }
-        } catch (e) {
-            console.log(e)
-        }
-    }
+    // const getOffers = async () => {
+    //     try {
+    //         const { status, data } = await Offers.getAll()
+    //         if (status) {
+    //             const parsedData = data.data.map((offer: any) => {
+    //                 try {
+    //                     return {
+    //                         ...offer,
+    //                         images: JSON.parse(offer.images),
+    //                     };
+    //                 } catch (error) {
+    //                     console.error("Error al parsear las imágenes:", error);
+    //                     return {
+    //                         ...offer,
+    //                         images: [],
+    //                     };
+    //                 }
+    //             });
+    //             dispatch({
+    //                 type: offerActions.LOADED_OFFER_LIST,
+    //                 payload: parsedData
+    //             })
+    //         }
+    //     } catch (e) {
+    //         console.log(e)
+    //     }
+    // }
 
     const changeValue = (prop: string, data: any) => {
         dispatch({

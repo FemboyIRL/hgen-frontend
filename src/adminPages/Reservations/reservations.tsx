@@ -21,7 +21,7 @@ import { dummyReservations } from '../../pages/HomePage/dummy_data';
 const Reservations: React.FC = () => {
     const [activeTab, setActiveTab] = useState('todas');
     const [searchTerm, setSearchTerm] = useState('');
-    const [showModal, setShowModal] = useState(false);
+    // const [showModal, setShowModal] = useState(false);
     const [reservations, setReservations] = useState<Reservation[]>([])
 
     useEffect(() => {
@@ -100,7 +100,7 @@ const Reservations: React.FC = () => {
                     <p>Administra todas las reservaciones del hotel</p>
                 </div>
                 <div className="header-actions">
-                    <button className="btn-primary" onClick={() => setShowModal(true)}>
+                    <button className="btn-primary" onClick={() => { }}>
                         <FaPlus /> Nueva Reservación
                     </button>
                     <button className="btn-secondary">

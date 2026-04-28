@@ -5,14 +5,14 @@ import LoadingSpinnerContainer from "../../components/LoadingSpinner/loading-spi
 import '../module-styles.css'
 import { useEffect, useReducer } from "react";
 import { reducer, initialState, EmployeeActions } from "./reducer/reducer"
-import ApiConsumer from "../../services/api_consumer";
+// import ApiConsumer from "../../services/api_consumer";
 import { Employee } from "../../types/employee";
 import { FaSearch, FaUserTie } from "react-icons/fa";
 import { dummyEmployees } from "../../pages/HomePage/dummy_data";
 import DeleteEmployeeModal from "./modals/deleteEmployeeModal/deleteModal";
 import CreateEmployeeModal from "./modals/createEmployeeModal/userModal";
 
-const Employers = new ApiConsumer({ url: "clients" })
+// const Employers = new ApiConsumer({ url: "clients" })
 
 const EmployeesPage = () => {
 
@@ -38,21 +38,21 @@ const EmployeesPage = () => {
         })
     }, [state.loading]);
 
-    const getEmployees = async () => {
-        try {
-            const { status, data } = await Employers.getAll(
-                state.searchTerm ? `?search=${state.searchTerm}` : ''
-            );
-            if (status) {
-                dispatch({
-                    type: EmployeeActions.LOADED_EMPLOYEES_LIST,
-                    payload: data.data
-                });
-            }
-        } catch (error) {
-            console.error('Error fetching Employers:', error);
-        }
-    }
+    // const getEmployees = async () => {
+    //     try {
+    //         const { status, data } = await Employers.getAll(
+    //             state.searchTerm ? `?search=${state.searchTerm}` : ''
+    //         );
+    //         if (status) {
+    //             dispatch({
+    //                 type: EmployeeActions.LOADED_EMPLOYEES_LIST,
+    //                 payload: data.data
+    //             });
+    //         }
+    //     } catch (error) {
+    //         console.error('Error fetching Employers:', error);
+    //     }
+    // }
 
     const changeValue = (prop: string, data: any) => {
         dispatch({

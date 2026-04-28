@@ -5,14 +5,14 @@ import LoadingSpinnerContainer from "../../components/LoadingSpinner/loading-spi
 import '../module-styles.css'
 import { useEffect, useReducer } from "react";
 import { reducer, initialState, CustomerActions } from "./reducer/reducer"
-import ApiConsumer from "../../services/api_consumer";
+// import ApiConsumer from "../../services/api_consumer";
 import DeleteModal from "./modals/deleteCustomerModal/deleteModal";
 import { Customer } from "../../types/customer";
 import CreateClientModal from "./modals/createCustomerModal/userModal";
 import { FaSearch } from "react-icons/fa";
 import { dummyCustomers } from "../../pages/HomePage/dummy_data";
 
-const Customers = new ApiConsumer({ url: "clients" })
+// const Customers = new ApiConsumer({ url: "clients" })
 
 const CustomersPage = () => {
 

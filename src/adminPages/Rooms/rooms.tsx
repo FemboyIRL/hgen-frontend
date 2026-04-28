@@ -3,14 +3,14 @@ import roomsActions from "./reducer/actions"
 import { useEffect, useReducer } from "react"
 import { initialState, reducer } from "./reducer/reducer"
 import LoadingSpinnerContainer from "../../components/LoadingSpinner/loading-spinner"
-import ApiConsumer from "../../services/api_consumer"
+// import ApiConsumer from "../../services/api_consumer"
 import './rooms.css'
 import CreateRoomModal from "./modals/roomModal/roomModal"
 import { Room } from "../../types/room"
 import DeleteRoomModal from "./modals/deleteModal/deleteModal"
 import { dummyRooms } from "../../pages/HomePage/dummy_data"
 
-const Rooms = new ApiConsumer({ url: 'rooms/' })
+// const Rooms = new ApiConsumer({ url: 'rooms/' })
 
 const RoomsPage = () => {
     const [state, dispatch] = useReducer(reducer, initialState)
@@ -24,33 +24,33 @@ const RoomsPage = () => {
         })
     }, [state.loading])
 
-    const getRooms = async () => {
-        try {
-            const { status, data } = await Rooms.getAll()
-            if (status) {
-                const parsedData = data.data.map((room: any) => {
-                    try {
-                        return {
-                            ...room,
-                            images: JSON.parse(room.images),
-                        };
-                    } catch (error) {
-                        console.error("Error al parsear las imágenes:", error);
-                        return {
-                            ...room,
-                            images: [],
-                        };
-                    }
-                });
-                dispatch({
-                    type: roomsActions.LOADED_ROOMS_LIST,
-                    payload: parsedData
-                })
-            }
-        } catch (e) {
-            console.log(e)
-        }
-    }
+    // const getRooms = async () => {
+    //     try {
+    //         const { status, data } = await Rooms.getAll()
+    //         if (status) {
+    //             const parsedData = data.data.map((room: any) => {
+    //                 try {
+    //                     return {
+    //                         ...room,
+    //                         images: JSON.parse(room.images),
+    //                     };
+    //                 } catch (error) {
+    //                     console.error("Error al parsear las imágenes:", error);
+    //                     return {
+    //                         ...room,
+    //                         images: [],
+    //                     };
+    //                 }
+    //             });
+    //             dispatch({
+    //                 type: roomsActions.LOADED_ROOMS_LIST,
+    //                 payload: parsedData
+    //             })
+    //         }
+    //     } catch (e) {
+    //         console.log(e)
+    //     }
+    // }
 
     const changeValue = (prop: string, data: any) => {
         dispatch({
