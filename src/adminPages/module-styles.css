@@ -36,6 +36,10 @@
   font-weight: bold;
 }
 
+.titleContain svg {
+  margin-top: 10px;
+}
+
 .moduleContain .moduleInner .innerContent .innerContain .titleContain .title p {
   font-size: 15px;
   font-weight: 400;

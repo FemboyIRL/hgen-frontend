@@ -4,6 +4,7 @@ import RoomsPage from "../adminPages/Rooms/rooms"
 import MenuItemsPage from "../adminPages/Menu/menu"
 import OffersPage from "../adminPages/Offers/offers"
 import OrderPage from "../adminPages/Orders/orders"
+import EmployeesPage from "../adminPages/Employers/employers"
 
 export const AdminRoutes = () => {
     return [
@@ -51,7 +52,7 @@ export const AdminRoutes = () => {
         },
         {
             path: "employees",
-            element: <></>,
+            element: <EmployeesPage />,
             title: "Empleados",
             icon: <Briefcase size={30} />,
         },

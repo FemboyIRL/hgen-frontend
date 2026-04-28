@@ -4,59 +4,59 @@ import { PencilFill, Trash3Fill } from "react-bootstrap-icons";
 import LoadingSpinnerContainer from "../../components/LoadingSpinner/loading-spinner";
 import '../module-styles.css'
 import { useEffect, useReducer } from "react";
-import { reducer, initialState, CustomerActions } from "./reducer/reducer"
+import { reducer, initialState, EmployeeActions } from "./reducer/reducer"
 import ApiConsumer from "../../services/api_consumer";
-import DeleteModal from "./modals/deleteCustomerModal/deleteModal";
-import { Customer } from "../../types/customer";
-import CreateClientModal from "./modals/createCustomerModal/userModal";
-import { FaSearch } from "react-icons/fa";
-import { dummyCustomers } from "../../pages/HomePage/dummy_data";
+import { Employee } from "../../types/employee";
+import { FaSearch, FaUserPlus, FaUserTie } from "react-icons/fa";
+import { dummyEmployees } from "../../pages/HomePage/dummy_data";
+import DeleteEmployeeModal from "./modals/deleteEmployeeModal/deleteModal";
+import CreateEmployeeModal from "./modals/createEmployeeModal/userModal";
 
-const Customers = new ApiConsumer({ url: "clients" })
+const Employers = new ApiConsumer({ url: "clients" })
 
-const CustomersPage = () => {
+const EmployeesPage = () => {
 
     const [state, dispatch] = useReducer(reducer, initialState);
 
-    const filterCustomerList = () => {
-        const customerList = state.customers;
+    const filterEmployeeList = () => {
+        const employeeList = state.employees;
 
-        const filteredList = customerList.filter((customer: Customer) =>
-            customer.fullName.toLowerCase().includes(state.searchTerm.toLowerCase()) ||
-            customer.email.toLowerCase().includes(state.searchTerm.toLowerCase()) ||
-            customer.phone.includes(state.searchTerm)
+        const filteredList = employeeList.filter((employee: Employee) =>
+            employee.fullName.toLowerCase().includes(state.searchTerm.toLowerCase()) ||
+            employee.email.toLowerCase().includes(state.searchTerm.toLowerCase()) ||
+            employee.position.includes(state.searchTerm)
         );
 
         return filteredList;
     };
 
     useEffect(() => {
-        // getCustomers();
+        // getEmployers();
         dispatch({
-            type: CustomerActions.LOADED_CUSTOMERS_LIST,
-            payload: dummyCustomers
+            type: EmployeeActions.LOADED_EMPLOYEES_LIST,
+            payload: dummyEmployees
         })
     }, [state.loading]);
 
-    // const getCustomers = async () => {
-    //     try {
-    //         const { status, data } = await Customers.getAll(
-    //             state.searchTerm ? `?search=${state.searchTerm}` : ''
-    //         );
-    //         if (status) {
-    //             dispatch({
-    //                 type: CustomerActions.LOADED_CUSTOMERS_LIST,
-    //                 payload: data.data
-    //             });
-    //         }
-    //     } catch (error) {
-    //         console.error('Error fetching customers:', error);
-    //     }
-    // }
+    const getEmployees = async () => {
+        try {
+            const { status, data } = await Employers.getAll(
+                state.searchTerm ? `?search=${state.searchTerm}` : ''
+            );
+            if (status) {
+                dispatch({
+                    type: EmployeeActions.LOADED_EMPLOYEES_LIST,
+                    payload: data.data
+                });
+            }
+        } catch (error) {
+            console.error('Error fetching Employers:', error);
+        }
+    }
 
     const changeValue = (prop: string, data: any) => {
         dispatch({
-            type: CustomerActions.CHANGE_VALUE,
+            type: EmployeeActions.CHANGE_VALUE,
             payload: {
                 prop,
                 data
@@ -64,12 +64,12 @@ const CustomersPage = () => {
         })
     }
 
-    const selectCustomerId = (prop: any, data: any, customer: Customer) => {
+    const selectEmployeeId = (prop: any, data: any, employee: Employee) => {
         changeValue(prop, data);
-        changeValue("currentCustomer", customer)
+        changeValue("currentEmployee", employee)
     }
 
-    const temporal_list = filterCustomerList();
+    const temporal_list = filterEmployeeList();
 
     return (
         <>
@@ -78,10 +78,10 @@ const CustomersPage = () => {
                     <div className="innerContent">
                         <div className="innerContain">
                             <div className="titleContain">
-                                <img src="/assets/icons/icon-customer.svg" alt="" width={50} />
+                                <FaUserTie size={50} color="#000" />
                                 <div className="title">
-                                    <h3>Clientes</h3>
-                                    <p>Lista de Clientes registrados</p>
+                                    <h3>Empleados</h3>
+                                    <p>Lista de Empleados registrados</p>
                                 </div>
                             </div>
                             <div className="searchBarContain">
@@ -98,7 +98,7 @@ const CustomersPage = () => {
                                                     onChange={(e) =>
                                                         changeValue("searchTerm", e.target.value)
                                                     }
-                                                    placeholder="Buscar cliente..."
+                                                    placeholder="Buscar empleado..."
                                                 />
                                             </form>
                                         </Row>
@@ -109,12 +109,12 @@ const CustomersPage = () => {
                                             <Button
                                                 onClick={() =>
                                                     changeValue(
-                                                        "customerModal",
-                                                        !state.customerModal
+                                                        "employeeModal",
+                                                        !state.employeeModal
                                                     )
                                                 }
                                             >
-                                                Nuevo Cliente
+                                                Nuevo Empleado
                                             </Button>
                                         </Row>
                                     </Col>
@@ -125,7 +125,7 @@ const CustomersPage = () => {
                             ) : (
                                 <>
                                     {temporal_list.length === 0 ? (
-                                        <p>No se encontraron clientes.</p>
+                                        <p>No se encontraron empleados.</p>
                                     ) : (
                                         <div className="tableModule">
                                             <table className="tableContain">
@@ -133,27 +133,29 @@ const CustomersPage = () => {
                                                     <tr>
                                                         <th>Nombre</th>
                                                         <th>Email</th>
-                                                        <th>Teléfono</th>
+                                                        <th>Puesto</th>
+                                                        <th>Fecha de contratación</th>
                                                         <th>Acciones</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    {temporal_list.map((customer: any) => (
-                                                        <tr key={`customer-${customer.id}`}>
-                                                            <td>{`${customer.fullName}`}</td>
-                                                            <td>{customer.email}</td>
-                                                            <td>{customer.phone}</td>
+                                                    {temporal_list.map((employee: any) => (
+                                                        <tr key={`employee-${employee.user_id}`}>
+                                                            <td>{employee.fullName}</td>
+                                                            <td>{employee.email}</td>
+                                                            <td>{employee.position}</td>
+                                                            <td>{new Date(employee.hire_date).toLocaleDateString()}</td>
                                                             <td>
                                                                 <div className="controllerOptions">
                                                                     <div className="optionsInner">
                                                                         <div className="option delete">
                                                                             <Trash3Fill
-                                                                                onClick={() => selectCustomerId("deleteCustomerModal", !state.deleteCustomerModal, customer)}
+                                                                                onClick={() => selectEmployeeId("deleteEmployeeModal", !state.deleteEmployeeModal, employee)}
                                                                             />
                                                                         </div>
                                                                         <div className="option edit">
                                                                             <PencilFill
-                                                                                onClick={() => selectCustomerId("customerModal", !state.customerModal, customer)}
+                                                                                onClick={() => selectEmployeeId("employeeModal", !state.employeeModal, employee)}
                                                                             />
                                                                         </div>
                                                                     </div>
@@ -171,10 +173,10 @@ const CustomersPage = () => {
                     </div>
                 </div>
             </div>
-            <DeleteModal stateReducer={state} dispatch={dispatch} changeModal={() => changeValue("deleteCustomerModal", !state.deleteCustomerModal)} />
-            <CreateClientModal stateReducer={state} dispatch={dispatch} changeModal={() => changeValue("customerModal", !state.customerModal)} />
+            <DeleteEmployeeModal stateReducer={state} dispatch={dispatch} changeModal={() => changeValue("deleteEmployeeModal", !state.deleteEmployeeModal)} />
+            <CreateEmployeeModal stateReducer={state} dispatch={dispatch} changeModal={() => changeValue("employeeModal", !state.employeeModal)} />
         </>
     );
 }
 
-export default CustomersPage
+export default EmployeesPage
