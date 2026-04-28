@@ -7,7 +7,7 @@ import { useEffect, useReducer } from "react";
 import { reducer, initialState, EmployeeActions } from "./reducer/reducer"
 import ApiConsumer from "../../services/api_consumer";
 import { Employee } from "../../types/employee";
-import { FaSearch, FaUserPlus, FaUserTie } from "react-icons/fa";
+import { FaSearch, FaUserTie } from "react-icons/fa";
 import { dummyEmployees } from "../../pages/HomePage/dummy_data";
 import DeleteEmployeeModal from "./modals/deleteEmployeeModal/deleteModal";
 import CreateEmployeeModal from "./modals/createEmployeeModal/userModal";

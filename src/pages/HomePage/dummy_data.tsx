@@ -3,7 +3,172 @@ import { Employee } from "../../types/employee";
 import { MenuItem } from "../../types/menu_item";
 import { Offer } from "../../types/offer";
 import { Order } from "../../types/order";
+import { Reservation } from "../../types/reservation";
 import { Room } from "../../types/room";
+
+
+export const dummyReservations: Reservation[] = [
+  {
+    id: 'RES-001',
+    customer_data: {
+      customer_id: 'CUST-001',
+      customer_name: 'María González',
+      customer_email: 'maria.gonzalez@email.com',
+      customer_phone: '+52 555 123 4567'
+    },
+    room_number: '301',
+    check_in_date: new Date('2024-01-15'),
+    check_out_date: new Date('2024-01-18'),
+    total_price: 7200,
+    status: 'confirmada',
+    employee: {
+      employee_id: 'EMP-001',
+      employee_name: 'Carlos Rodríguez'
+    },
+    billing_address: 'Av. Reforma 123, Col. Centro, CDMX',
+    payment_method: 'tarjeta_credito'
+  },
+  {
+    id: 'RES-002',
+    customer_data: {
+      customer_id: 'CUST-002',
+      customer_name: 'Carlos Rodríguez',
+      customer_email: 'carlos.rodriguez@email.com',
+      customer_phone: '+52 555 987 6543'
+    },
+    room_number: '205',
+    check_in_date: new Date('2024-01-15'),
+    check_out_date: new Date('2024-01-16'),
+    total_price: 1200,
+    status: 'confirmada',
+    employee: {
+      employee_id: 'EMP-002',
+      employee_name: 'Ana Martínez'
+    },
+    billing_address: 'Insurgentes Sur 456, Col. Roma, CDMX',
+    payment_method: 'efectivo'
+  },
+  {
+    id: 'RES-003',
+    customer_data: {
+      customer_id: 'CUST-003',
+      customer_name: 'Ana Martínez',
+      customer_email: 'ana.martinez@email.com',
+      customer_phone: '+52 555 456 7890'
+    },
+    room_number: '405',
+    check_in_date: new Date('2024-01-16'),
+    check_out_date: new Date('2024-01-20'),
+    total_price: 7200,
+    status: 'pendiente',
+    employee: {
+      employee_id: 'EMP-001',
+      employee_name: 'Carlos Rodríguez'
+    },
+    billing_address: 'Presidente Masaryk 789, Polanco, CDMX',
+    payment_method: 'transferencia'
+  },
+  {
+    id: 'RES-004',
+    customer_data: {
+      customer_id: 'CUST-004',
+      customer_name: 'Laura Sánchez',
+      customer_email: 'laura.sanchez@email.com',
+      customer_phone: '+52 555 234 5678'
+    },
+    room_number: '102',
+    check_in_date: new Date('2024-01-14'),
+    check_out_date: new Date('2024-01-15'),
+    total_price: 800,
+    status: 'check_in',
+    employee: {
+      employee_id: 'EMP-003',
+      employee_name: 'Laura Fernández'
+    },
+    billing_address: 'Av. Universidad 1000, Col. Narvarte, CDMX',
+    payment_method: 'tarjeta_debito'
+  },
+  {
+    id: 'RES-005',
+    customer_data: {
+      customer_id: 'CUST-005',
+      customer_name: 'Pedro López',
+      customer_email: 'pedro.lopez@email.com',
+      customer_phone: '+52 555 876 5432'
+    },
+    room_number: '208',
+    check_in_date: new Date('2024-01-13'),
+    check_out_date: new Date('2024-01-15'),
+    total_price: 2400,
+    status: 'check_out',
+    employee: {
+      employee_id: 'EMP-002',
+      employee_name: 'Ana Martínez'
+    },
+    billing_address: 'Periférico Sur 500, Jardines del Pedregal, CDMX',
+    payment_method: 'tarjeta_credito'
+  },
+  {
+    id: 'RES-006',
+    customer_data: {
+      customer_id: 'CUST-006',
+      customer_name: 'Sofia Ramírez',
+      customer_email: 'sofia.ramirez@email.com',
+      customer_phone: '+52 555 345 6789'
+    },
+    room_number: '302',
+    check_in_date: new Date('2024-01-17'),
+    check_out_date: new Date('2024-01-19'),
+    total_price: 4800,
+    status: 'cancelada',
+    employee: {
+      employee_id: 'EMP-001',
+      employee_name: 'Carlos Rodríguez'
+    },
+    billing_address: 'Eje Central 200, Col. Obrera, CDMX',
+    payment_method: 'efectivo'
+  },
+  {
+    id: 'RES-007',
+    customer_data: {
+      customer_id: 'CUST-007',
+      customer_name: 'Javier Méndez',
+      customer_email: 'javier.mendez@email.com',
+      customer_phone: '+52 555 678 9012'
+    },
+    room_number: '108',
+    check_in_date: new Date('2024-01-18'),
+    check_out_date: new Date('2024-01-21'),
+    total_price: 1800,
+    status: 'pendiente',
+    employee: {
+      employee_id: 'EMP-003',
+      employee_name: 'Laura Fernández'
+    },
+    billing_address: 'Av. Juárez 50, Col. Centro, CDMX',
+    payment_method: 'tarjeta_credito'
+  },
+  {
+    id: 'RES-008',
+    customer_data: {
+      customer_id: 'CUST-008',
+      customer_name: 'Isabel Torres',
+      customer_email: 'isabel.torres@email.com',
+      customer_phone: '+52 555 789 0123'
+    },
+    room_number: '410',
+    check_in_date: new Date('2024-01-19'),
+    check_out_date: new Date('2024-01-22'),
+    total_price: 5400,
+    status: 'confirmada',
+    employee: {
+      employee_id: 'EMP-001',
+      employee_name: 'Carlos Rodríguez'
+    },
+    billing_address: 'Paseo de la Reforma 250, Col. Juárez, CDMX',
+    payment_method: 'transferencia'
+  }
+];
 
 export const dummyEmployees: Employee[] = [
   {
