@@ -3,19 +3,25 @@ import menuItemsActions from "./reducer/actions"
 import { useEffect, useReducer } from "react"
 import { initialState, reducer } from "./reducer/reducer"
 import LoadingSpinnerContainer from "../../components/LoadingSpinner/loading-spinner"
-import ApiConsumer from "../../services/api_consumer"
+// import ApiConsumer from "../../services/api_consumer"
 import './menu.css'
 import { MenuItem } from "../../types/menu_item"
 import CreateMenuItemModal from "./modals/menuModal/menuModal"
 import DeleteMenuItemModal from "./modals/deleteModal/deleteModal"
+import { dummyMenuItems } from "../../pages/HomePage/dummy_data"
+import { FaSearch, FaUtensils } from "react-icons/fa";
 
-const MenuItems = new ApiConsumer({ url: 'menu/' })
+// const MenuItems = new ApiConsumer({ url: 'menu/' })
 
 const MenuItemsPage = () => {
     const [state, dispatch] = useReducer(reducer, initialState)
 
     useEffect(() => {
-        getmenuItems()
+        // getmenuItems()
+        dispatch({
+            type: menuItemsActions.LOADED_MENU_LIST,
+            payload: dummyMenuItems
+        })
     }, [state.loading])
 
     const filterMenuItemList = () => {
@@ -28,35 +34,35 @@ const MenuItemsPage = () => {
         return filteredList;
     };
 
-    const getmenuItems = async () => {
-        try {
-            const { status, data } = await MenuItems.getAll(
-                state.searchTerm ? `?search=${state.searchTerm}` : ''
-            )
-            if (status) {
-                const parsedData = data.data.map((menuItem: any) => {
-                    try {
-                        return {
-                            ...menuItem,
-                            images: JSON.parse(menuItem.images),
-                        };
-                    } catch (error) {
-                        console.error("Error al parsear las imágenes:", error);
-                        return {
-                            ...menuItem,
-                            images: [],
-                        };
-                    }
-                });
-                dispatch({
-                    type: menuItemsActions.LOADED_MENU_LIST,
-                    payload: parsedData
-                })
-            }
-        } catch (e) {
-            console.log(e)
-        }
-    }
+    // const getmenuItems = async () => {
+    //     try {
+    //         const { status, data } = await MenuItems.getAll(
+    //             state.searchTerm ? `?search=${state.searchTerm}` : ''
+    //         )
+    //         if (status) {
+    //             const parsedData = data.data.map((menuItem: any) => {
+    //                 try {
+    //                     return {
+    //                         ...menuItem,
+    //                         images: JSON.parse(menuItem.images),
+    //                     };
+    //                 } catch (error) {
+    //                     console.error("Error al parsear las imágenes:", error);
+    //                     return {
+    //                         ...menuItem,
+    //                         images: [],
+    //                     };
+    //                 }
+    //             });
+    //             dispatch({
+    //                 type: menuItemsActions.LOADED_MENU_LIST,
+    //                 payload: parsedData
+    //             })
+    //         }
+    //     } catch (e) {
+    //         console.log(e)
+    //     }
+    // }
 
     const changeValue = (prop: string, data: any) => {
         dispatch({
@@ -82,7 +88,7 @@ const MenuItemsPage = () => {
                     <div className="innerContent">
                         <div className="innerContain">
                             <div className="titleContain">
-                                <img src="/assets/icons/icon-menu.svg" alt="" width={50} />
+                                <FaUtensils size={50} />
                                 <div className="title">
                                     <h3>Menu</h3>
                                     <p>Lista de items del menu registrados</p>
@@ -93,12 +99,16 @@ const MenuItemsPage = () => {
                                     <Col xs="12" sm="7" md="7" lg="7" xl="8">
                                         <Row>
                                             <form action="">
-                                                <img src="/icons/iconSearch.svg" alt="" />
+                                                <FaSearch size={18} />
+
                                                 <input
                                                     type="search"
                                                     name="searchBar"
                                                     value={state.searchTerm}
-                                                    onChange={(e) => changeValue("searchTerm", e.target.value)}
+                                                    onChange={(e) =>
+                                                        changeValue("searchTerm", e.target.value)
+                                                    }
+                                                    placeholder="Buscar cliente..."
                                                 />
                                             </form>
                                         </Row>
@@ -118,7 +128,15 @@ const MenuItemsPage = () => {
                                 <p>No se encontraron habitaciones</p>
                             ) : (
                                 <>
-                                    <Row>
+                                    <Row style={{
+                                        flex: 1,
+                                        overflowY: 'auto',
+                                        overflowX: 'hidden',
+                                        margin: 0,
+                                        padding: '16px',
+                                        maxHeight: 'calc(100vh - 300px)' // Ajusta según necesidad
+                                    }}>
+
                                         {temporal_list.map((menuItem: MenuItem) => (
                                             <Col key={menuItem.id} xs="12" sm="6" md="4" lg="3">
                                                 <div className="menuItemCard" onClick={() => selectmenuItem("menuItemModal", !state.menuItemModal, menuItem)}>

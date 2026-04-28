@@ -1,35 +1,147 @@
-.OfferCard {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    overflow: hidden;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s;
+/* Admin Offer Card Styles */
+
+/* Contenedor scrolleable */
+.admin-cards-container {
+    max-height: calc(100vh - 350px); /* Ajusta según necesidad */
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 4px;
 }
 
-.OfferCard:hover {
-    transform: translateY(-5px);
+/* Personalizar scrollbar (opcional) */
+.admin-cards-container::-webkit-scrollbar {
+    width: 8px;
 }
 
-.OfferImage {
+.admin-cards-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.admin-cards-container::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+.admin-cards-container::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+/* Row con gaps */
+.admin-cards-row {
+    margin: 0 -12px; /* Compensa el padding de las columnas */
+}
+
+/* Columnas con gap vertical y horizontal */
+.admin-card-col {
+    padding: 12px; /* Crea gap entre tarjetas */
+    display: flex;
+}
+
+/* Las tarjetas ocupan todo el alto disponible */
+.admin-room-card,
+.admin-offer-card {
     width: 100%;
-    height: 200px;
+    height: 100%;
+}
+
+.admin-offer-card {
+    background: white;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-offer-card:hover {
+    border-color: #adb5bd;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* Image Wrapper */
+.admin-offer-image-wrapper {
+    position: relative;
+    background-color: #f8f9fa;
+    height: 160px;
+    overflow: hidden;
+}
+
+.admin-offer-image {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
 }
 
-.OfferDetails {
-    padding: 15px;
+/* Discount Badge */
+.admin-offer-discount-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    background: #dc3545;
+    color: white;
 }
 
-.OfferDetails h4 {
-    margin-top: 0;
-    font-size: 1.25rem;
+/* Info Container */
+.admin-offer-info {
+    padding: 12px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
-.OfferDetails p {
-    margin: 5px 0;
+.admin-offer-header {
+    margin-bottom: 8px;
 }
 
-.selectedPrice p {
+.admin-offer-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0;
+    color: #212529;
+}
+
+/* Description */
+.admin-offer-description {
+    font-size: 12px;
+    color: #6c757d;
+    margin: 0 0 12px 0;
+    line-height: 1.4;
+}
+
+/* Prices */
+.admin-offer-prices {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.admin-offer-original-price {
+    font-size: 13px;
+    color: #6c757d;
     text-decoration: line-through;
+}
+
+.admin-offer-discount-price {
+    font-size: 18px;
+    font-weight: 600;
+    color: #28a745;
+}
+
+/* Savings */
+.admin-offer-savings {
+    font-size: 11px;
+    color: #dc3545;
+    font-weight: 500;
+    margin-top: auto;
+    padding-top: 8px;
+    border-top: 1px solid #e9ecef;
 }

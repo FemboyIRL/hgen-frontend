@@ -13,9 +13,11 @@ const AdminLayout = () => {
                 <div className="sidebar d-none d-lg-block">
                     <SideBarAdmin />
                 </div>
-                <div className="content">
-                    <Outlet />
-                    <div className="footer">
+                <div className="content d-flex flex-column h-100">
+                    <div className="flex-grow-1 overflow-auto">
+                        <Outlet />
+                    </div>
+                    <div className="footer mt-auto">
                         <FooterOnModule />
                     </div>
                 </div>

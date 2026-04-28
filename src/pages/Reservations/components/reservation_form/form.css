@@ -564,30 +564,413 @@
   }
 }
 
-/* ===== MEDIA QUERIES ===== */
-@media (max-width: 768px) {
-  .reserve-confirm-btn {
-    padding: 16px 22px;
+/* ===== RESPONSIVE SIDEBAR ===== */
+
+/* Pantallas grandes (1200px - 1400px) */
+@media (max-width: 1400px) {
+  .reservation-sidebar {
+    min-width: 420px;
+    padding: 28px;
+  }
+}
+
+/* Tablets grandes y escritorios pequeños (992px - 1199px) */
+@media (max-width: 1200px) {
+  .reservation-sidebar {
+    min-width: 360px;
+    padding: 26px;
+    top: 80px;
+  }
+
+  .sidebar-title {
+    font-size: 1.4rem;
+    margin-bottom: 24px;
+  }
+}
+
+/* Tablets (768px - 991px) */
+@media (max-width: 1024px) {
+  .reservation-sidebar {
+    min-width: 100%;
+    position: relative;
+    top: 0;
+    margin: 0 auto;
+    max-width: 650px;
+  }
+}
+
+/* Tablets pequeñas y móviles grandes (600px - 767px) */
+@media (max-width: 900px) {
+  .reservation-sidebar {
+    padding: 24px;
+    border-radius: 24px;
+  }
+
+  .sidebar-title {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+  }
+
+  .sidebar-title::after {
+    width: 50px;
+    bottom: -6px;
+  }
+
+  .form-section {
+    padding: 16px;
+  }
+
+  .section-title {
+    font-size: 0.9rem;
+  }
+
+  .section-icon {
+    font-size: 1.1rem;
+  }
+}
+
+/* Móviles (481px - 599px) */
+@media (max-width: 600px) {
+  .reservation-sidebar {
+    padding: 20px;
+    border-radius: 20px;
+  }
+
+  .sidebar-title {
+    font-size: 1.2rem;
+    margin-bottom: 18px;
+  }
+
+  .sidebar-title::after {
+    width: 40px;
+    height: 2px;
+  }
+
+  .reservation-form {
+    gap: 16px;
+  }
+
+  .form-section {
+    padding: 14px;
+    border-radius: 14px;
+  }
+
+  .section-header {
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-size: 0.85rem;
+  }
+
+  .guest-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 1.3rem;
+  }
+
+  .guest-number {
+    font-size: 1.2rem;
+  }
+
+  .guest-label {
+    font-size: 0.75rem;
+  }
+
+  .info-chip {
+    padding: 4px 10px;
+    font-size: 0.75rem;
+  }
+
+  .amenity-tag {
+    font-size: 0.7rem;
+    padding: 3px 8px;
+  }
+
+  .date-item {
+    font-size: 0.85rem;
+    padding: 4px 0;
+  }
+
+  .price-row {
+    font-size: 0.85rem;
+    padding: 6px 0;
+  }
+
+  .price-row.total {
+    font-size: 1rem;
+  }
+
+  .total-amount {
+    font-size: 1.2rem;
+  }
+}
+
+/* Móviles pequeños (320px - 480px) */
+@media (max-width: 480px) {
+  .reservation-sidebar {
+    padding: 16px;
+    border-radius: 18px;
+  }
+
+  .sidebar-title {
+    font-size: 1.1rem;
+    margin-bottom: 16px;
+  }
+
+  .reservation-form {
+    gap: 14px;
+  }
+
+  .form-section {
+    padding: 12px;
+    border-radius: 12px;
+  }
+
+  .section-header {
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+
+  .section-icon {
+    font-size: 1rem;
+  }
+
+  .section-title {
+    font-size: 0.8rem;
+  }
+
+  .custom-select {
+    padding: 10px;
+    font-size: 0.9rem;
+    border-radius: 10px;
+  }
+
+  .room-selected-info {
+    gap: 6px;
+    margin-top: 10px;
+  }
+
+  .info-chip {
+    padding: 3px 8px;
+    font-size: 0.7rem;
+  }
+
+  .amenities-preview {
+    gap: 4px;
+  }
+
+  .amenity-tag {
+    font-size: 0.65rem;
+    padding: 2px 6px;
+  }
+
+  .date-summary {
+    padding: 8px;
+  }
+
+  .date-item {
+    font-size: 0.8rem;
+    padding: 3px 0;
+  }
+
+  .total-nights {
+    margin-top: 4px;
+    padding-top: 8px;
+  }
+
+  .guests-input-group {
+    padding: 4px;
+  }
+
+  .guest-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 1.2rem;
+  }
+
+  .guest-count {
+    min-width: 70px;
+  }
+
+  .guest-number {
+    font-size: 1.1rem;
+  }
+
+  .guest-label {
+    font-size: 0.7rem;
+  }
+
+  .capacity-info {
+    padding: 6px 10px;
+    font-size: 0.75rem;
+  }
+
+  .price-detail {
+    margin-bottom: 10px;
+  }
+
+  .price-row {
+    font-size: 0.8rem;
+    padding: 5px 0;
+  }
+
+  .price-row.total {
+    font-size: 0.95rem;
+  }
+
+  .price-divider {
+    margin: 8px 0;
+  }
+
+  .total-amount {
+    font-size: 1.1rem;
+  }
+}
+
+/* Móviles muy pequeños (menos de 360px) */
+@media (max-width: 360px) {
+  .reservation-sidebar {
+    padding: 14px;
+  }
+
+  .sidebar-title {
+    font-size: 1rem;
+  }
+
+  .form-section {
+    padding: 10px;
+  }
+
+  .guest-count {
+    min-width: 60px;
+  }
+
+  .guest-number {
+    font-size: 1rem;
+  }
+
+  .guest-label {
+    font-size: 0.65rem;
+  }
+
+  .guest-btn {
+    width: 28px;
+    height: 28px;
     font-size: 1rem;
   }
 
   .btn-price {
-    padding: 6px 14px;
-    font-size: 0.95rem;
+    display: none;
+  }
+
+  .btn-text {
+    font-size: 0.9rem;
+  }
+
+  .btn-icon {
+    font-size: 1.1rem;
+    margin-right: 8px;
+  }
+
+  .reserve-confirm-btn {
+    padding: 12px 16px;
   }
 }
 
-@media (max-width: 480px) {
+/* Orientación horizontal en móviles */
+@media (max-height: 600px) and (orientation: landscape) {
+  .reservation-sidebar {
+    position: relative;
+    top: 0;
+    min-width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  .reservation-form {
+    gap: 12px;
+  }
+
+  .form-section {
+    padding: 12px;
+  }
+
+  .room-selected-info {
+    margin-top: 8px;
+  }
+
+  .guests-selector {
+    flex-direction: row;
+    gap: 20px;
+  }
+
+  .guests-input-group {
+    flex: 1;
+  }
+}
+
+/* Ajustes para tablets en modo landscape */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  .reservation-sidebar {
+    min-width: 450px;
+  }
+}
+
+/* Mejoras de touch para dispositivos táctiles */
+@media (hover: none) and (pointer: coarse) {
+  .guest-btn:hover:not(:disabled) {
+    transform: none;
+  }
+
+  .guest-btn:active:not(:disabled) {
+    transform: scale(0.95);
+    background: var(--primary);
+  }
+
+  .reserve-confirm-btn:hover:not(:disabled) {
+    transform: none;
+  }
+
+  .reserve-confirm-btn:active:not(:disabled) {
+    transform: scale(0.98);
+  }
+
+  .form-section:hover {
+    background: rgba(255, 255, 255, 0.03);
+  }
+}
+
+/* Soporte para safe areas (notch) */
+@supports (padding: max(0px)) {
+  .reservation-sidebar {
+    padding-left: max(32px, env(safe-area-inset-left));
+    padding-right: max(32px, env(safe-area-inset-right));
+  }
+
+  @media (max-width: 480px) {
+    .reservation-sidebar {
+      padding-left: max(16px, env(safe-area-inset-left));
+      padding-right: max(16px, env(safe-area-inset-right));
+    }
+  }
+}
+
+/* Reducción de animaciones para usuarios que prefieren menos movimiento */
+@media (prefers-reduced-motion: reduce) {
+  .reservation-sidebar,
+  .form-section,
+  .guest-btn,
   .reserve-confirm-btn {
-    padding: 14px 18px;
-    font-size: 0.95rem;
+    animation: none !important;
+    transition: none !important;
   }
 
-  .btn-price {
-    display: none; /* Ocultar precio en móvil para simplificar */
+  .reserve-confirm-btn:hover:not(:disabled) {
+    transform: none !important;
   }
 
-  .reserve-confirm-btn:hover .btn-text::after {
-    width: 20px;
+  .reserve-confirm-btn::before {
+    display: none;
   }
 }

@@ -10,15 +10,11 @@ export type Room = {
     capacity: number,            // Capacidad máxima de personas
     amenities: Array<string>,    // Ej: ["WiFi", "TV", "Aire acondicionado", "Minibar"]
 
-    // Precios
-    price: number,               // Precio por noche
-
     // Características adicionales
     size?: number,               // Tamaño en metros cuadrados (opcional)
     bed_type?: string,           // Ej: "King size", "Queen size", "Individual"
 
     // Estado y disponibilidad
-    available?: boolean,         // Si la habitación está disponible
     floor?: number,              // Número de piso
     features?: Array<string>,    // Características especiales
 }

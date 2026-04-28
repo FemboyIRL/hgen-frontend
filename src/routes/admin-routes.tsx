@@ -4,12 +4,15 @@ import RoomsPage from "../adminPages/Rooms/rooms"
 import MenuItemsPage from "../adminPages/Menu/menu"
 import OffersPage from "../adminPages/Offers/offers"
 import OrderPage from "../adminPages/Orders/orders"
+import EmployeesPage from "../adminPages/Employers/employers"
+import AdminDashboard from "../adminPages/Home/home"
+import Reservations from "../adminPages/Reservations/reservations"
 
 export const AdminRoutes = () => {
     return [
         {
             path: "home",
-            element: <></>,
+            element: <AdminDashboard />,
             title: "Inicio",
             icon: <House size={30} />,
         },
@@ -27,7 +30,7 @@ export const AdminRoutes = () => {
         },
         {
             path: "reservations",
-            element: <></>,
+            element: <Reservations />,
             title: "Reservaciones",
             icon: <CalendarCheck size={30} />,
         },
@@ -51,7 +54,7 @@ export const AdminRoutes = () => {
         },
         {
             path: "employees",
-            element: <></>,
+            element: <EmployeesPage />,
             title: "Empleados",
             icon: <Briefcase size={30} />,
         },

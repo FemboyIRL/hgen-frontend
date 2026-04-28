@@ -73,16 +73,21 @@ const ReservaBar: React.FC<ReserveBarProps> = ({ state, dispatch, handleSubmit }
     const selectedRoom = state.reserve_bar.selected_room?.room_number;
 
     const handleRoomChange = (roomId: string) => {
-
         const selected_room = state.rooms.find(
             (room: Room) => room.room_number === roomId
         );
 
         changeValue("selected_room", selected_room);
-
         changeValue("date_range", [null, null]);
-    };
 
+        const select = document.getElementById("room-select") as HTMLSelectElement;
+        if (select) {
+            select.blur();
+            setTimeout(() => {
+                select.value = "";
+            }, 0);
+        }
+    };
     const handleDateChange = (update: [Date | null, Date | null]) => {
         const [start, end] = update;
 

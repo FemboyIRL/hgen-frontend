@@ -2,7 +2,7 @@ export type MenuItem = {
     id: string,
     name: string,
     description: string,
-    price: Float64Array
+    price: number
     is_available: boolean
     images: Array<string>
 }
