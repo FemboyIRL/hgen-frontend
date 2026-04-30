@@ -342,6 +342,29 @@
   color: #ef4444;
 }
 
+/* Para mejorar el scroll del modal */
+.view-reservation-modal .modal-body {
+  padding: 0;
+}
+
+.view-reservation-modal .modal-body::-webkit-scrollbar {
+  width: 8px;
+}
+
+.view-reservation-modal .modal-body::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.view-reservation-modal .modal-body::-webkit-scrollbar-thumb {
+  background: #667eea;
+  border-radius: 10px;
+}
+
+.view-reservation-modal .modal-body::-webkit-scrollbar-thumb:hover {
+  background: #764ba2;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .reservations-page {

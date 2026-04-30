@@ -2,7 +2,7 @@ import { Room } from '../../../types/room.tsx'
 
 const reservationsInitial = {
     rooms: [] as Room[],
-    payment_modal: false,
+    payment_modal: true,
     loading: false,
     form: {
         selected_room: null as Room | null,
