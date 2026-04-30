@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import {
     FaCalendarCheck,
     FaSearch,
@@ -16,16 +16,26 @@ import {
 } from 'react-icons/fa';
 import './Reservations.css';
 import { Reservation } from '../../types/reservation';
-import { dummyReservations } from '../../pages/HomePage/dummy_data';
+import { dummyCustomers, dummyEmployees, dummyReservations, dummyRooms } from '../../pages/HomePage/dummy_data';
+import initialState from './reducer/constants';
+import { reducer, ReservationsActions } from './reducer/reducer';
+import ReservationModal from './modals/reservation_modal/reservation_modal';
+import DeleteReservationModal from './modals/delete_modal/delete_modal';
+import ViewReservationModal from './modals/details_modal/details_modal';
 
 const Reservations: React.FC = () => {
     const [activeTab, setActiveTab] = useState('todas');
-    const [searchTerm, setSearchTerm] = useState('');
-    // const [showModal, setShowModal] = useState(false);
-    const [reservations, setReservations] = useState<Reservation[]>([])
+
+    const [state, dispatch] = useReducer(reducer, initialState)
 
     useEffect(() => {
-        setReservations(dummyReservations)
+        dispatch({
+            type: ReservationsActions.LOADED_RESERVATION_LIST,
+            payload: dummyReservations
+        })
+        changeValue('customers', dummyCustomers)
+        changeValue('employees', dummyEmployees)
+        changeValue('rooms', dummyRooms)
     }, [])
 
     const getStatusBadge = (status: string) => {
@@ -74,21 +84,42 @@ const Reservations: React.FC = () => {
         }).format(price);
     };
 
-    const filteredReservations = reservations.filter(res => {
-        const matchesSearch = res.customer_data!.customer_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            res.customer_data.customer_email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            res.customer_data.customer_phone.includes(searchTerm) ||
-            res.room_number.includes(searchTerm);
+    const filteredReservations = state.reservations.filter((res: Reservation) => {
+        const matchesSearch = res.customer!.fullName.toLowerCase().includes(state.searchTerm.toLowerCase()) ||
+            res.customer.email.toLowerCase().includes(state.searchTerm.toLowerCase()) ||
+            res.customer.phone.includes(state.searchTerm) ||
+            res.room.room_number.includes(state.searchTerm);
         const matchesTab = activeTab === 'todas' || res.status === activeTab;
         return matchesSearch && matchesTab;
     });
 
+
+    const changeValue = (prop: string, data: any) => {
+        dispatch({
+            type: ReservationsActions.CHANGE_VALUE,
+            payload: {
+                prop,
+                data
+            }
+        })
+    }
+
+    const selectReservation = (res: Reservation, type: string) => {
+        changeValue('currentReservation', res)
+
+        if (type === "1") {
+            changeValue("detailsReservationModal", !state.detailsReservationModal)
+        } else {
+            changeValue('reservationModal', !state.reservationModal)
+        }
+    }
+
     const stats = {
-        total: reservations.length,
-        confirmed: reservations.filter(r => r.status === 'confirmada').length,
-        pending: reservations.filter(r => r.status === 'pendiente').length,
-        checkedIn: reservations.filter(r => r.status === 'check_in').length,
-        totalRevenue: reservations.reduce((sum, r) => sum + r.total_price, 0)
+        total: state.reservations.length,
+        confirmed: state.reservations.filter((r: { status: string; }) => r.status === 'confirmada').length,
+        pending: state.reservations.filter((r: { status: string; }) => r.status === 'pendiente').length,
+        checkedIn: state.reservations.filter((r: { status: string; }) => r.status === 'check_in').length,
+        totalRevenue: state.reservations.reduce((sum: any, r: { total_price: any; }) => sum + r.total_price, 0)
     };
 
     return (
@@ -100,7 +131,7 @@ const Reservations: React.FC = () => {
                     <p>Administra todas las reservaciones del hotel</p>
                 </div>
                 <div className="header-actions">
-                    <button className="btn-primary" onClick={() => { }}>
+                    <button className="btn-primary" onClick={() => changeValue('reservationModal', !state.reservationModal)}>
                         <FaPlus /> Nueva Reservación
                     </button>
                     <button className="btn-secondary">
@@ -165,8 +196,8 @@ const Reservations: React.FC = () => {
                     <input
                         type="text"
                         placeholder="Buscar por cliente, email, teléfono o habitación..."
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
+                        value={state.searchTerm}
+                        onChange={(e) => changeValue('searchTerm', e.target.value)}
                     />
                 </div>
                 <div className="tabs">
@@ -226,18 +257,18 @@ const Reservations: React.FC = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {filteredReservations.map((res) => {
+                        {filteredReservations.map((res: Reservation) => {
                             const status = getStatusBadge(res.status);
                             return (
                                 <tr key={res.id}>
                                     <td className="res-id">{res.id}</td>
                                     <td>
                                         <div className="customer-info">
-                                            <strong>{res.customer_data.customer_name}</strong>
-                                            <small>{res.customer_data.customer_email}</small>
+                                            <strong>{res.customer.fullName}</strong>
+                                            <small>{res.customer.email}</small>
                                         </div>
                                     </td>
-                                    <td className="room-number">{res.room_number}</td>
+                                    <td className="room-number">{res.room.room_number}</td>
                                     <td>{formatDate(res.check_in_date)}</td>
                                     <td>{formatDate(res.check_out_date)}</td>
                                     <td className="total-price">{formatPrice(res.total_price)}</td>
@@ -255,13 +286,13 @@ const Reservations: React.FC = () => {
                                     </td>
                                     <td>
                                         <div className="action-buttons">
-                                            <button className="action-btn view" title="Ver detalles">
+                                            <button className="action-btn view" title="Ver detalles" onClick={() => selectReservation(res, "1")}>
                                                 <FaEye />
                                             </button>
-                                            <button className="action-btn edit" title="Editar">
+                                            <button className="action-btn edit" title="Editar" onClick={() => selectReservation(res, "2")}>
                                                 <FaEdit />
                                             </button>
-                                            <button className="action-btn delete" title="Eliminar">
+                                            <button className="action-btn delete" title="Eliminar" onClick={() => changeValue('deleteReservationModal', !state.deleteReservationModal)}>
                                                 <FaTrash />
                                             </button>
                                         </div>
@@ -272,6 +303,10 @@ const Reservations: React.FC = () => {
                     </tbody>
                 </table>
             </div>
+
+            <ViewReservationModal reservation={state.currentReservation} show={state.detailsReservationModal} onHide={() => changeValue('detailsReservationModal', !state.detailsReservationModal)} />
+            <ReservationModal state={state} changeModal={() => changeValue('reservationModal', !state.reservationModal)} dispatch={dispatch} onAddNewCustomer={() => { }} />
+            <DeleteReservationModal state={state} changeModal={() => changeValue('deleteReservationModal', !state.deleteReservationModal)} dispatch={dispatch} />
         </div>
     );
 };
