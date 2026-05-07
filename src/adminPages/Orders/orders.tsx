@@ -1,12 +1,12 @@
 import { useEffect, useReducer } from "react"
 import { Button, Col, Row } from "react-bootstrap"
-import { PencilFill, Trash3Fill } from "react-bootstrap-icons"
+import { Bag, PencilFill, Trash3Fill } from "react-bootstrap-icons"
 import { initialState, ordersActions, reducer } from "./reducer/reducer"
 import LoadingSpinnerContainer from "../../components/LoadingSpinner/loading-spinner"
 // import ApiConsumer from "../../services/api_consumer"
 import { Order } from "../../types/order"
-import CreateOrderModal from "./orderModal/orderModal"
 import { dummyCustomers, dummyMenuItems, dummyOrders } from "../../pages/HomePage/dummy_data"
+import OrderFormModal from "./orderModal/orderModal"
 
 // const Orders = new ApiConsumer({ url: "orders/" })
 // const Customers = new ApiConsumer({ url: "clients/" })
@@ -124,6 +124,8 @@ const OrderPage = () => {
     const selectOrderId = (prop: any, data: any, order: Order) => {
         changeValue(prop, data)
         changeValue("currentOrder", order)
+
+        console.log(order)
     }
 
     return (
@@ -133,7 +135,7 @@ const OrderPage = () => {
                     <div className="innerContent">
                         <div className="innerContain">
                             <div className="titleContain">
-                                <img src="/assets/icons/icon-order.svg" alt="" width={50} />
+                                <Bag size={50} />
                                 <div className="title">
                                     <h3>Ordenes</h3>
                                     <p>Lista de Ordenes registradas</p>
@@ -206,7 +208,7 @@ const OrderPage = () => {
                     </div>
                 </div>
             </div>
-            <CreateOrderModal stateReducer={state} dispatch={dispatch} changeModal={() => changeValue("orderModal", !state.orderModal)} />
+            <OrderFormModal stateReducer={state} dispatch={dispatch} changeModal={() => changeValue("orderModal", !state.orderModal)} />
         </>
     )
 }
