@@ -7,6 +7,7 @@ import OrderPage from "../adminPages/Orders/orders"
 import EmployeesPage from "../adminPages/Employers/employers"
 import AdminDashboard from "../adminPages/Home/home"
 import Reservations from "../adminPages/Reservations/reservations"
+import NotFound from "../pages/NotFound/not_found"
 
 export const AdminRoutes = () => {
     return [
@@ -60,7 +61,7 @@ export const AdminRoutes = () => {
         },
         {
             path: "*",
-            element: <p>Página no encontrada</p>,
+            element: <NotFound />,
             title: "",
             icon: "",
         },

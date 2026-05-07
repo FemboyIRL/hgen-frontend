@@ -1,12 +1,14 @@
-import { Col, Dropdown, DropdownButton, Form, Row, InputGroup, Button } from "react-bootstrap";
-import { OrderReducer } from "../reducer/constants";
+import { Col, Form, Row } from "react-bootstrap";
+import { MenuItemsList, OrderReducer } from "../reducer/constants";
 import ApiConsumer from "../../../services/api_consumer";
-import { useEffect } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import ordersActions from "../reducer/actions";
 import FormModal from "../../../components/FormModal/form-modal";
 import { Customer } from "../../../types/customer";
 import { MenuItem } from "../../../types/menu_item";
-import { Plus } from "react-bootstrap-icons";
+import CustomerSearchSection from "../components/customer_search_bar";
+import MenuItemSearchSection from "../components/menu_item_search";
+import CartItemRow from "../components/cart_item_row";
 
 
 interface CreateOrderModalProps {
@@ -52,13 +54,69 @@ const CreateOrderModal: React.FC<CreateOrderModalProps> = ({ stateReducer, dispa
         return filteredList;
     };
 
+    // Función para transformar order del backend a formData
+    const transformOrderToFormData = (order: any) => {
+        // Verificar si order.menu_items tiene cantidades o necesitas asumir quantity = 1
+        const menuItemsMap: Record<string, MenuItemsList[]> = {};
+
+        order.menu_items.forEach((item: MenuItem) => {
+            // ⚠️ Aquí está el problema: tu backend no envía quantity
+            // Por ahora asumimos quantity = 1, pero deberías agregar quantity en el backend
+            const quantity = 1; // Si no viene, default 1
+
+            const categoryKey = item.id;
+
+            if (!menuItemsMap[categoryKey]) {
+                menuItemsMap[categoryKey] = [];
+            }
+
+            menuItemsMap[categoryKey].push({
+                item: item,
+                quantity: quantity,
+                category: 0
+            });
+        });
+
+        return {
+            customer: order.user_id ? {
+                user_id: order.user_id,
+                fullName: order.user_name,
+                email: order.user_email,
+                phone: order.user_phone || ''
+            } : null,
+            menuItems: menuItemsMap
+        };
+    };
+
+    // const transformFormDataToOrder = (formData: any) => {
+    //     const menuItemsArray: MenuItem[] = [];
+
+    //     Object.values(formData.menuItems).forEach((items: any) => {
+    //         items.forEach(({ item, quantity }: MenuItemsList) => {
+
+    //             for (let i = 0; i < quantity; i++) {
+    //                 menuItemsArray.push(item);
+    //             }
+    //         });
+    //     });
+
+    //     return {
+    //         user_id: formData.customer?.user_id,
+    //         menu_items: menuItemsArray,
+    //     };
+    // };
     const getOrderData = () => {
-        const selectedOrderItem = stateReducer.orders.find(item => item.order_id === stateReducer.currentOrder?.order_id);
+        if (!stateReducer.currentOrder) return;
+
+        // Transformar los datos del backend al formato del form
+        const transformedFormData = transformOrderToFormData(stateReducer.currentOrder);
+
+        // Actualizar el formData con los datos transformados
         dispatch({
             type: ordersActions.CHANGE_ALL_VALUE_FORM,
-            payload: selectedOrderItem
-        })
-    }
+            payload: transformedFormData
+        });
+    };
 
     const changeValueForm = (prop: string, data: any) => {
         dispatch({
@@ -113,15 +171,15 @@ const CreateOrderModal: React.FC<CreateOrderModalProps> = ({ stateReducer, dispa
         }
     };
 
-    const onDelete = () => {
-        dispatch({
-            type: ordersActions.CHANGE_VALUE,
-            payload: {
-                prop: 'deleteOrderModal',
-                data: !stateReducer.deleteOrderModal
-            }
-        })
-    }
+    // const onDelete = () => {
+    //     dispatch({
+    //         type: ordersActions.CHANGE_VALUE,
+    //         payload: {
+    //             prop: 'deleteOrderModal',
+    //             data: !stateReducer.deleteOrderModal
+    //         }
+    //     })
+    // }
 
     const changeValue = (prop: string, data: any) => {
         dispatch({
@@ -133,31 +191,55 @@ const CreateOrderModal: React.FC<CreateOrderModalProps> = ({ stateReducer, dispa
         })
     }
 
-    const handleOnChangeInput = (e: React.MouseEvent | React.ChangeEvent) => {
-        const target = e.currentTarget as HTMLElement;
-        const actionType = target.dataset.action;
-        const itemId = target.dataset.itemId;
-        const category = target.dataset.category;
 
-        if (!itemId || !category || !actionType) return;
-
-        // Para el input numérico
-        const inputValue = actionType === "input"
-            ? Math.max(1, parseInt((target as HTMLInputElement).value)) || 1
-            : null;
-
-        console.log(inputValue, actionType, category)
-
+    const handleQuantityChange = useCallback((
+        itemId: string,
+        category: string,
+        action: 'increase' | 'decrease' | 'input',
+        value?: number
+    ) => {
         dispatch({
             type: ordersActions.UPDATE_MENU_ITEM_QUANTITY,
             payload: {
                 category,
-                itemId: parseInt(itemId),
-                action: actionType,
-                value: inputValue
+                itemId,
+                action,
+                value
             }
         });
-    };
+    }, [dispatch]);
+
+    // Eliminar item del carrito
+    const handleRemoveItem = useCallback((itemId: string, category: string) => {
+        dispatch({
+            type: ordersActions.DELETE_MENU_ITEM,
+            payload: { category, itemId }
+        });
+    }, [dispatch]);
+
+    // Calcular total del pedido
+    const calculateTotal = useMemo(() => {
+        let total = 0;
+        Object.values(stateReducer.formData.menuItems).forEach((items: any[]) => {
+            items.forEach(({ item, quantity }) => {
+                total += (item.price || 0) * quantity;
+            });
+        });
+        return total.toFixed(2);
+    }, [stateReducer.formData.menuItems]);
+
+    // Obtener items del carrito de forma plana (para facilitar el render)
+    const cartItems = useMemo(() => {
+        const items: Array<MenuItemsList & { categoryKey: string }> = [];
+        Object.entries(stateReducer.formData.menuItems).forEach(([categoryKey, itemsList]) => {
+            itemsList.forEach(item => {
+                items.push({ ...item, categoryKey });
+            });
+        });
+        return items;
+    }, [stateReducer.formData.menuItems]);
+
+    const hasItems = cartItems.length > 0;
 
     const temporal_customer_list = filterCustomerList()
 
@@ -171,195 +253,74 @@ const CreateOrderModal: React.FC<CreateOrderModalProps> = ({ stateReducer, dispa
                 btnText={stateReducer.currentOrder ? "Editar" : 'Agregar'}
                 onSubmit={handleSave}
                 size={'lg'}
-                onDelete={stateReducer.currentOrder ? onDelete : undefined}
-                changeModal={() => closeModal()}
+                changeModal={closeModal}
             >
                 <Form>
                     <div className="container">
+                        {/* Sección de selección de cliente */}
                         <Row>
                             <Col>
-                                <InputGroup>
-                                    <Form.Control
-                                        className="input"
-                                        placeholder="Buscar cliente..."
-                                        aria-label="Buscar cliente"
-                                        value={stateReducer.searchCustomer}
-                                        onChange={(e) => changeValue("searchCustomer", e.target.value)}
-                                    />
-                                    <DropdownButton
-                                        className="btn"
-                                        title="▼"
-                                        id="input-group-dropdown-1"
-                                        align="end"
-                                        show={stateReducer.searchCustomer !== ''}
-                                    >
-                                        {temporal_customer_list.length > 0 ? (
-                                            temporal_customer_list.map((customer: Customer) => (
-                                                <Dropdown.Item
-                                                    onClick={() => {
-                                                        changeValueForm('customer', customer);
-                                                        changeValue("searchCustomer", '');
-                                                    }}
-                                                    key={`customer-${customer.user_id}`}
-                                                >
-                                                    <div>
-                                                        <div>{customer.fullName}</div>
-                                                        <small className="text-muted">{customer.email} | {customer.phone}</small>
-                                                    </div>
-                                                </Dropdown.Item>
-                                            ))
-                                        ) : (
-                                            <Dropdown.Item disabled>No se encontraron clientes</Dropdown.Item>
-                                        )}
-                                    </DropdownButton>
-                                </InputGroup>
-
-                                {stateReducer.formData.customer && (
-                                    <div className="mt-2 p-2 border rounded">
-                                        <strong>Cliente seleccionado:</strong>
-                                        <div>{stateReducer.formData.customer.fullName}</div>
-                                        <small className="text-muted">
-                                            {stateReducer.formData.customer.email} | {stateReducer.formData.customer.phone}
-                                        </small>
-                                    </div>
-                                )}
+                                <CustomerSearchSection
+                                    searchCustomer={stateReducer.searchCustomer}
+                                    selectedCustomer={stateReducer.formData.customer}
+                                    customerList={temporal_customer_list}
+                                    onSearchChange={(value) => changeValue("searchCustomer", value)}
+                                    onSelectCustomer={(customer) => {
+                                        changeValueForm('customer', customer);
+                                        changeValue("searchCustomer", '');
+                                    }}
+                                />
                             </Col>
                         </Row>
-                        <Row className="mt-2" >
+
+                        {/* Sección de selección de platillos */}
+                        <Row className="mt-2">
                             <Col>
-                                <InputGroup>
-                                    <Form.Control
-                                        className="input"
-                                        placeholder="Buscar platillo..."
-                                        aria-label="Buscar platillo"
-                                        value={stateReducer.searchMenuItem}
-                                        onChange={(e) => changeValue("searchMenuItem", e.target.value)}
-                                    />
-                                    <DropdownButton
-                                        className="btn"
-                                        title="▼"
-                                        id="input-group-dropdown-1"
-                                        align="end"
-                                        show={stateReducer.searchMenuItem !== ''}
-                                    >
-                                        {temporal_menu_list.length > 0 ? (
-                                            temporal_menu_list.map((item: MenuItem) => (
-                                                <Dropdown.Item
-                                                    onClick={() => {
-                                                        dispatch({
-                                                            type: ordersActions.ADD_MENU_ITEM,
-                                                            payload: {
-                                                                item: item,
-                                                                quantity: 1,
-                                                            }
-                                                        })
-                                                        changeValue("searchMenuItem", '');
-                                                    }}
-                                                    key={`item-${item.id}`}
-                                                >
-                                                    <div>
-                                                        <div>{item.name}</div>
-                                                    </div>
-                                                </Dropdown.Item>
-                                            ))
-                                        ) : (
-                                            <Dropdown.Item disabled>No se encontraron platillos en el menu</Dropdown.Item>
-                                        )}
-                                    </DropdownButton>
-                                </InputGroup>
+                                <MenuItemSearchSection
+                                    searchMenuItem={stateReducer.searchMenuItem}
+                                    menuList={temporal_menu_list}
+                                    onSearchChange={(value) => changeValue("searchMenuItem", value)}
+                                    onSelectItem={(item) => {
+                                        dispatch({
+                                            type: ordersActions.ADD_MENU_ITEM,
+                                            payload: { item, quantity: 1 }
+                                        });
+                                        changeValue("searchMenuItem", '');
+                                    }}
+                                />
 
-                                {Object.keys(stateReducer.formData.menuItems).length > 0 && (
+                                {/* Lista de platillos seleccionados */}
+                                {hasItems && (
                                     <Form.Group className="mt-3">
-                                        <Form.Label className="fw-bold">Platillos seleccionados</Form.Label>
+                                        <Form.Label className="fw-bold">
+                                            Platillos seleccionados ({cartItems.length} items)
+                                        </Form.Label>
 
-                                        {Object.entries(stateReducer.formData.menuItems).map(([category, items]) => {
-                                            console.log(category)
-                                            console.log(items)
-                                            return (
-                                                <>
-                                                    <div key={`category-${category}`} className="border rounded bg-light p-2 mb-3">
-                                                        {items.map((group) => (
-                                                            <Form.Control
-                                                                as="div"
-                                                                key={`selected-item-${group.item.id}`}
-                                                                className="mb-2 p-2 border-bottom d-flex align-items-center"
-                                                            >
-                                                                <div className="d-flex align-items-center flex-grow-1">
-                                                                    {/* Image */}
-                                                                    <div className="mr-3" style={{ width: '50px', height: '50px' }}>
-                                                                        <img
-                                                                            src={group.item.images?.[0] || '/placeholder-food.jpg'}
-                                                                            alt={group.item.name}
-                                                                            className="img-fluid rounded"
-                                                                            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                                                                        />
-                                                                    </div>
+                                        {cartItems.map(({ item, quantity, categoryKey }) => (
+                                            <CartItemRow
+                                                key={`${categoryKey}-${item.id}`}
+                                                item={item}
+                                                quantity={quantity}
+                                                categoryKey={categoryKey}
+                                                onQuantityChange={handleQuantityChange}
+                                                onRemove={handleRemoveItem}
+                                            />
+                                        ))}
 
-                                                                    {/* Name and Price */}
-                                                                    <div className="flex-grow-1">
-                                                                        <div className="fw-medium">{group.item.name || 'Nombre no disponible'}</div>
-                                                                        {group.item.price && (
-                                                                            <small className="text-muted">
-                                                                                ${group.item.price} c/u
-                                                                            </small>
-                                                                        )}
-                                                                    </div>
-                                                                </div>
-
-                                                                {/* Quantity Controls */}
-                                                                <div className="d-flex align-items-center ml-3">
-                                                                    <Button
-                                                                        variant="outline-secondary"
-                                                                        size="sm"
-                                                                        className="p-0 rounded-circle"
-                                                                        style={{ width: '28px', height: '28px' }}
-                                                                        data-action="decrease"
-                                                                        data-item-id={group.item.id}
-                                                                        data-category={group.category}
-                                                                        onClick={handleOnChangeInput}
-                                                                        disabled={group.quantity <= 1}
-                                                                    >
-                                                                        -
-                                                                    </Button>
-
-                                                                    <Form.Control
-                                                                        type=""
-                                                                        name="quantity"
-                                                                        min="1"
-                                                                        value={group.quantity}
-                                                                        data-item-id={group.item.id}
-                                                                        data-category={group.category}
-                                                                        onChange={handleOnChangeInput}
-                                                                        className="mx-2 text-center"
-                                                                        style={{ width: '45px' }}
-                                                                    />
-
-                                                                    <Button
-                                                                        variant="outline-secondary"
-                                                                        size="sm"
-                                                                        className="p-0 rounded-circle"
-                                                                        style={{ width: '28px', height: '28px' }}
-                                                                        data-action="increase"
-                                                                        data-item-id={group.item.id}
-                                                                        data-category={group.category}
-                                                                        onClick={handleOnChangeInput}
-                                                                    >
-                                                                        <Plus size={16} />
-                                                                    </Button>
-                                                                </div>
-                                                            </Form.Control>
-                                                        ))}
-                                                    </div>
-                                                </>
-                                            )
-                                        })}
+                                        {/* Total del pedido */}
+                                        <div className="mt-3 pt-2 border-top">
+                                            <div className="d-flex justify-content-between align-items-center">
+                                                <strong>Total:</strong>
+                                                <strong className="fs-5">${calculateTotal}</strong>
+                                            </div>
+                                        </div>
                                     </Form.Group>
                                 )}
                             </Col>
                         </Row>
                     </div>
                 </Form>
-            </FormModal >
+            </FormModal>
         </>
     )
 }
